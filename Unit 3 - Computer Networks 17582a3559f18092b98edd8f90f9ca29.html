@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 3 - Computer Networks</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17582a35-59f1-8092-b98e-dd8f90f9ca29" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">3️⃣</span></div><h1 class="page-title">Unit 3 - Computer Networks</h1><p class="page-description"></p></header><div class="page-body"><h2 id="17582a35-59f1-8016-9b12-c44a051e79fd" class="">3.1. Principles of Data Transmission</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Communication</summary><div class="indented"><p id="17882a35-59f1-809e-8115-d2def661fe57" class="">Human communication has evolved from direct speech and gestures to long-distance methods like smoke signals, mail, telegraphs, and analog phones. Today, most communication is digital, including how computers exchange information. However, even digital communication relies on analog signal transmission, where digital data is mapped to physical quantities like current, voltage, light pulses, or electromagnetic waves. Common transmission medium include copper cables, fiber optics, and radio waves.</p><ul id="17582a35-59f1-809c-beec-f05f4a038e92" class="toggle"><li><details open=""><summary><strong>Digital vs. Analog Transmission</strong></summary><ul id="befd14e7-4080-4e01-89e5-19b1572cb964" class="bulleted-list"><li style="list-style-type:disc"><strong>Digital transmission</strong>: Deals with <strong>binary data</strong> (0s and 1s), also called symbols.</li></ul><ul id="e8e1838a-6090-407f-80f3-29f301420437" class="bulleted-list"><li style="list-style-type:disc"><strong>Analog signals</strong>: The actual transmission is in the form of physical signals like voltage, light, or radio waves.</li></ul></details></li></ul><ul id="17582a35-59f1-80b2-8e17-de90a951aa14" class="block-color-default toggle"><li><details open=""><summary><strong>Transmission Medium </strong>is a carrier for the propagation of the signal changes in a physical quantity.</summary><ul id="8dc34e16-fe30-42ce-bbce-e3fe4c498e17" class="bulleted-list"><li style="list-style-type:disc"><strong>Copper cables</strong>: Traditional wiring, prone to interference but widely used in local networks (LAN), for current/voltage or electromagnetic waves.</li></ul><ul id="148a658f-0b37-4082-8565-5737ee2f8136" class="bulleted-list"><li style="list-style-type:disc"><strong>Fiber optics</strong>: High-speed, light-based transmission, ideal for long-distance and high-volume data.</li></ul><ul id="210b3738-3201-40cb-888e-76f5eea1b014" class="bulleted-list"><li style="list-style-type:disc"><strong>Radio waves</strong>: Wireless transmission, used in Wi-Fi, cellular networks, and satellite communication.</li></ul></details></li></ul><ul id="17882a35-59f1-8064-a221-ee376869bd44" class="toggle"><li><details open=""><summary><strong>Data trasmission Coding</strong></summary><p id="17882a35-59f1-8075-83b9-c7c6600853f8" class="">In data transmission, digital values (e.g., &quot;0&quot; or &quot;1&quot;) are mapped to physical quantities in the transmission medium, such as voltage levels. However, this mapping is prone to distortion from  interference during transmission. To ensure accuracy, coding defines acceptable signal intervals and includes mechanisms to detect and correct errors.</p><p id="17882a35-59f1-80bd-b0aa-fcb5637a7984" class=""><strong>Key coding steps in data transmission:</strong></p><ol type="1" id="17882a35-59f1-8035-b48e-f4d25ac4dcd3" class="block-color-red_background numbered-list" start="1"><li><strong>Line Coding</strong>: Maps digital values to physical signals (and viceversa), allowing reconstruction on the receiver side.</li></ol><ol type="1" id="17882a35-59f1-805f-ba6d-dd00003840f2" class="block-color-red_background numbered-list" start="2"><li><strong>Channel Encoding </strong>(<em>or error correction)</em>: Adds checksums (a redudancy correction) to the data to be transmitted. <mark class="highlight-default">This helps us spot if something goes wrong during transmission. Sometimes, it even lets us fix errors automatically. </mark><ol type="a" id="17882a35-59f1-8053-b72d-cbf28845e1d1" class="numbered-list" start="1"><li>Checksum: a number derived from a set of other numbers (e.g., through summation) used to detect errors by comparing it to a previously derived number over the same set.</li></ol></li></ol><ol type="1" id="17882a35-59f1-8085-9b87-e4acd2dc70b3" class="block-color-red_background numbered-list" start="3"><li><strong>Source Encoding</strong>: Compresses original data before transmission, to reduce the burden on channels, often resulting in &quot;lossy&quot; content, where multimedia quality decreases to match available bandwidth. While source encoding is less significant in PC communication, it plays a critical role in transmitting multimedia over low-capacity connections like mobile networks, preventing interruptions by adapting the data stream to the available data rate.<ol type="a" id="17882a35-59f1-80ec-8a4d-f84dd87d0dee" class="numbered-list" start="1"><li><strong>Channel capacity :</strong> It is the maximum data rate that a transmission channel can provide, and it is measured in bits per second (bps).</li></ol></li></ol><figure id="fcbd3da0-ff8f-4efe-9c4b-b2be67d4f136" class="image" style="text-align:center"><a href="image%2011.png"><img style="width:432px" src="image%2011.png"/></a></figure></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Line codes and modulation</summary><div class="indented"><p id="17882a35-59f1-8063-9bb4-f3b828108631" class="">Line coding process is fundamental in data transmission, as it allows computers to communicate over various physical channels like copper cables, fiber optics, or radio waves.</p><ul id="17882a35-59f1-80e1-8b53-cbfb57e65fa3" class="toggle"><li><details open=""><summary><strong>Baseband Transmission</strong>:</summary><p id="17882a35-59f1-8069-bd69-da5f65dd4fff" class="">Uses signals without a higher-frequency carrier. It transmits signals in their original frequency range. Example: Amplitude modulation, where +/- 5 volts represent &quot;0&quot; and &quot;1&quot; in transmissions over copper cables.</p></details></li></ul><ul id="17882a35-59f1-801c-a2d9-e91653611b25" class="toggle"><li><details open=""><summary><strong>Passband Transmission</strong>:</summary><p id="17582a35-59f1-808d-87e0-da659242b2c9" class="">Shifts baseband signals to a higher frequency range using a carrier signal. </p></details></li></ul><ul id="17882a35-59f1-8076-94f1-fa7726f77cc1" class="toggle"><li><details open=""><summary><strong>Manchester Code</strong>:</summary><p id="17882a35-59f1-8086-bc55-ed750823837d" class="block-color-red_background">Manchester encoding is a <strong>phase encoding</strong> method where voltage rising (negative to positive) = binary &quot;1&quot; and voltage falling (positive to negative) = binary &quot;0.&quot;</p><p id="18282a35-59f1-806d-93d2-db03741c428f" class="block-color-red_background">The voltage level changes in every signal period (i.e., at every binary value), ensuring <strong>self-clocking</strong>. This allows the sender and receiver to synchronize implicitly without needing a separate clock signal, as the transitions help in the clock recovery scheme.</p><p id="18282a35-59f1-80f3-b738-c85a6ea16f8f" class="block-color-red_background">In Manchester encoding, the sender adjusts the voltage at twice the data rate frequency, ensuring that each bit period contains a transition. This design allows the receiver to recover the sender&#x27;s clock frequency and maintain synchronization throughout the data transmission (<strong>clock recovery</strong>).</p><figure id="17882a35-59f1-8027-bce9-c09be82b751e" class="image"><a href="image%2012.png"><img style="width:192px" src="image%2012.png"/></a></figure></details></li></ul><p id="17582a35-59f1-8069-a01b-e1fd45aeeaf3" class=""><strong>Modulation</strong>: Converts digital data into analog signals for transmission over long distances (e.g., AM, FM, QAM).</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>Error Detection Mechanisms</strong></summary><div class="indented"><ul id="17882a35-59f1-80d5-aa46-d5d022159f35" class="toggle"><li><details open=""><summary><strong>Challenges</strong>:</summary><p id="30680c7d-b695-4ece-ad71-8dc01d271537" class="">During transmission, signals can suffer from <strong>distortions</strong> like noise or attenuation despite synchronization. Mechanisms like <strong>error detection</strong><em> (e.g., checksums or parity checks) </em>and <strong>retransmission</strong> ensure data accuracy even if signal quality degrades during transmission.</p></details></li></ul><ul id="17882a35-59f1-806b-a7e9-e3d32c3b8d65" class="toggle"><li><details open=""><summary>Parity Check</summary><p id="17882a35-59f1-807e-ae81-c6955174fc9f" class="">A digital method for error detection (and, if possible, automatic error correction) based on the evaluation of the parity bits, which supplement the payload bits until they are either an even number (even parity) or an odd number (odd parity).</p><ul id="17882a35-59f1-80de-bafa-eb2412518767" class="bulleted-list"><li style="list-style-type:disc">Binary data is divided into blocks of n bits, with an additional <strong>parity bit</strong> appended, that acts as a checksum.</li></ul><ul id="17882a35-59f1-8021-9cd2-cc6a86a957de" class="bulleted-list"><li style="list-style-type:disc"><strong>How it works: </strong>The binary data are packed into blocks of n bits each, appended by a parity bit that acts as a checksum. If the number of bits that are set to “1” within a block is odd, then the parity bit is also set to “1” before being sent over the line; otherwise, it is set to “0.” The receiver can then check whether this rule has been<br/>observed for each received block—if the total number of “1” symbols in a block is now (including the parity bit) uneven, a transmission error must have occurred. <br/></li></ul><ul id="17882a35-59f1-8071-88c6-d7da71ff2ae1" class="block-color-red_background bulleted-list"><li style="list-style-type:disc"><strong>Enhanced Error detection</strong>: After transmitting m data blocks, an additional <strong>parity block</strong> is sent, consisting exclusively of parity bits in each bit position (i.e., for the columns) of the previous m blocks, using row and column parity checks, the receiver can pinpoint the exact corrupted bit and often times correct it automatically</li></ul><ul id="17882a35-59f1-806c-9b1f-f2832425ddbf" class="toggle"><li><details open=""><summary>Example</summary><figure id="17882a35-59f1-809d-a5c0-cccbbacf9e5f" class="image" style="text-align:center"><a href="image%2013.png"><img style="width:384px" src="image%2013.png"/></a></figure><p id="17882a35-59f1-80a3-8ebd-f8efbf081351" class="">If the bit in question<em> (marked by the lightning bolt symbol) </em>has been corrupted and thus<br/>transmitted incorrectly, the receiver can detect from the parity bit that there must be an error somewhere in the block, as the total number of “1” symbols therein is not even. Furthermore <br/><em>(in this example)</em>, after every m = 4 blocks, there is another block that contains no payload data. Rather, it contains only parity bits for the columns of the last four blocks. And, again, the receiver can detect that there must have been a transmission error, this time in the third column of one of the four blocks. With these two coordinates <em>(third column and third block),</em> it becomes clear exactly which bit has been corrupted, and a correction <em>(reverting the wrongly received “1” back to a “0”)</em> is possible.</p></details></li></ul></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Operating Modes and Multiplexing</summary><div class="indented"><p id="17882a35-59f1-80e8-86cc-c550a605d0fe" class="">Data communication modes and methods vary based on directionality (from sender to receiver and from receiver to sender) and the ability to handle multiple data streams.</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Communication Modes:</summary><div class="indented"><ol type="1" id="17882a35-59f1-806c-9b84-d7ad199f1f22" class="numbered-list" start="1"><li><strong>Simplex: </strong>Data flows only in one direction. Common in systems like Digital Audio Broadcasting (DAB), but rarely used in computer networks.</li></ol><ol type="1" id="17882a35-59f1-8039-88b0-fc5837fe73e4" class="numbered-list" start="2"><li><strong>Half-Duplex</strong>: Data flows in both directions, but only one side transmits at a time. Similar to walkie-talkie communication and still used in Wi-Fi networks, where only one station transmits at a time to avoid interference. Active use of the communication medium is handed over to the other side, either explicitly <em>(e.g., through keywords like “over”) </em>or implicitly <em>(by waiting until the channel is free).</em></li></ol><ol type="1" id="17882a35-59f1-80fb-a711-d565a26b366f" class="numbered-list" start="3"><li><strong>Full-Duplex</strong>:Data flows simultaneously in both directions but it requires separate channels for each direction. Used in <strong>telephone conversation</strong>, where both parties can speak and listen at the same time</li></ol><ol type="1" id="17882a35-59f1-8097-a2f4-dbe4d351b345" class="block-color-red_background numbered-list" start="4"><li><strong>Multiplexing: </strong>Allows multiple senders and receivers to communicate simultaneously by dividing time, space, frequency, or wavelengths:<ol type="1" id="17582a35-59f1-8071-a268-cb4f1f8133e1" class="numbered-list" start="1"><li><strong>Time Division Multiplexing (TDM)</strong>: Divides channel capacity into time slices for multiple data streams in a quasi-parallel.<figure id="17882a35-59f1-800a-ae87-defa807a03e2" class="image" style="text-align:center"><a href="image%2014.png"><img style="width:432px" src="image%2014.png"/></a></figure></li></ol><ol type="1" id="17582a35-59f1-8044-8dcc-e9ed68f99dab" class="numbered-list" start="2"><li><strong>Space Division Multiplexing (SDM)</strong>: Uses parallel lines to transmit signals.</li></ol><ol type="1" id="17582a35-59f1-8024-a7b8-e83eb68653e7" class="numbered-list" start="3"><li><strong>Frequency Division Multiplexing (FDM)</strong>: Uses different carrier frequencies to transmit signals simultaneously.</li></ol><ol type="1" id="17582a35-59f1-80b9-b4d4-f5961f287fa2" class="numbered-list" start="4"><li><strong>Wavelength Division Multiplexing (WDM)</strong>: Uses different laser colors for optical fibers.</li></ol><p id="17882a35-59f1-80eb-8417-fdd12abc89be" class="">Multiplexing methods can be combined with each other and with simplex, half-duplex, or full-duplex modes, providing <strong>complex and flexible options</strong> for managing digital data streams.</p><figure id="17882a35-59f1-8086-9a63-f5d47bd800d1" class="image" style="text-align:center"><a href="image%2015.png"><img style="width:467.8993225097656px" src="image%2015.png"/></a></figure></li></ol></div></details></div></details><hr id="17582a35-59f1-80ba-82f5-eb7e6ea777c7"/><h2 id="17582a35-59f1-80a1-9bbe-db4aa631c249" class="">3.2. Network Topologies</h2><p id="17582a35-59f1-809f-a0b7-e979f76b4809" class="block-color-red_background"><strong>Topology: </strong>The topology of a network describes the basic structure of the wiring/ cabling to which the various devices are connected.</p><ul id="17882a35-59f1-8055-9ea2-dca7ae7c13aa" class="block-color-default toggle"><li><details open=""><summary><strong>Bus Topology</strong>:</summary><p id="17882a35-59f1-8074-89a2-ca370758c455" class="">A <strong>bus topology </strong>connects multiple devices using a single communication medium <em>(that can comprise several parallel lines or transmission frequencies) </em>but, for the topology, only one device can send data at a time, while another receives it ( <strong>simplex </strong>or <strong>half-duplex </strong>communication). Challenges arise in managing simultaneous communication through <strong>media access control protocols</strong>.</p><ul id="17882a35-59f1-804a-a8af-d6044147bde4" class="bulleted-list"><li style="list-style-type:disc"><strong>Advantages</strong>: Easy to set up and requires minimal cabling.</li></ul><ul id="17882a35-59f1-8014-b2a1-d0983d069931" class="bulleted-list"><li style="list-style-type:disc"><strong>Disadvantages</strong>:<ul id="17882a35-59f1-80b8-859d-c84693ccce70" class="bulleted-list"><li style="list-style-type:circle">If the bus fails, the entire network stops working.</li></ul><ul id="17882a35-59f1-8005-b7d6-ec7a8bc7cb06" class="bulleted-list"><li style="list-style-type:circle">Performance worsens as more devices are added.</li></ul></li></ul><ul id="17882a35-59f1-80c9-9353-d6e27b93a529" class="bulleted-list"><li style="list-style-type:disc"><strong>Modern Use</strong>: Rarely used due to inefficiency for wired communication between computers, replaced by <strong>switched networks</strong>.</li></ul></details></li></ul><ul id="17882a35-59f1-80f9-9ece-d150376cdb8c" class="block-color-red_background toggle"><li><details open=""><summary><strong>Switches</strong></summary><p id="17882a35-59f1-8002-ba54-c97d7134792e" class="">Switches are network components that efficiently manage and control data exchange between multiple devices.</p><ul id="17882a35-59f1-801c-8470-d13321aa3040" class="bulleted-list"><li style="list-style-type:disc"><strong>How They Work</strong>: A switch dynamically connects devices, allowing up to <strong>n/2 simultaneous device pairs</strong> (if n devices are connected). They can either cross or straight connect inputs with two outputs.</li></ul><ul id="17882a35-59f1-802d-be93-c7c7245cacf2" class="toggle"><li><details open=""><summary><strong>Internal Switching Mechanisms</strong>:</summary><ol type="1" id="17882a35-59f1-803a-ab28-cb3d09cc3263" class="block-color-red_background numbered-list" start="1"><li><strong>Crossbar Switches</strong>: Highly flexible and can connect many devices at once. However, they are expensive due to their internal architecture because they use a grid of switching elements (n² elements for n devices).</li></ol><ol type="1" id="17882a35-59f1-807b-a99d-fb7964f5be10" class="block-color-red_background numbered-list" start="2"><li><strong>Permutation Switching Networks</strong>:  Less expensive but less flexible than crossbar switches. They can connect many communication- partners, but not all combinations simultaneously.</li></ol><div id="17882a35-59f1-807a-98b7-e2999698cda6" class="column-list"><div id="17882a35-59f1-8089-bba9-f68ae4a598e1" style="width:50%" class="column"><figure id="17882a35-59f1-801c-8fd1-cc617f404f62" class="image"><a href="image%2016.png"><img style="width:240px" src="image%2016.png"/></a></figure></div><div id="17882a35-59f1-802f-979a-d4952bf721f2" style="width:50%" class="column"><figure id="17882a35-59f1-8094-b73e-c01fd935cb83" class="image"><a href="image%2017.png"><img style="width:192px" src="image%2017.png"/></a></figure></div></div></details></li></ul><ul id="17882a35-59f1-8019-a525-ce1ee58ce2a5" class="toggle"><li><details open=""><summary><strong>Switch vs. Hub</strong>:</summary><ul id="17882a35-59f1-80a0-b0f8-e86616b6ebf0" class="bulleted-list"><li style="list-style-type:disc"><strong>Hubs</strong> broadcast data to all devices like a shared bus <em>(all connected devices receive all data) </em>, leading to collisions and reduced performance.  It’s is a switch in its simplest form but functions like a <strong>shared bus.</strong></li></ul><ul id="17882a35-59f1-8068-b0a5-e341f733ecf8" class="bulleted-list"><li style="list-style-type:disc"><strong>Switches</strong> forward data only to the intended recipient, enabling faster, collision-free communication.</li></ul></details></li></ul><ul id="17882a35-59f1-80b9-9e59-d64ed8fc63d7" class="block-color-gray_background toggle"><li><details open=""><summary>Packet Switching</summary><p id="17882a35-59f1-8031-a872-c72594637730" class="block-color-gray_background">Data streams are broken into smaller data packets of a standard size, each containing additional routing information (<strong>meta-information</strong>) that the intermediate network nodes (e.g., hubs or switches) evaluate in order to forward the packets to the appropriate destination., forming the backbone of modern internet communication. .</p></details></li></ul><ul id="17882a35-59f1-801b-8063-f295636d9bbc" class="block-color-gray_background bulleted-list"><li style="list-style-type:disc"><strong>Significance</strong>: Packet switching is fundamental to modern internet communication, improving efficiency and reliability.</li></ul><figure id="17882a35-59f1-80c7-83df-d5d69852cfd2" class="image" style="text-align:center"><a href="image%2018.png"><img style="width:240px" src="image%2018.png"/></a></figure></details></li></ul><ul id="17882a35-59f1-808e-adf4-d7d58345b8e0" class="toggle"><li><details open=""><summary><strong>Star and Tree Topologies</strong>:</summary><p id="17882a35-59f1-8086-9bb9-f1dddba8462d" class=""><strong>Star Topology</strong>: Devices connect to a central switch, enabling direct communication.</p><p id="17882a35-59f1-80fd-b42c-efe092e5ccfb" class=""><strong>Tree Topology</strong>: Multiple stars link together through switches, forming a hierarchy.</p><figure id="17882a35-59f1-8091-bece-ef066ed2915b" class="image" style="text-align:center"><a href="image%2019.png"><img style="width:336px" src="image%2019.png"/></a></figure><ul id="17882a35-59f1-8089-a118-d168dde54b3a" class="bulleted-list"><li style="list-style-type:disc"><strong>Structured Cabling</strong>:<ul id="17882a35-59f1-8011-97b8-cbb8086cdf7f" class="bulleted-list"><li style="list-style-type:circle"><strong>Tertiary or Horizontal Cabling</strong>: Connects devices to a room switch.</li></ul><ul id="17882a35-59f1-80de-ae5e-df303368d999" class="bulleted-list"><li style="list-style-type:circle"><strong>Secondary or  Vertical Cabling</strong>: Links floor switches to a central switch.</li></ul><ul id="17882a35-59f1-80a2-93be-dc8d2fb9418c" class="bulleted-list"><li style="list-style-type:circle"><strong>Primary or Site Backbone</strong>: Connects switches across buildings.<figure id="0973d18d-d2c9-4f86-874a-d6856443922d" class="image" style="text-align:center"><a href="image%2020.png"><img style="width:336px" src="image%2020.png"/></a></figure></li></ul></li></ul><p id="17882a35-59f1-80ad-ad95-c8c90eb8cb22" class=""><strong>Advantages</strong>:</p><ul id="17882a35-59f1-8050-acec-ec5550031080" class="bulleted-list"><li style="list-style-type:disc">Easy to set up and troubleshoot. <mark class="highlight-default"> </mark></li></ul><ul id="17882a35-59f1-8011-a990-d913b0f36c0e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">Failure of a single cable does not affect the entire network.</mark></li></ul><p id="17882a35-59f1-801f-86a9-d2f3cefca5bb" class=""><strong>Disadvantages</strong>:</p><ul id="17882a35-59f1-8062-a285-fa2d228c3fa9" class="bulleted-list"><li style="list-style-type:disc">If the central switch fails, the entire network goes down.</li></ul></details></li></ul><ul id="17882a35-59f1-8075-bbb2-c33749a9825f" class="toggle"><li><details open=""><summary><strong>Mesh Topologies</strong>:</summary><p id="17882a35-59f1-8094-b6b7-fe9fe944e64a" class="">Mesh networks offer high reliability by creating multiple communication routes. Redundant communication routes enhance <strong>fail-safety</strong> and allow dynamic path selection. </p><p id="17882a35-59f1-80bd-a3fd-d54084b6a5fb" class=""><strong>Advantages</strong>:</p><ul id="17882a35-59f1-8095-b491-fe35242840e8" class="bulleted-list"><li style="list-style-type:disc">High fault tolerance: Data can <mark class="highlight-default">take another path.</mark> if a connection fails.</li></ul><ul id="17882a35-59f1-809e-98a5-e854600945a2" class="bulleted-list"><li style="list-style-type:disc">Suitable for <strong>wide area networks (WANs)</strong>.</li></ul><p id="17882a35-59f1-80f6-90f9-ec151d9928e6" class=""><strong>Disadvantages</strong>:</p><ul id="17882a35-59f1-80ef-8c3f-f3f7cd492870" class="bulleted-list"><li style="list-style-type:disc">Expensive to set up because it requires lots of cabling.</li></ul><ul id="17882a35-59f1-80b0-908e-f9716a1bf604" class="bulleted-list"><li style="list-style-type:disc">Complex to manage.</li></ul><p id="ac0b36b9-0b96-4031-ba70-5d2ab6a00d03" class="block-color-default">Types of Mesh Topology:</p><ol type="1" id="ddf21945-d72b-4986-851c-c282b6cd028e" class="block-color-default numbered-list" start="1"><li><strong>Fully Meshed Topology: </strong>Each node is directly <strong>connected to every other node</strong>. <strong>Advantages:</strong> High reliability, as connections provide redundancy; any node can communicate directly with another.</li></ol><ol type="1" id="dbd6bdfc-0da5-43a3-bacd-eb0af1b10232" class="block-color-default numbered-list" start="2"><li><strong>Meshed Topology: </strong>Nodes are interconnected with multiple paths, but <strong>not every node is directly connected</strong>. <strong>Advantages:</strong> <strong>Provides fail-safety</strong> through redundant paths and dynamic path selection, making it robust against node failures.</li></ol><div id="17882a35-59f1-80d2-add3-c3980e724dd8" class="column-list"><div id="17882a35-59f1-80f4-a49c-ce0430e0d02f" style="width:50%" class="column"><figure id="17882a35-59f1-8091-be78-d08b10768cc1" class="image"><a href="image%2021.png"><img style="width:482.9687805175781px" src="image%2021.png"/></a></figure><p id="18282a35-59f1-8030-8df2-dd304178a557" class="">
+</p></div><div id="17882a35-59f1-802e-8f5f-c784665ba369" style="width:50%" class="column"><figure id="17882a35-59f1-8019-9431-d33d52034396" class="image"><a href="image%2022.png"><img style="width:192px" src="image%2022.png"/></a></figure></div></div></details></li></ul><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>Size and Extent of Networks</strong></summary><div class="indented"><p id="17582a35-59f1-80ee-84b2-ca90fca4ab7c" class="">For the hierarchy of networks, the boundaries between these levels are flexible.</p><ol type="1" id="17582a35-59f1-803b-8504-ffb647bf84aa" class="numbered-list" start="1"><li><strong>Network on a Chip (NoC)</strong>: <strong>Smallest scale</strong> network connecting components within a single microchip.</li></ol><ol type="1" id="17582a35-59f1-80b9-8d71-c09b35fc8cda" class="block-color-default numbered-list" start="2"><li><strong>Chip Area Network (CAN)</strong>: Connects <strong>microchips</strong> directly, such as the <strong>CPU and main memory</strong>.</li></ol><ol type="1" id="17582a35-59f1-8071-9595-c616b16a48b3" class="numbered-list" start="3"><li><strong>Local Area Network (LAN)</strong>: A network within a limited area (e.g., <strong>offices or schools</strong>). <strong>Devices at the same location</strong> communicate with each other.</li></ol><ol type="1" id="17582a35-59f1-80f8-a3d1-e9b4ce68b71f" class="numbered-list" start="4"><li><strong>Metropolitan Area Network (MAN)</strong>: Connects <strong>multiple LANs</strong> over a larger area like a <strong>city</strong>.</li></ol><ol type="1" id="17582a35-59f1-80f3-8be2-ceda4d68e235" class="numbered-list" start="5"><li><strong>Wide Area Network (WAN)</strong>: A large-scale network (e.g., a <strong>country</strong>), built with a <strong>developed mesh topology</strong> for resilience.</li></ol><ol type="1" id="17582a35-59f1-802d-ac7d-c73761ee8d07" class="numbered-list" start="6"><li><strong>Global Area Network (GAN)</strong>: Worldwide networks connected through <strong>submarine cables or satellites</strong>, supporting global communication .</li></ol></div></details><hr id="17882a35-59f1-8007-9143-ce5f90e836ee"/><h2 id="17582a35-59f1-80c5-b09a-d947047ce708" class="">3.3. The OSI Reference Model</h2><p id="1d982a35-59f1-8071-93f2-e4ca871e28f3" class="">The <strong>Open Systems Interconnection (OSI) reference model</strong>, developed by the International Organization for Standardization (ISO) in the 1980s, offers a conceptual framework for understanding how computer networks communicate. It is made up of <strong>seven layers</strong>, each responsible for a specific role in the data communication process.</p><p id="1d982a35-59f1-804b-b820-f9d2ecbaf405" class="">While the OSI model is not strictly followed in real-world implementations and is not a mandatory standard for network device manufacturers, it has significantly improved  <strong>network compatibility</strong>, efficiency, and<strong> communication</strong>.</p><p id="1d982a35-59f1-80b2-8b6e-d136cff189df" class="">Each layer interacts with the ones directly above and below it through <strong>well-defined interfaces</strong>, and communication between systems (like clients and servers) is handled through <strong>protocols</strong> operating within the corresponding layers.</p><ul id="17882a35-59f1-8090-8abe-c9bf6b63e8ae" class="bulleted-list"><li style="list-style-type:disc">Although not officially part of the original OSI model, the human user is sometimes considered an eighth layer.</li></ul><p id="17582a35-59f1-801c-b793-eb80ceb0d24e" class=""><mark class="highlight-red"><strong>P</strong></mark><mark class="highlight-red">lease </mark><mark class="highlight-red"><strong>D</strong></mark><mark class="highlight-red">o </mark><mark class="highlight-red"><strong>N</strong></mark><mark class="highlight-red">ot </mark><mark class="highlight-red"><strong>T</strong></mark><mark class="highlight-red">hrow </mark><mark class="highlight-red"><strong>S</strong></mark><mark class="highlight-red">alami </mark><mark class="highlight-red"><strong>P</strong></mark><mark class="highlight-red">izza </mark><mark class="highlight-red"><strong>A</strong></mark><mark class="highlight-red">way</mark></p><ul id="17582a35-59f1-802a-b3dc-d47d296e2548" class="toggle"><li><details open=""><summary><strong>Layer 1: Physical Layer</strong></summary><p id="17882a35-59f1-80d2-ae37-f96c1fd83034" class="">This layer focuses on the physical transmission of raw data between devices using hardware like cables, connectors, and signals. Early networks used coaxial cables, but today, Ethernet cables with RJ45 connectors  are more common. These cables often have twisted pairs of wires to reduce interference. Higher layers rely on this layer for all data transfer.</p><ul id="17882a35-59f1-8094-80d8-dfb98e19a1f7" class="bulleted-list"><li style="list-style-type:disc">In high-speed networks, optical fiber cables are used.<ul id="17882a35-59f1-806e-a5b4-d9e9cb20fe45" class="bulleted-list"><li style="list-style-type:circle"><strong>Multi-mode fibers</strong> are cost-effective but prone to signal distortion over long distances due to their thicker core.</li></ul><ul id="17882a35-59f1-8074-9aef-fab62cae0d70" class="bulleted-list"><li style="list-style-type:circle"><strong>Single-mode fibers</strong> are thinner, expensive, and ideal for long-distance communication due to their straight light path.</li></ul></li></ul><ul id="17882a35-59f1-8055-b9f7-e84aa631f53f" class="toggle"><li><details open=""><summary>Example of cable connector types</summary><figure id="17882a35-59f1-80b1-9656-f291bd771f5e" class="image"><a href="image%2023.png"><img style="width:432.9687805175781px" src="image%2023.png"/></a></figure></details></li></ul></details></li></ul><ul id="17582a35-59f1-8081-9a20-e22b7e2245ff" class="toggle"><li><details open=""><summary><strong>Layer 2: Data Link Layer</strong></summary><p id="17882a35-59f1-8055-9f0e-d861399623a0" class="">This layer ensures data can move correctly between devices in the same network. It includes:</p><p id="17882a35-59f1-803f-b064-e08709dcceed" class=""><strong>Error Detection</strong>: Detects and corrects errors in data transmission.</p><p id="17882a35-59f1-809b-9ce8-cf2ec6467cb2" class=""><strong>Protocols</strong> that control the access of senders to a transmission channel:</p><ul id="1810f1e3-5070-4e3c-8c77-73488fbbf81c" class="block-color-default bulleted-list"><li style="list-style-type:disc"><strong>MAC (Medium Access Control) Protocol</strong>: Manages how devices share and access the communication medium in a network. Each device is assigned a unique <strong>MAC address</strong> (Media Access Control address), hard-coded into the device’s <strong>network interface card (NIC)</strong>. A MAC address is a <strong>globally unique identifier</strong>, made up of two parts:<ol type="1" id="1d982a35-59f1-8031-8b03-ffbd9995c421" class="numbered-list" start="1"><li>A <strong>manufacturer identifier</strong> (assigned by the IEEE)</li></ol><ol type="1" id="1d982a35-59f1-80a3-89f3-c43e0ad329f3" class="numbered-list" start="2"><li>A <strong>unique serial number</strong> (assigned by the manufacturer)</li></ol><ul id="1d982a35-59f1-80f4-b27b-ed2fefb017fd" class="bulleted-list"><li style="list-style-type:circle">In Ethernet and Wi-Fi networks, both parts are 3 bytes long, making the full MAC address <strong>6 bytes (48 bits)</strong> in total.</li></ul><ul id="1d982a35-59f1-80dc-8628-dea62e792933" class="bulleted-list"><li style="list-style-type:circle">MAC addresses are usually written in <strong>hexadecimal format</strong>, separated by hyphens.<p id="1d982a35-59f1-8063-96b9-d0eb1582340e" class="">Example: <code>12-34-56-78-9A-BC</code></p></li></ul><ul id="17882a35-59f1-80ef-ac84-ec6bb05e9d9a" class="bulleted-list"><li style="list-style-type:circle">The address ff-ff-ff-ff-ff-ff-ff is reserved as the broadcast address.</li></ul></li></ul></details></li></ul><ul id="17582a35-59f1-8019-bf27-da915feb214a" class="toggle"><li><details open=""><summary><strong>Layer 3: Network Layer</strong></summary><p id="17882a35-59f1-808e-bdce-d4799f207ca9" class="">This layer decides how data travels between different networks through routing.</p><p id="17882a35-59f1-8002-ae2e-ded4d397d21d" class=""><strong>Routers</strong> manage this process by connecting different networks and using logical addresses like <strong>IP addresses</strong> to find the best path for data packets. </p><p id="1d982a35-59f1-80b9-b671-efd1316e5e75" class="">In more distant subnets, routers may be directly connected to one another—such as over <strong>wide area networks (WANs)</strong>—forming a <strong>mesh topology</strong>. Routing through these topologies is managed by <strong>routing algorithms and protocols</strong>, which are part of the <strong>network layer</strong>.</p><ul id="17882a35-59f1-80b9-9a91-f95c4c7ad4f5" class="toggle"><li><details open=""><summary><strong>Types of Switches</strong>:</summary><ul id="17882a35-59f1-80eb-8d7b-d4810ba380e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Layer 2 Switches</strong>: Operate at the <strong>data link layer</strong>. Use <strong>MAC addresses</strong> to forward data within the same network. More efficient than hubs, as they prevent unnecessary data transmission.</li></ul><ul id="17882a35-59f1-8065-882b-fbf1abf7e015" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Layer 3 Switches</strong></mark><mark class="highlight-purple">: Operate at the </mark><mark class="highlight-purple"><strong>network layer</strong></mark><mark class="highlight-purple">. Can route data between different network segments using </mark><mark class="highlight-purple"><strong>IP addresses</strong></mark><mark class="highlight-purple">. Often called </mark><mark class="highlight-purple"><strong>routers</strong></mark><mark class="highlight-purple"> due to their ability to handle routing tasks alongside switching. They can switch between different data link domains</mark><em><mark class="highlight-purple"> (</mark></em><em>Within a data link domain,  devices can communicate directly via their MAC addresses, and hardware-based broadcasting is possible within the same domain).</em></li></ul></details></li></ul><figure id="17882a35-59f1-80ea-a589-d74402fb54c1" class="image" style="text-align:center"><a href="image%2024.png"><img style="width:288px" src="image%2024.png"/></a></figure></details></li></ul><ul id="17582a35-59f1-80c8-9201-fcfa8cae4579" class="toggle"><li><details open=""><summary><strong>Layer 4: Transport Layer</strong></summary><p id="17882a35-59f1-80b5-b9a9-c00b72fed492" class="">This layer ensures data is delivered reliably by splitting data into smaller packets for transmission. Therefore protocols on the fourth layer must ensure that, if expected packets do not arrive, an automatic retransmit of the lost data is performed. For this reason, this type of transport protocol is also called an <strong>automatic repeat request (ARQ).</strong></p><ul id="17882a35-59f1-80fa-9e53-ff183a836cdd" class="bulleted-list"><li style="list-style-type:disc">If additional data (e.g., parity bits) are added to the packets, they become the headers or trailers. They commonly contain information about the sender and the receiver (e.g., for routing), as well as information about the data packet itself (e.g., its size or parity bits).</li></ul><ul id="17582a35-59f1-80cb-841d-f39819c8e4c9" class="bulleted-list"><li style="list-style-type:disc"><strong>Protocols</strong>: Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) are key protocols operating at this layer.</li></ul><ul id="55627346-1604-44f9-9d34-ddc9c1845b4e" class="block-color-default toggle"><li><details open=""><summary><strong>Automatic Repeat reQuest (ARQ)</strong> </summary><p id="17882a35-59f1-80ba-8e82-e405542a5eea" class=""><strong>A protocol for error correction</strong> in data transmission. It works with timeouts <em>(an error that occurs or is automatically generated if an operation and/or the arrival of a response takes too long and thus exceeds a given time period) </em>and with acknowledgments (ACK) and/or repeat requests (negative acknowledgments - NACK).</p><ol type="1" id="6056c2c4-db36-4806-98fa-9388458e1363" class="block-color-default numbered-list" start="1"><li><strong>Stop-and-Wait ARQ:</strong><ul id="2201a4a0-15c7-484b-bc9d-38af6a95d766" class="bulleted-list"><li style="list-style-type:disc">Wait for <code>ACK</code> for each packet from the receiver after each data packet has been delivered before the next one can be sent.</li></ul><ul id="d12d9576-5e00-4b67-b9ab-361f9742322a" class="bulleted-list"><li style="list-style-type:disc">If no ACK (<code>NACK</code>) is received within a set time (<strong>timeout</strong>), the sender resends the last packet.</li></ul><ul id="17882a35-59f1-80a3-9a03-d6eb06dbb172" class="bulleted-list"><li style="list-style-type:disc">Drawback: low data throughput—even in error-free cases, the sender must still wait for the acknowledgement.</li></ul><ul id="17882a35-59f1-8033-8728-c80cbb037216" class="toggle"><li><details open=""><summary></summary><figure id="17882a35-59f1-80b6-8bcc-eec2e932e430" class="image"><a href="image%2025.png"><img style="width:452.951416015625px" src="image%2025.png"/></a></figure></details></li></ul></li></ol><ol type="1" id="fcb7333c-d9a8-41d3-b7e9-0bd4c696d45b" class="block-color-default numbered-list" start="2"><li><strong>Go-Back-N ARQ:</strong><ol type="1" id="de583dfc-559d-4ff9-8052-58bec16a5322" class="numbered-list" start="1"><li>send up to <em>m</em> data packets, then wait for <code>ACK</code> .</li></ol><ol type="1" id="ef59a210-0ec6-4fc0-956d-d8e835aa672f" class="numbered-list" start="2"><li>If a packet is missing or faulty on the receiving side, a <strong>NACK </strong>is sent back for the sequence number N of this data packet.</li></ol><ol type="1" id="17882a35-59f1-803a-ae88-fd1345fede91" class="numbered-list" start="3"><li>The sender then retransmits all packets starting from this number, because it is assumed that some of the successive packets already transmitted will have likely also been corrupt and/or lost.</li></ol><ol type="1" id="c509b986-91e4-40f9-ba9e-c3c6d49ca34b" class="numbered-list" start="4"><li>It results in improved data throughput. </li></ol><ul id="17882a35-59f1-80ae-a004-e8a49596f889" class="toggle"><li><details open=""><summary></summary><figure id="17882a35-59f1-806b-9b18-d3d73142237f" class="image"><a href="image%2026.png"><img style="width:445.0000305175781px" src="image%2026.png"/></a></figure></details></li></ul></li></ol></details></li></ul></details></li></ul><ul id="17582a35-59f1-8040-b017-cffb48e824c4" class="toggle"><li><details open=""><summary><strong>Layer 5: Session Layer</strong></summary><p id="17882a35-59f1-80e0-b70d-cb7fcc94ae5d" class="">This layer establishes and manages the communication sessions between devices, used in fourth layer. It provides the functions of authentication, sychronization, negotiation, and mutual agreement with which communication partners can agree on network parameters in order to establish and maintain the best possible connection, which is called session. </p><p id="17882a35-59f1-8032-aaa8-db511032cce1" class="">The session manages and maintains logical connections between devices, ensuring smooth and stateful communication. In network programming, <strong>sockets</strong> represent these connections, allowing two devices to exchange data bi-directionally. </p><p id="17882a35-59f1-8023-8ae5-d29561268307" class="">Beyond simple connections, the session layer supports group communication, like online meetings, by coordinating multiple participants.</p><p id="17882a35-59f1-8098-aead-f64cd5e73386" class="">It also handles errors, terminates sessions gracefully, and releases resources when no longer needed, making it vital for efficient and organized networking.</p></details></li></ul><ul id="17582a35-59f1-800b-bf11-fa158421d7e3" class="toggle"><li><details open=""><summary><strong>Layer 6: Presentation Layer</strong></summary><p id="17882a35-59f1-804f-bf4f-f4332ed7a7ae" class="">This layer occupies of:</p><ul id="17a82a35-59f1-8087-806b-d5b256322793" class="bulleted-list"><li style="list-style-type:disc"><strong>Data formatting: </strong>translates data between network and application formats into a format that the application layer can accept. For this purpose, the participants either negotiate a common presentation form for the data via the session layer, or the data is converted into a standardized format for the exchange (ex. ASCII for text).<ul id="17882a35-59f1-80be-9085-c1c85f4d9740" class="bulleted-list"><li style="list-style-type:circle">One common exchange format is the extensible markup language (XML), which can be used to convert any application data structures into simple text files, which is readable by both humans and machines. After sending such a file, the recipient can reconstruct these data structures with an XML parser and convert them into the respective local format.</li></ul></li></ul><ul id="17882a35-59f1-8052-91fb-cf1896ef3c3c" class="bulleted-list"><li style="list-style-type:disc"><strong>Compression:</strong> Reduces file size for faster transmission. Example: JPEG compression for images or MP3 for audio.</li></ul><ul id="17882a35-59f1-80a8-9973-d7b800830482" class="bulleted-list"><li style="list-style-type:disc"><strong>Encryption:</strong> Secures data for transmission, such as <strong>TLS</strong> encrypting web traffic.</li></ul></details></li></ul><ul id="17582a35-59f1-80dd-b6bc-c42b7651151c" class="toggle"><li><details open=""><summary><strong>Layer 7: Application Layer</strong></summary><p id="17882a35-59f1-8054-a2af-cc866ea96d50" class="">This layer provides the interface for end-user applications to access network services. Applications (e.g., web browsers or email clients) are not directly housed in this layer, as they are not covered by the OSI model. However, they do interact directly with this layer and make use of its protocol interfaces such as:</p><ul id="17882a35-59f1-8095-b1f6-ee5e0e9409aa" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP/HTTPS:</strong> For web browsing.</li></ul><ul id="17882a35-59f1-8086-8820-d3cc85e207f0" class="bulleted-list"><li style="list-style-type:disc"><strong>SMTP/IMAP:</strong> For email communication.</li></ul><ul id="17882a35-59f1-800a-a346-ec5435a33cfe" class="bulleted-list"><li style="list-style-type:disc"><strong>FTP:</strong> For file transfers.</li></ul></details></li></ul><hr id="17582a35-59f1-80f6-9a28-d29e1a63da70"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Communication within each layer</summary><div class="indented"><p id="17882a35-59f1-80bc-8cc6-df86d3618110" class="">Communication within the OSI model layers involves a structured interaction where processes or instances at each layer communicate within their respective layer using specific protocols. These protocols also interact with neighboring layers through interfaces to ensure seamless data transfer across the entire network stack.</p><p id="17882a35-59f1-80a3-84a4-e8ee7799dda7" class="">At the top, applications interact using the application layer&#x27;s protocols, which rely on the presentation layer to coordinate data formatting and interpretation. These interactions depend on sessions managed by the session layer, which ensures proper synchronization. The transport layer manages data delivery by using logical data packets, which are routed between networks via the network layer, utilizing logical addresses. Within subnetworks, devices communicate directly using hardware addresses, with data transmitted as signals over a physical medium like cables or switches.</p><p id="17882a35-59f1-80b0-b846-d30314eaeb6c" class="">This entire process, illustrated in protocol stacks, enables two remote participants to exchange data efficiently. Each layer utilizes the functions provided by the layer below it while offering additional functionalities to the layer above, ensuring reliable and structured communication.</p><p id="17882a35-59f1-8084-901b-d95e56f92ad2" class=""><strong>Example:</strong></p><ol type="1" id="17882a35-59f1-8001-a08c-ec0b67eb03f6" class="numbered-list" start="1"><li><strong>Layer 7 (Application)</strong> on Device A sends a message.</li></ol><ol type="1" id="17882a35-59f1-8081-b993-dfc060411993" class="numbered-list" start="2"><li>The message moves down through Layers 6 to 1, where it’s prepared for physical transmission.</li></ol><ol type="1" id="17882a35-59f1-80b7-b61d-cb2bc7c6465d" class="numbered-list" start="3"><li>On Device B, the message moves up from Layer 1 to Layer 7, where it’s understood by the receiving application.</li></ol><p id="17882a35-59f1-8036-bfb2-c4ee28df57eb" class="">This layered approach ensures that each part of the communication process is handled efficiently and systematically.</p><figure id="17882a35-59f1-80a6-bfac-d0519e81afc6" class="image" style="text-align:center"><a href="image%2027.png"><img style="width:424.9653015136719px" src="image%2027.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Importance of the OSI Model:</summary><div class="indented"><ul id="17582a35-59f1-80fa-8b0f-d9d24172b177" class="bulleted-list"><li style="list-style-type:disc"><strong>Interoperability</strong>: Provides a standard framework for different systems and networks to communicate.</li></ul><ul id="17582a35-59f1-8010-bea6-c01647c70afc" class="bulleted-list"><li style="list-style-type:disc"><strong>Modular design</strong>: Each layer operates independently, enabling easier troubleshooting and upgrades.</li></ul><ul id="17582a35-59f1-802d-aea6-ccb915053173" class="bulleted-list"><li style="list-style-type:disc"><strong>Protocol Standards</strong>: Each layer has specific protocols ensuring network tasks are accomplished correctly.</li></ul></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

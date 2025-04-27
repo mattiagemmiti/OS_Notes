@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 1 - Fundamentals of The Operating System</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="15d82a35-59f1-8076-9745-d6cb29733cd9" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">1️⃣</span></div><h1 class="page-title">Unit 1 - Fundamentals of The Operating System</h1><p class="page-description"></p></header><div class="page-body"><h1 id="15d82a35-59f1-8044-9a9f-c55aec33a57f" class="block-color-blue">1.1 The Basic Structure of Computer Systems</h1><h2 id="15d82a35-59f1-8076-97c4-fab28a74efbf" class="block-color-default"><strong>Von Neumann Architecture</strong></h2><p id="17582a35-59f1-806e-80f6-d7d143606b6a" class="">Practically all modern computers work according to the Von Neumann Cycle and are contructed using the universal Von Neumann Architecture. The atchitecture consists of: </p><ul id="d5eb6842-dee7-42c9-95cc-47c456b438f6" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>1.  Central Processing Unit</strong></mark><strong> </strong>which is the heart of the computer and consist of</summary><ol type="1" id="9b98db27-c25f-47c1-998e-e915034f33e6" class="numbered-list" start="1"><li><strong>Control Unit</strong>: Execution of the program, fetching, decoding, and coordinating the execution of instructions.</li></ol><ol type="1" id="189d5a68-e35d-401a-8b02-459481fef694" class="numbered-list" start="2"><li><strong>Computing Unit or Arithmetic Logic Unit (ALU) </strong>: Handles the actual execution of arithmetic and logical operations. <em>The calculation results are then stored in registers, which are fast buffers within the CPU—&gt; Operations can be executed without needing further access to main memory.</em></li></ol></details></li></ul><ul id="c777bb10-d9f0-4ae9-95be-a111a69c39cc" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>2. Main Memory</strong></mark></summary><p id="359a1e42-742a-4eb9-b76c-05f9500ed84b" class="">The computer&#x27;s <mark class="highlight-purple"><strong>primary working memory</strong></mark>, which is <strong>volatile (</strong>loses its contents when powered off), stores data and instructions actively processed by the CPU. Typically, <strong>RAM (Random Access Memory)</strong> serves as the main memory. It has random access, allowing CPU to read and write data and instructions in any order.</p><p id="15d82a35-59f1-807b-ab19-d3a67dbe210b" class="">It is organized in cells that each have an address and whose content can be read and written by CPU using said address. The smallest addresssable size is Byte</p></details></li></ul><ul id="3bfbe854-7c45-4b51-8a2b-6b04c240e5fd" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>3. Input/Output</strong></mark></summary><p id="adeb8686-07a4-4a84-8978-008207250500" class="block-color-default">The interfaces between the system and its environment, include <strong>communication with the user and also with the storage devices</strong>.</p></details></li></ul><ul id="13ed6aa5-9b39-47ba-abfa-1dc56b0b678e" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>4. Communication system</strong></mark></summary><p id="3d907e4a-3265-4ce3-82ae-927623981e21" class="">The internal communication between the elements of Von Neumann architecture, based on <mark class="highlight-blue"><strong>bus</strong></mark> system.</p><p id="75b14dd1-00aa-413e-ab17-569f84e23b82" class=""><strong>BUS= </strong>A communication medium on which communication is only possible in <strong>one direction</strong> and between two communication partners simultaneously.</p><ul id="15d82a35-59f1-80fc-bce5-f6f480381904" class="bulleted-list"><li style="list-style-type:disc">Address bus and Data bus are used for communication between processor and main memory.<ul id="15d82a35-59f1-8006-80f8-d6b785b78acb" class="bulleted-list"><li style="list-style-type:circle">CPU notifies the main memory about which memory cell is to be read via Address bus.</li></ul><ul id="15d82a35-59f1-8045-8709-f1f2cc987ce3" class="bulleted-list"><li style="list-style-type:circle">The content of this cell is then sent to the CPU via the data bus.   </li></ul></li></ul></details></li></ul><figure id="eff53537-5d51-45d6-9c31-4a0f1b96a4c6" class="image" style="text-align:center"><a href="image.png"><img style="width:528px" src="image.png"/></a></figure><hr id="15d82a35-59f1-806c-b755-c0766bdcb70a"/><h2 id="15d82a35-59f1-8031-b9f9-fc7f4893b78e" class="">Von Neumann Cycle</h2><p id="15d82a35-59f1-80e7-ab87-d281a3da1afd" class="">A computer using the von Neumann architecture operates in a continuous loop. This loop can be broken down into five main steps that happen one after another:</p><ol type="1" id="92d91114-f2cb-44b0-94dd-b34af94965f8" class="numbered-list" start="1"><li><mark class="highlight-purple"><strong>Fetch Instruction:</strong></mark> The computer program instruction is loaded from main memory into the CPU for processing. Therefore, the Control Unit sends the program counter content via the <strong>address</strong> bus to main memory, which returns the instruction via the data bus. </li></ol><ol type="1" id="e13721d8-a5be-4c7c-a276-52a5732d70c8" class="numbered-list" start="2"><li><mark class="highlight-purple"><strong>Decode Instruction:</strong></mark> The Control Unit decodes the instruction, that is stored in main memory in numerical form, by translating it into processor-specific machine language. The CPU therefore activates specific circuits to interpret these numerical codes and execute operations, such as &quot;Add.&quot; The exact machine language varies depending on the processor family.<ul id="75103cc5-0ac8-48fa-8a04-c832763a90dd" class="toggle"><li><details open=""><summary><strong>Machine language</strong></summary><p id="58a04857-f352-4aeb-95bb-f19f8bdce611" class="">Each processor family has its own machine language and, therefore, its own set of executable instructions (or instruction set) architecture (ISA)</p></details></li></ul></li></ol><ol type="1" id="aade4200-a837-497b-84bd-1626e10a7e35" class="numbered-list" start="3"><li><mark class="highlight-purple"><strong>Fetch Operand:</strong></mark> Based on the decoded instruction, the Control Unit requests operands from main memory. Different instructions require different numbers of operands—&quot;Invert&quot; needs one, while &quot;Add&quot; needs two or more. The CPU sends the appropriate bus to the main memory and receives the operand values, storing them in registers.</li></ol><ol type="1" id="3f43e32c-b0c0-469f-9d0e-b7f63db7fb7f" class="numbered-list" start="4"><li><mark class="highlight-purple"><strong>Execute Instruction:</strong></mark> Once the Control Unit has gathered all necessary data for the execution of the instruction, the ALU performs the actual calculation. <mark class="highlight-yellow">This includes operations like adding two numbers or changing the program counter to jump to a new instruction address.</mark></li></ol><ol type="1" id="8401758c-9657-4663-a554-6b9806522457" class="numbered-list" start="5"><li><mark class="highlight-purple"><strong>Store the result:</strong></mark> The final step stores the calculation result either back in main memory or temporarily in the processor&#x27;s registers.</li></ol><figure id="7570c49d-61b5-4998-a306-50c97163a826" class="image"><a href="image%201.png"><img style="width:240px" src="image%201.png"/></a></figure><p id="95ad2643-9c3f-4406-a2a1-9eb03d25876d" class=""><mark class="highlight-purple">To calculate the </mark><mark class="highlight-purple"><strong>duration of one clock cycle</strong></mark><mark class="highlight-purple"> from given frequencies, use the formula:  </mark><mark class="highlight-purple"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Cycle Duration</mtext><mo>=</mo><mfrac><mn>1</mn><mtext>Frequency</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{Cycle Duration} = \frac{1}{\text{Frequency}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Cycle Duration</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.3262em;vertical-align:-0.4811em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Frequency</span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-purple"> </mark></p><p id="4eb33af9-8711-49bc-bffd-6688e7300541" class=""><mark class="highlight-purple"><strong>Example:</strong></mark><div class="indented"><p id="eaa2751c-274a-40bc-86a8-d8519d84d8c9" class=""><mark class="highlight-purple">Frequency: 2 GHz, Convert GHz to Hz: (</mark><mark class="highlight-purple"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex"> 2 \times 10^9 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-purple">) Hz<br/>Cycle Duration = ( <br/></mark><mark class="highlight-purple"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>2</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{2 \times 10^9}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">×</span><span class="mord mtight">1</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-purple"> ) seconds<br/>Cycle Duration = 0.5 nanoseconds<br/></mark></p></div></p><hr id="15d82a35-59f1-80fa-b940-fe13342131da"/><h2 id="15d82a35-59f1-8068-8a2b-cdc1d7febf4a" class=""><strong>Architectural Extensions in Modern Computer Systems</strong></h2><p id="15d82a35-59f1-806f-8f6f-d3c822e2988b" class="">The main problem with the <strong>von Neumann architecture</strong> is <strong>both program instructions and data use the same memory and communication paths</strong>. The CPU can&#x27;t get instructions and data at the same time and causes <strong>delays and slows down the computer</strong>.</p><p id="15d82a35-59f1-80a0-8451-ee34c00e2307" class="block-color-red"><strong>How to solve the von Neumann problem:</strong></p><ol type="1" id="d34f4d47-03cb-4529-9725-67f7c97b8dc1" class="block-color-red_background numbered-list" start="1"><li><strong>Parallel Processing: </strong>The idea behind <strong>parallel processing</strong> is to make a processor run faster by <strong>doing multiple things at once</strong>. This can be done at different levels:<ol type="a" id="69a97c98-12ee-43f7-b9e2-bf158aaf802a" class="numbered-list" start="1"><li><strong>Instruction Pipelining</strong>: <strong>multiple units process the individual steps of instruction at the same time</strong> so that, ideally, one instruction of the machine program is completed per clock cycle(e.g., while one instruction is being fetched, another is being decoded, etc.).</li></ol><ol type="a" id="8a723283-ae89-41dd-b170-c78fa8b74b24" class="block-color-red_background numbered-list" start="2"><li><strong>Vector Processing</strong>: The CPU perform the corresponding calculation per instruction across a whole set of operands, for exampl, on a vector (most commonly used in computer games and scientfic simulations). The vector processing is known as x86 processing under abbreviations such as MMX, SSE, or AVX.</li></ol><ul id="de621ba8-7c53-476a-b556-fbe5f3468caa" class="toggle"><li><details open=""><summary><strong>Clock cycle</strong></summary><p id="b725096f-c3ff-4b69-8850-3bd2226012cd" class="">Processors are clocked, i.e., they operate at a certain clock frequency. In the optimal case, each clock cycle would also correspond to a step in the von Neumann cycle.</p></details></li></ul><ul id="e3d83c9e-b2ca-4ff2-874d-1c72caa53f9b" class="toggle"><li><details open=""><summary><strong>Parallel processing</strong></summary><p id="f95cd132-f896-4f02-9d74-32f365ea6fdd" class="">If a system has n processing units, the processing can be accelerated by a factor of n in the ideal case, as compared to the n=1 case.</p></details></li></ul></li></ol><ol type="1" id="0ce77aee-2189-404e-bb17-0c99402c4d7e" class="block-color-red_background numbered-list" start="2"><li><strong>Multicore Systems</strong>: A less specific form of parallel processing. Uses <strong>multiple CPUs (cores) within the same processor, on </strong>a <strong>single physical chip</strong>. Each core acts like its own CPU, meaning they can <strong>run separate tasks or work on different parts of the same task simultaneously.</strong></li></ol><hr id="15d82a35-59f1-80c6-960a-f999ba75c1f8"/><h2 id="15d82a35-59f1-8015-88fb-f0ddd393d1b2" class=""><strong>Memory Hierarchy</strong></h2><p id="f139afa7-c5b9-499c-b861-cc199d08d6ab" class="">The <mark class="highlight-yellow"><strong>memory hierarchy</strong></mark> is a structure that uses multiple levels of memory with different speeds and sizes to store data more efficiently. The hierarchy typically includes:<div class="indented"><ol type="1" id="39dc0853-4599-416e-867b-dde64505f5ca" class="numbered-list" start="1"><li><strong>CPU </strong><mark class="highlight-yellow"><strong>Registers</strong></mark> (fastest, smallest)</li></ol><ol type="1" id="7e2ff073-f4b8-4d5b-84c7-20334788967e" class="numbered-list" start="2"><li><mark class="highlight-yellow"><strong>Cache</strong></mark><strong> Memory</strong> (L1, L2, L3) - Volatile, bridge the gap between CPU and RAM, storing copies of frequently accessed data.</li></ol><ol type="1" id="e5a72a25-2e54-4f3a-b1b5-8b7b40989812" class="numbered-list" start="3"><li><mark class="highlight-yellow"><strong>Main Memory/RAM</strong></mark> - Volatile but allow random accessibility.  These are small, fast memory units that store frequently used data. They help <strong>bridge the speed gap between the CPU and main memory, reducing delays</strong>.</li></ol><ol type="1" id="3934e501-33e3-4ffe-b040-1702950ae09d" class="numbered-list" start="4"><li><strong>ROM</strong> (Read-Only Memory) – Stores firmware and is non-volatile. Only be read and not written to.</li></ol><ol type="1" id="5e0afbfe-e92b-42bf-8c34-c20f08698246" class="numbered-list" start="5"><li><mark class="highlight-yellow"><strong>Secondary Storage</strong></mark> (Hard Drives, SSDs)</li></ol></div></p><hr id="15d82a35-59f1-80c2-ae7b-e42796421477"/><h1 id="15d82a35-59f1-80fd-9bb5-fd59e32f5615" class="">1.2 The Role of the Operating System</h1><h2 id="15e82a35-59f1-8034-879e-eb36affb9412" class=""><strong>Understanding Kernel Mode </strong></h2><ul id="15d82a35-59f1-805a-ba32-eb0e4522df82" class="block-color-red_background toggle"><li><details open=""><summary>Kernel mode</summary><p id="961e07cf-ff10-4f19-b3cd-695c8b00a2f4" class=""><mark class="highlight-purple"><mark class="highlight-red_background"><strong>Kernel is the core part of the operating system which is executed in a priviliged CPU mode that allows computer to use commands that regular programs can&#x27;t use</strong></mark></mark><mark class="highlight-red_background">.</mark> If a normal program tries to use these special commands, it causes an error that the operating system handles. This separation between normal mode (for regular programs) and kernel mode (for the operating system) keeps the computer stable and stops programs from directly controlling hardware, which could be risky.</p></details></li></ul><ul id="15e82a35-59f1-80cc-b439-d9ba96023996" class="block-color-red_background toggle"><li><details open=""><summary>How Programs Talk to Hardware</summary><p id="15e82a35-59f1-808d-8484-d789510ee5f6" class="">Programs can’t access hardware directly, as this would compromise security and system stability. Instead, they ask the operating system (OS) for help through something called <strong>system calls (</strong>The OS acts as an abstraction layer offering interfaces in form of function calls, which are actionable by the applications). </p><p id="15e82a35-59f1-80d2-8a69-ed793fe2b150" class="">Here’s how it works when the program makes a <strong>system call</strong> to request a specific service.</p><ol type="1" id="15e82a35-59f1-8030-a84f-e71c94c2f1c2" class="numbered-list" start="1"><li>The processor switches from <strong>user mode</strong> to <strong>kernel mode</strong>, giving the OS the necessary permissions to interact with the hardware.</li></ol><ol type="1" id="15e82a35-59f1-8009-a93a-c550e0a6ceff" class="numbered-list" start="2"><li>The OS performs the priviliged operation (e.g., reading data from a hard disk). <mark class="highlight-purple">The OS interacts with the hardware to fulfill the request.</mark></li></ol><ol type="1" id="15e82a35-59f1-8067-a18b-c70e5609b4ef" class="numbered-list" start="3"><li>Once the task is complete, the processor switches back to user mode and returns control to the program.</li></ol><p id="15e82a35-59f1-8055-9daa-d2a06c9bf618" class="">These requests are typically encapsulated in <strong>standardized system libraries</strong>, which enable applications to work seamlessly across different processor architectures without requiring hardware-specific modifications.</p><ul id="81c16d10-183a-4fae-9456-f538ef484da0" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>System calls</strong></mark></summary><p id="f1bd3cf8-f373-4256-9764-2f2fbfcbe31c" class="block-color-red_background"><mark class="highlight-purple"><strong>The interfaces between application program, operating system, and hardware</strong></mark>: for software, they are often standardised and encapsulated in system libraries; for hardware, special machine instructions of the respective processor family <mark class="highlight-purple"><strong>are used when transitioning from user mode to kernel mode</strong></mark>.</p></details></li></ul><ul id="15e82a35-59f1-8062-88f0-f17355069835" class="toggle"><li><details open=""><summary>Standardized Libraries</summary><p id="15e82a35-59f1-807f-85a1-c495def2f173" class="">The operating system provides <strong>standardized system libraries</strong> for different hardware architectures. These libraries allow programs to work on various types of hardware without needing any changes, making applications portable and easy to use across different devices. </p><p id="17682a35-59f1-80ac-9bc3-d61630aecfee" class="">Frequently used and (in particular) system-related functions are made available to the applications by system libraries, which also partially encapsulate the system calls.</p><hr id="17782a35-59f1-805a-9e27-d6f51c8344b0"/><p id="4a446d32-30da-44ca-8f8d-866c5a04ddbc" class="block-color-red_background"><strong>System libraries in user mode </strong>play a critical role in <strong>providing a set of interfaces</strong> for developers, enabling e<strong>asier and safer access to kernel functions</strong>. Without such libraries, operations like file writing could directly interact with the kernel, raising security and stability concerns. For instance, if unchecked file data can corrupt the file system, causing system instability. A strategy to prevent this is to use kernel-only buffer writing. This ensures data integrity before writing it to disk, preventing potential corruption. A second strategy could be the inclusion of permission verification functions in the system libraries. These examples enhance performance and user experience by maintaining system stability, eliminating potential security threats, and preventing downtime.</p></details></li></ul></details></li></ul><ul id="15e82a35-59f1-8052-ab9a-f0b9558d672d" class="block-color-red_background toggle"><li><details open=""><summary>Handling Errors and Interruptions</summary><p id="15e82a35-59f1-8031-b3c7-e237cf9781b2" class="">The OS also manages unexpected events, like errors or user input, through a mechanism called <strong>exception and interrupt handling</strong>. </p><p id="15e82a35-59f1-80f3-83df-d2b6f0fd7cfb" class="">Here’s how it works if an interrupt occurs (e.g., when you press a key): </p><ol type="1" id="15e82a35-59f1-80a0-a0b3-e794a698bc8a" class="numbered-list" start="1"><li>the processor temporarily stops what it’s doing and it saves the current program counter (the address of the next instruction to execute).</li></ol><ol type="1" id="15e82a35-59f1-8013-bac0-e386e99c55a9" class="numbered-list" start="2"><li>Loads a new address pointing to the relevant kernel code to handle the interrupt.</li></ol><ol type="1" id="15e82a35-59f1-8008-a4c1-cab47a15acf5" class="numbered-list" start="3"><li>Executes the kernel code to resolve the issue.</li></ol><ol type="1" id="15e82a35-59f1-809f-b5b0-e0ae54bff034" class="numbered-list" start="4"><li>After resolving the issue, the processor resumes the original task, ensuring everything continues smoothly.</li></ol><p id="15e82a35-59f1-80c7-8ee4-c3eea1adb444" class="">Interrupts are managed by a special component called the <strong>interrupt controller.</strong></p><ul id="82cfdb12-2248-4e49-9059-50307d24cee6" class="toggle"><li><details open=""><summary><strong>Interrupt controller</strong></summary><p id="17582a35-59f1-80c9-851e-f7a5e29f2c29" class="block-color-red_background">This extension of the von Neumann model enables the microcontroller to handle incoming signals, such as those from peripheral devices or interruption signals sent via a dedicated control line. These signals can interrupt the current process, prompting the processor to execute specific instructions within the operating system. By managing hardware requests and error notifications, this mechanism ensures the operating system prioritizes urgent tasks while preserving overall system functionality.</p></details></li></ul></details></li></ul><ul id="15e82a35-59f1-8047-88f5-f55899719431" class="block-color-red_background toggle"><li><details open=""><summary>The Layered Approach</summary><p id="15e82a35-59f1-80ea-a591-fc15d80d4779" class="">This process works because of the clear separation between applications, the OS, and hardware:</p><ol type="1" id="15e82a35-59f1-8092-a4cc-e3e5c6ceb3a6" class="block-color-red_background numbered-list" start="1"><li><strong>Applications</strong>: Programs rely on the OS to perform hardware tasks by using system calls through libraries.</li></ol><ol type="1" id="15e82a35-59f1-80b3-be11-cf9c65be517b" class="block-color-red_background numbered-list" start="2"><li><strong>Operating System</strong>: The OS acts as a translator, converting requests from programs into hardware-specific instructions.</li></ol><ol type="1" id="15e82a35-59f1-80c9-97ff-ebe7b620b5bd" class="block-color-red_background numbered-list" start="3"><li><strong>Hardware</strong>: Devices like the CPU and disk interact with the OS using interrupts and special machine instructions.</li></ol><p id="15e82a35-59f1-808d-bc2c-edfadbbdfcd0" class="">This layered structure ensures:</p><ul id="15e82a35-59f1-80e5-8e8f-e020e188dab6" class="bulleted-list"><li style="list-style-type:disc"><strong>Security and Stability</strong>: Programs can’t directly interfere with hardware, protecting the system.</li></ul><ul id="15e82a35-59f1-80b4-a21c-e32d80274a20" class="bulleted-list"><li style="list-style-type:disc"><strong>Compatibility</strong>: Applications can run on different devices using standardized libraries.</li></ul><ul id="15e82a35-59f1-80d3-8aff-f2946dd8f95b" class="bulleted-list"><li style="list-style-type:disc"><strong>Efficiency</strong>: The OS can manage tasks and resources while handling hardware interactions safely.</li></ul></details></li></ul><p id="f63ed415-344d-4235-a1b9-90598daa0b80" class="block-color-red_background"><mark class="highlight-yellow">A </mark><mark class="highlight-yellow"><strong>privileged kernel mode</strong></mark><mark class="highlight-yellow"> is the mode in which device drivers execute to directly interact with the hardware.</mark></p><figure id="e81f12c3-f987-4c29-a300-6631c64e950a" class="image"><a href="image%202.png"><img style="width:528px" src="image%202.png"/></a></figure><hr id="15e82a35-59f1-8042-b2ba-fc25098d8e59"/><h3 id="15e82a35-59f1-80cb-9df8-d4605bafc7f4" class="block-color-default"><strong>Role of the operating system:</strong></h3><ul id="15d82a35-59f1-80e2-bca1-c4e9a2925752" class="block-color-red_background toggle"><li><details open=""><summary><mark class="highlight-yellow">1. Support Different Operating mode</mark></summary><p id="15e82a35-59f1-80ef-9b76-f9ad8f533914" class="">Operating systems and other special software (like programs that help run virtual machines) that make different ways of using a computer possible. </p><ul id="15d82a35-59f1-80ac-9c28-d58bb2feec94" class="bulleted-list"><li style="list-style-type:disc"><strong>Real-time operation:</strong> The computer must respond very quickly, within a fixed time. </li></ul><ul id="15d82a35-59f1-80c8-ba49-de632b4f8894" class="bulleted-list"><li style="list-style-type:disc"><strong>Multi-user operation:</strong> Many users can process the programs at the same time. </li></ul><ul id="15d82a35-59f1-8061-b4b6-d6048acb7888" class="bulleted-list"><li style="list-style-type:disc"><strong>Batch processing:</strong> The computer does a lot of similar tasks automatically, either sequentially or concurrently. </li></ul></details></li></ul><ul id="15d82a35-59f1-8040-bc09-c4358f474541" class="block-color-red_background toggle"><li><details open=""><summary><mark class="highlight-yellow"><strong>2. Managing Program Execution</strong></mark></summary><p id="15d82a35-59f1-802d-a3ee-de59884ffcb1" class="">It organizes and controls the programs running on the computer.</p></details></li></ul><ul id="15d82a35-59f1-80f1-b0b1-c85ef257b989" class="block-color-red_background toggle"><li><details open=""><summary><mark class="highlight-yellow"><strong>3. Providing User Interfaces</strong></mark></summary><p id="15d82a35-59f1-809f-bfd2-f33dba9dd9c4" class="">It provides a way for users to interact with the computer. Modern computers usually present themselves via a graphical user interface (GUI), which does not have to be part of the kernel mode necessarily. Ther lowest interface are the system calls.</p></details></li></ul><ul id="15d82a35-59f1-8013-b4fc-d96228009006" class="block-color-red_background toggle"><li><details open=""><summary><mark class="highlight-yellow"><strong>4. Performing User, Device, and Resource Management</strong></mark></summary><p id="15d82a35-59f1-8097-a159-d31f946266c8" class="">It manages the computer&#x27;s user, device and resources efficiently. User accounts can be assigned different access rights.</p><p id="15e82a35-59f1-809d-9d46-fdb3f42e6b2d" class="">Users with access to an administrator account are usually allowed to configure critical system settings, while those with access to standard accounts have only limited rights to configure the operating system.</p><p id="15e82a35-59f1-8076-82f3-eead919c9574" class="">The operating system manages access to hardware (e.g., peripherals) via device drivers while simultaneously administering and obscuring access to core resources (e.g., the CPU and main memory). </p><p id="15e82a35-59f1-8095-9793-ceabf4b43711" class="">A <strong>device driver</strong> is a set of program code that controls communication between the machine and the attached device in question. In order for this code to interact directly with the hardware, it must be executed in privileged kernel mode. For this purpose, the device drivers are usually loaded into the kernel in the form of software modules.</p></details></li></ul><ul id="15d82a35-59f1-8045-81c9-ecb9e1d6c9ea" class="block-color-red_background toggle"><li><details open=""><summary><mark class="highlight-yellow"><strong>5. Ensuring System Security and Monitoring</strong></mark></summary><p id="15d82a35-59f1-8047-be5b-f7bbea6e9b52" class="">It keeps an eye on how the system is working and helps keep the computer secur from unauthorized access, program errors, in a multi-user system, the actions of one user should have as little effect as possible on the availability of computing resources for other users.</p><p id="15e82a35-59f1-8027-94f5-c78901d54c76" class="">continuous system monitoring is required for the operating system to be able to intervene appropriately in critical situations. If availability does fail, log data generated by the operating system ensures that an administrator can at least analyze the actual cause.</p></details></li></ul><hr id="15e82a35-59f1-80c2-b580-e6016cbe852b"/><h1 id="15e82a35-59f1-80ca-895b-e8fd826f16a6" class="">1.3 Processes and Threads</h1><p id="15f82a35-59f1-8090-9b8e-ea4ffdb17b0f" class="block-color-red_background">The operating system usually distinguishes between programs (a sequence of machine instructions) and processes (programs in execution).</p><p id="e972d4ba-60ac-4685-b606-fad5b82fc0d6" class="block-color-red_background">A <strong>process</strong> is like a whole program running on your computer. It has its own separate space and resources. An OS uses the abstraction of the process as an instance of a program in execution. Such an instance consists of both the code to be executed (n terms of machine instructions) and a current state (the current value of the program counter).</p><h2 id="15e82a35-59f1-8091-81b4-c4e8f3de9fd1" class=""><strong>Processes Switching</strong></h2><p id="364de3bb-eff0-4116-b018-9e2f2a27cf6b" class="block-color-red_background">The OS manages the status of each process in a data structure,<strong> Process Control Block (PCB)</strong>, that stores information about a process (e.g., process ID, state, CPU register contents). The <strong>OS uses the PCB to keep track of each process</strong>. With each process change, the CPU saves the content of the program counter so that the operating system can update the respective entry in the process control block in the main memory. </p><p id="15f82a35-59f1-8044-bf1e-e47ace4cc804" class="block-color-red_background">Subsequently, the operating system selects another process for further processing and then loads the counter value of this next process back into the program counter register of the CPU. It is then actively processed by the CPU until it too makes a system call, signaling to the operating system that it can select another process after taking control.</p><p id="15f82a35-59f1-80c1-8e87-d758545b83e3" class="block-color-red_background">The multitasking approach can be extended from one CPU to several processors or cores (multiprocessors).</p><ul id="d0302e7f-d361-43d7-bd92-bf92519d320c" class="toggle"><li><details open=""><summary><strong>Multitasking</strong></summary><p id="b7bb4ddc-b8e5-43ab-8b59-5eb30767fc2e" class=""><strong>Several processes in the system are executed quasi-parallel</strong> (also called “interleaved” or “concurrent”) by constantly changing the process being executed on one CPU.</p></details></li></ul><ul id="63ce6838-8b45-4284-95e7-4a4a2101bd08" class="toggle"><li><details open=""><summary><strong>Multiprocessing</strong></summary><p id="92e9e211-6be8-4f51-a086-351563979799" class="">If there is <strong>more than one CPU or multiple cores in a system</strong>, multitasking is extended to multiprocessing, which enables true parallel processing.</p></details></li></ul><h3 id="15e82a35-59f1-8083-8575-c4a9274cfbd5" class=""><mark class="highlight-purple"><strong>Process States</strong></mark></h3><ol type="1" id="15e82a35-59f1-8087-95bc-e919e1412722" class="numbered-list" start="1"><li><mark class="highlight-purple"><strong>Active/Running:</strong></mark><mark class="highlight-purple"> The process is currently being executed by one of the CPUs.</mark></li></ol><ol type="1" id="15e82a35-59f1-802c-b772-da6aa129612d" class="numbered-list" start="2"><li><mark class="highlight-purple"><strong>Ready:</strong></mark><mark class="highlight-purple"> The process is prepared to run and is waiting for CPU allocation. </mark></li></ol><ol type="1" id="15e82a35-59f1-8016-a5f0-e02dd8f32a8a" class="numbered-list" start="3"><li><mark class="highlight-purple"><strong>Blocked:</strong></mark><mark class="highlight-purple"> The process cannot continue until a specific condition is met or an event occurs. </mark><mark class="highlight-yellow">A process transition from a &#x27;blocked&#x27; state to a &#x27;ready&#x27; state, once the required data becomes available and an interrupt signal has been sent.</mark></li></ol><figure id="fd5ea981-935c-4aaa-861c-6834fbcb9530" class="image"><a href="image%203.png"><img style="width:288px" src="image%203.png"/></a></figure><h3 id="15e82a35-59f1-80a7-8743-c660a1fbb2b8" class="">Cooperative Multitasking</h3><p id="15e82a35-59f1-8080-9a43-dab7371a0089" class=""><strong>Polling=</strong> Processes <strong>actively waiting</strong> by continuously querying the status of an I/O operation. The disadvantage is that the CPU is busy waiting and therefore unavailable for other processes. </p><p id="15f82a35-59f1-80ad-8ec2-fbbbbe69fb1e" class="">The idea is not to have processes actively waiting on the CPU for needed data but, rather, it is to block and later resume them via interrupts once the data are available, thus allowing other processes to use the CPU in the meantime.</p><p id="15f82a35-59f1-8032-8280-f544bfc24fc6" class="">This mechanism is <strong>Cooperative Multitasking</strong>: Each process <strong>voluntarily gives up control</strong> of the CPU to allow other processes to run. The drawback is that the processes, which are in reality not very cooperative (as they rarely or never make system calls), can monopolize the CPU without the operating system being able to intervene. </p><h3 id="15e82a35-59f1-8003-adf8-f49f803bd632" class=""><strong>Preemptive Multitasking</strong></h3><p id="15f82a35-59f1-80be-a646-c8b0ba20c3be" class=""><mark class="highlight-yellow"><strong>Preemptive Multitasking</strong></mark><mark class="highlight-yellow">: The operating system </mark><mark class="highlight-yellow"><strong>decides when to take control</strong></mark><mark class="highlight-yellow"> of the CPU from a running process and give it to another process, even if the current process hasn’t finished. </mark><mark class="highlight-yellow"><strong>A kind of “hardware alarm clock”! </strong></mark></p><p id="15f82a35-59f1-8083-9e09-fc52fd389852" class="">When this alarm clock expires, the interrupt controller automatically triggers an interruption and thus a change in the operating system kernel. This way, the operating system can always regain control over the CPU and execute other processes and/or even terminate non-cooperative processes if necessary. At the latest, it does this after the alarm time expires. This is called a time slice. The end of the time slice does not necessarily lead to a process change. For example, no such change occurs in a scenario where no further processes are queued up.</p><p id="15f82a35-59f1-8048-b599-d15e98c84015" class="">With very long time slices, the processes usually perform a system call before the time slice expires, whereas smaller time slices imply both frequent changes and a noticeable overhead (since each process change also costs CPU time needed for the operating system.)</p><ul id="ec819726-b27a-4f1d-bc64-b40cff155d35" class="toggle"><li><details open=""><summary><strong>Time slice</strong></summary><p id="41aa4590-6ae3-4f04-b6d1-59b9ef32e757" class="">This is the maximum amount of time a process can be worked on by the CPU before the operating system regains control.</p></details></li></ul><figure id="857bf5a3-9e99-4b18-8ebd-94e9cc9888ff" class="image"><a href="image%204.png"><img style="width:336px" src="image%204.png"/></a></figure><hr id="15f82a35-59f1-80b8-b31e-e7fccdb75527"/><h2 id="15f82a35-59f1-8006-9701-caa47a370735" class=""><strong>Threads</strong></h2><p id="15f82a35-59f1-8033-bc4f-d7de6a4ec478" class="">A <strong>thread</strong> is a smaller unit of execution within a <strong>process</strong>. Unlike processes, which operate independently with separate resources, all threads within a process share the same <strong>address space</strong>—the memory locations a process can use. This shared access allows threads to work faster and more efficiently than separate processes.</p><p id="15f82a35-59f1-801b-9654-e44f21f19be0" class="">Threads are useful for handling multiple tasks simultaneously within the same program. For example, in a chat program, one thread can handle user input while another manages incoming messages, allowing both tasks to run concurrently in the same process.</p><p id="15f82a35-59f1-8050-a254-f3304c79c2a9" class="">Threads reduce the overhead of switching between processes and are better suited for tasks that need to share data or resources. However, processes are more appropriate for running entirely separate programs.</p><h3 id="15f82a35-59f1-80c7-b200-d7851a42ad07" class=""><strong>How Threads Work</strong></h3><p id="15f82a35-59f1-8088-8643-fe9590a0bcc9" class="">Threads operate using a sequence of instructions, and APIs like POSIX Threads, Windows Threads, or Java Threads are used to program them. After completing a sequence of tasks, a thread may switch to another, allowing multitasking within the same process.</p><p id="15f82a35-59f1-802e-95b8-ea2af75d9fc7" class="">When multiple threads are managed by the same CPU, switching between them is efficient and avoids the overhead of process switching. If threads are spread across different CPUs (via kernel-level threads), the OS manages the distribution for true parallel execution.</p><ul id="15f82a35-59f1-80a6-878f-f225667c5cf4" class="toggle"><li><details open=""><summary><strong>Types of Threads</strong></summary><ol type="1" id="15f82a35-59f1-807a-b8a8-e0d0a43f4da0" class="block-color-red_background numbered-list" start="1"><li><strong>Software-Level Threads</strong><ul id="15f82a35-59f1-8030-972f-e85fb43c6c9b" class="bulleted-list"><li style="list-style-type:disc"><strong>User-Level Threads</strong>: Managed entirely by the application, not the operating system. These threads are lightweight and efficient but limited because the OS treats them as a single process, meaning true parallel execution isn’t possible.</li></ul><ul id="15f82a35-59f1-804c-bd0c-d944d7716bc1" class="bulleted-list"><li style="list-style-type:disc"><strong>Kernel-Level Threads</strong>: Managed by the operating system, allowing multiple threads of the same process to run on different CPUs simultaneously. This enables true parallelism but comes with higher overhead due to the OS managing thread switching.</li></ul></li></ol><ol type="1" id="15f82a35-59f1-804b-8215-f14c0e61516e" class="block-color-red_background numbered-list" start="2"><li><strong>Hardware-Level Threads</strong><ul id="15f82a35-59f1-805c-bda5-f73b65054e5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Simultaneous Multithreading (SMT)</strong>: A CPU-level feature (e.g., Intel&#x27;s Hyper-Threading) that allows multiple threads to run within a single CPU core. This maximizes hardware efficiency but is limited by the CPU’s design.</li></ul></li></ol></details></li></ul><figure id="17582a35-59f1-80c4-99dd-d0c6af32034f" class="image"><a href="SmartSelect_Pin.jpg"><img style="width:288px" src="SmartSelect_Pin.jpg"/></a></figure><hr id="15f82a35-59f1-8088-aa66-e8e81e9547cd"/><ul id="15f82a35-59f1-80a7-b3eb-f9ed993643e7" class="toggle"><li><details open=""><summary><strong>Concurrency vs. Parallelism</strong></summary><ul id="15f82a35-59f1-80c3-bf1a-ec684025cfc1" class="bulleted-list"><li style="list-style-type:disc"><strong>Concurrency</strong>: Tasks are executed in overlapping time periods. For example, threads may switch back and forth, allowing asynchronous operations, but not necessarily at the same time.</li></ul><ul id="15f82a35-59f1-80c9-be00-cdeede4d7360" class="bulleted-list"><li style="list-style-type:disc"><strong>Parallelism</strong>: Tasks are executed simultaneously. This requires multiple CPU cores or processors working together on different tasks at the same time.</li></ul></details></li></ul><ul id="15f82a35-59f1-8080-bb1a-e7e92d7d24be" class="toggle"><li><details open=""><summary><strong>Address Space</strong></summary><p id="15f82a35-59f1-80ad-9e67-ce94c34a41ee" class="">The <strong>address space</strong> refers to all the memory locations a process can access. Threads within the same process share this memory, making it easier to share variables and data between threads.</p></details></li></ul><hr id="17582a35-59f1-8021-8e0e-faad2e3c4b7b"/><h2 id="17582a35-59f1-8069-adfe-ca2463ce3e1f" class="">1.4. Memory Management</h2><h3 id="17582a35-59f1-80f8-a88f-e754efe3ca62" class=""><mark class="highlight-purple">Dynamic Memory Allocation</mark></h3><p id="1df82a35-59f1-808f-8806-e45f5c5bbf11" class="block-color-red_background">The operating system manages memory allocation while a program is running. Since processes often don’t know in advance how much memory they will need, the OS decides how to use the main memory for storing data and instructions that the CPU is actively using</p><p id="1df82a35-59f1-80a7-8c40-dae9d1d41ad0" class="block-color-red_background"><mark class="highlight-purple"><strong>Main memory is divided into addressable cells, allowing the CPU to read and write data in any order.</strong></mark><mark class="highlight-purple"> </mark>Operating systems and/or <strong>system libraries</strong> offer special functions to keep track with which programs can allocate and release memory. For this purpose, however, the system must keep track of which memory areas have already been allocated and which are still free. <mark class="highlight-purple">Frequent requesting and releasing of memory leads to a problem called </mark><mark class="highlight-purple"><strong>memory fragmentation. </strong></mark><strong> </strong></p><p id="17682a35-59f1-800e-9526-e6a936cb5f6f" class="">Over time, the main memory gets fragmented, reducing its workable space to smaller and smaller areas. At some point, there may still be many small chunks of free memory. However, as an allocated memory region must always be contiguous, they can no longer be used for handling large blocks of allocation requests</p><ul id="17682a35-59f1-8011-912c-e01c83726ac4" class="toggle"><li><details open=""><summary>Fragmentation</summary><p id="17682a35-59f1-801d-9e23-eaee81aeb162" class=""><mark class="highlight-yellow"><strong>F</strong></mark><mark class="highlight-yellow">ragmentation is the inefficient splitting of memory space into small chuncks in the main memory or hard disk. it should be avoided to reduce access times. </mark></p></details></li></ul><ul id="17682a35-59f1-8063-8ce0-d52299371c8f" class="toggle"><li><details open=""><summary>Memory Address Space</summary><p id="17682a35-59f1-80b0-9357-f6db0908afe3" class="">The code and data of the operating system are located at the lower end of the memory addresses (address zero), followed by program code. After, the program code, toward the<br/>end of the address space, there are dynamically allocated data areas.<br/></p></details></li></ul><h3 id="17582a35-59f1-8029-b307-f191a5afb485" class="block-color-default"><strong>Allocation Strategy</strong></h3><p id="17682a35-59f1-80e7-bf25-ed65756f6471" class=""> A good allocation strategy must be chosen that leads to as little fragmentation as possible.</p><table id="a86fefea-42a2-4017-9c0c-db852026f6ad" class="simple-table"><tbody><tr id="15e09059-3463-4746-84ae-6383b1171602"><td id="qC`b" class="" style="width:82.00000762939453px"><mark class="highlight-purple"><strong>Strategy</strong></mark></td><td id="ckDa" class="" style="width:236.12501525878906px"><strong>Procedure</strong></td><td id="Y{h=" class=""><strong>Advantages</strong></td><td id="c\AN" class="" style="width:200.6527862548828px"><strong>Disadvantages</strong></td></tr><tr id="8c176840-e594-4fca-bec7-4aec00dceb1b"><td id="qC`b" class="" style="width:82.00000762939453px"><mark class="highlight-purple">First fit</mark></td><td id="ckDa" class="" style="width:236.12501525878906px">Allocate first free and matching block</td><td id="Y{h=" class="">Simple and fast</td><td id="c\AN" class="" style="width:200.6527862548828px">Small free chunks accumulate at small addresses</td></tr><tr id="494361ea-2108-40a2-b7b0-45aef053739e"><td id="qC`b" class="" style="width:82.00000762939453px"><mark class="highlight-purple">Next fit</mark></td><td id="ckDa" class="" style="width:236.12501525878906px">Same as first fit, but continue search at last allocation and not at address 0</td><td id="Y{h=" class="">Simple and fast</td><td id="c\AN" class="" style="width:200.6527862548828px">Similar to First Fit, Small free chunks accumulate at small addresses</td></tr><tr id="750c5605-4a51-472a-9b87-bf790a39bd2a"><td id="qC`b" class="" style="width:82.00000762939453px"><mark class="highlight-purple">Best fit</mark></td><td id="ckDa" class="" style="width:236.12501525878906px">Allocate the block that leaves the smallest remainder, after searching the whole address space</td><td id="Y{h=" class="">Minimises wasted space</td><td id="c\AN" class="" style="width:200.6527862548828px"><mark class="highlight-default">Slower, leads to small unusable fragments</mark></td></tr><tr id="f1f036b0-ada7-4d55-8ee9-2f181aee96b7"><td id="qC`b" class="" style="width:82.00000762939453px"><mark class="highlight-purple">Worst fit</mark></td><td id="ckDa" class="" style="width:236.12501525878906px">Allocate the block that leaves the largest remainder</td><td id="Y{h=" class="">Remaining gaps remain large and therefore easy to allocate</td><td id="c\AN" class="" style="width:200.6527862548828px"></td></tr></tbody></table><h3 id="17582a35-59f1-8062-8127-fd2c8ea413aa" class=""><strong>Memory Protection and Multitasking</strong></h3><p id="17582a35-59f1-80c0-94f8-edeca64a3323" class=""><strong>Memory protection</strong> is a feature that <strong>keeps different programs on a computer separate from each other</strong>.  This is really helpful for a few reasons:</p><ol type="1" id="17582a35-59f1-8007-ac9b-da1c1cc8e671" class="numbered-list" start="1"><li><strong>Safety</strong>: If one program has a problem, it can only mess up its own &quot;room&quot;. Other programs stay safe and can keep running normally.</li></ol><ol type="1" id="17582a35-59f1-8072-ada8-ee991bd33165" class="numbered-list" start="2"><li><strong>Privacy</strong>: In systems where many people use the same computer, memory protection helps keep each person&#x27;s private information safe. It stops other users from easily seeing sensitive data that&#x27;s stored in the computer&#x27;s memory.</li></ol><ol type="1" id="17582a35-59f1-8030-8379-cad2d0b49009" class="numbered-list" start="3"><li><strong>Stability</strong>: By keeping programs separate, the whole computer system becomes more stable and reliable.</li></ol><p id="17582a35-59f1-8060-a4ab-fb487361555e" class="">The operating system gives each program its own space in the computer&#x27;s memory. The <strong>CPU knows &quot;boundary registers&quot; of each running processes, and then check if a process is trying to use memory that doesn&#x27;t belong to it</strong>. </p><p id="17582a35-59f1-8018-86ef-c2d2f6d92d07" class="">If <strong>a program tries to use memory that&#x27;s not its own</strong>, it&#x27;s called a &quot;<strong>memory access violation</strong>&quot;. When this happens, the <strong>CPU immediately tells the operating system</strong>. The <strong>operating system then stop the program</strong>.</p><ul id="17682a35-59f1-8072-9c01-c5a5e6ffd72b" class="toggle"><li><details open=""><summary>Memory Protection using Beoundary Registers</summary><figure id="17682a35-59f1-80e4-b206-eeae74a36696" class="image"><a href="image%205.png"><img style="width:240px" src="image%205.png"/></a></figure></details></li></ul><h3 id="17582a35-59f1-80ef-ba49-e982abe648d1" class=""><strong>Logical and Physical Memory Addresses</strong></h3><ul id="17682a35-59f1-802e-b456-d28d3b277008" class="toggle"><li><details open=""><summary>Logical Address</summary><p id="17582a35-59f1-80dd-8078-c44ef9016f29" class=""> A <strong>logical address/Virtual address</strong> is the address <strong>generated by the CPU during program execution</strong>. It is the address that a program (or process) uses to access memory.</p><p id="17582a35-59f1-80dc-8823-d69db8f7db66" class="">Processes work with logical addresses in their own <strong>address space</strong>, meaning each process has its own set of logical addresses that are independent of the actual physical memory.</p></details></li></ul><ul id="17682a35-59f1-80e6-9cd6-ed5a4fcf60a2" class="toggle"><li><details open=""><summary><strong>Physical Address</strong></summary><p id="17582a35-59f1-80bb-9995-da158bd246a0" class="">A <strong>physical address</strong> is the actual location in the hardware’s memory (RAM) where data is stored. It represents a real location in the memory chips.</p></details></li></ul><ul id="17682a35-59f1-80e9-a382-f8180f9d0876" class="toggle"><li><details open=""><summary>Address Translation</summary><p id="17582a35-59f1-80dc-b24b-f39450b1294c" class="">The OS and hardware (via the <strong>Memory Management Unit</strong>, or MMU) translate logical addresses to physical addresses. This allows programs to work with their own logical address space, while the OS manages the actual memory layout.</p><p id="17682a35-59f1-80f8-aed6-d7c8f7a30f51" class="">MMU has two registers that store the start address of the program (base register) and the length of the address range of the process (limit register). The logical addresses of every program always start at address zero and are continuously converted to physical addresses by the MMU by adding the content of the base register. Also, before an address is sent to the main memory via the address bus, a comparison between the logical addresses and the limit register is made to control for any memory protection violations.</p><p id="17682a35-59f1-80a5-82e3-dc3acaf1219c" class="">Upon a process switch, the contents of the base and limit registers are saved alongside the program counter in the process control block, as these are all process-specific. When a process finally comes back to active execution, these stored values are written to the corresponding CPU and/or MMU registers respectively, and processing can continue at the previous position.</p><ul id="17682a35-59f1-80f9-886d-c832153c66db" class="toggle"><li><details open=""><summary>Conversion of Logical Addresses to Physical Addresses</summary><figure id="17682a35-59f1-802f-b328-eb46fc8426eb" class="image"><a href="image%206.png"><img style="width:288px" src="image%206.png"/></a></figure></details></li></ul><p id="17582a35-59f1-806f-a266-fb28061b3af6" class=""><strong>Translation Process</strong>:<div class="indented"><ol type="1" id="c02d2d68-8975-4fed-ab8a-4acbd0575a65" class="numbered-list" start="1"><li><strong>Program uses a logical address</strong> to access data. </li></ol><ol type="1" id="25f47b88-ce59-4a18-a807-1672f7a3f0cf" class="numbered-list" start="2"><li><strong>MMU translates</strong> this logical address into a corresponding physical address using techniques like <strong>paging</strong> or <strong>segmentation</strong>.</li></ol><ol type="1" id="c1eb4ae2-d2b7-4a79-a6d7-d2a50756c7dc" class="numbered-list" start="3"><li>The <strong>physical address</strong> is then used to access the <strong>actual location in RAM</strong>. <ol type="a" id="17682a35-59f1-8042-90b6-c91ea684cdb7" class="numbered-list" start="1"><li>The address bus uses only the physical addresses.</li></ol><ol type="a" id="17682a35-59f1-800b-905e-f49d0378158a" class="numbered-list" start="2"><li>CPU and programs use logical addresses.</li></ol></li></ol></div></p></details></li></ul><h3 id="17582a35-59f1-8071-b52b-cebf9af368b0" class="">Virtual Memory Addresses</h3><ul id="17582a35-59f1-80a4-8d56-e954cf3a6611" class="toggle"><li><details open=""><summary><strong>Virtual Address</strong></summary><p id="1df82a35-59f1-8031-8286-fcf18b9e36dd" class="">Paging is an advanced concept in logical memory management that eliminates the need for contiguous physical memory. In traditional logical memory systems, a process’s address range can only be extended if there is free space immediately following its allocated region in physical memory—this is enforced by the limit register. Paging overcomes this limitation by dividing memory into fixed-size blocks called <strong>pages</strong>, allowing them to be placed anywhere in physical memory.<br/>In systems that use paging, the CPU generates <br/><strong>virtual addresses</strong> instead of physical ones. Unlike logical addressing, virtual memory does not rely on limit registers or boundary checks. Instead, the <strong>entire virtual address space</strong>—divided into pages—is reserved for the currently active process.<br/>Virtual memory <br/><strong>creates the illusion of a large, continuous memory space</strong> for each program, even if sufficient physical memory is not available. This is managed by the <strong>Memory Management Unit (MMU)</strong>, which translates virtual addresses into physical addresses using <strong>page tables</strong>. </p><p id="1df82a35-59f1-80ae-a2fb-c63af216abff" class="">When the processor accesses data, it:</p><ul id="1df82a35-59f1-8091-a221-e486a132ae28" class="bulleted-list"><li style="list-style-type:disc">Uses <strong>virtual addresses</strong> generated by the program,</li></ul><ul id="1df82a35-59f1-80fe-8ce5-c2f141ca2682" class="bulleted-list"><li style="list-style-type:disc"><strong>Consults the page tables</strong> to find the corresponding physical address,</li></ul><ul id="1df82a35-59f1-806f-ac65-d44e0b9a766c" class="bulleted-list"><li style="list-style-type:disc"><strong>Uses the address bus</strong> to communicate with main memory,</li></ul><ul id="1df82a35-59f1-80cf-adba-ce26352c62ca" class="bulleted-list"><li style="list-style-type:disc">And performs <strong>demand paging</strong>, loading data into RAM only when it’s needed.</li></ul></details></li></ul><ul id="17682a35-59f1-8006-993a-e8744953ce3f" class="toggle"><li><details open=""><summary>Paging method</summary><p id="1df82a35-59f1-804b-b64c-c80c0a9e061b" class=""><strong>Paging</strong> is a memory management technique that divides memory into fixed-size blocks called <strong>pages</strong>. Each page is mapped to a corresponding <strong>page frame</strong> in physical memory, which is also a fixed-size block. These page frames always start at addresses that are multiples of the page size. The <strong>Memory Management Unit (MMU)</strong> handles the translation from virtual addresses (used by programs) to physical addresses (in RAM).<br/>To efficiently manage memory, the operating system works with the MMU and uses <br/><strong>page tables</strong>, which are often organized hierarchically (multi-level paging). Since no entries are created for unused pages, even though virtual address spaces can be large, typical programs only use a small number of pages. As a result, their page tables usually contain just a few entries.</p><p id="17682a35-59f1-80fc-ae51-d2f5640a4bbe" class="">Here’s how it works:</p><ol type="1" id="17682a35-59f1-80b7-903c-c6775e456cde" class="numbered-list" start="1"><li><strong>Determine the page</strong>:  MMU identifies which memory page a virtual address belongs to.</li></ol><ol type="1" id="17682a35-59f1-80df-a0ce-f091e1c950ca" class="numbered-list" start="2"><li><strong>Find the frame</strong>: It locates the corresponding page frame in the physical memory by checking the page table.</li></ol><ol type="1" id="17682a35-59f1-80a4-abbf-e18fd56119a0" class="numbered-list" start="3"><li><strong>Calculate the address</strong>: The final physical address is calculated by adding the offset of the virtual address (relative to the page start) to the page frame&#x27;s starting address.</li></ol><p id="17682a35-59f1-80a3-9a36-d2de4f8743b1" class="">Each process has its own virtual address space and page table, which the operating system manages. This ensures processes operate as if they have exclusive access to memory while the MMU efficiently handles the actual address translation in hardware.</p></details></li></ul><ul id="17682a35-59f1-803a-a67a-c147bff36d9f" class="toggle"><li><details open=""><summary>How Virtual Memory Works:</summary><ol type="1" id="e11118a4-0949-4dee-a683-e729c79abfc2" class="numbered-list" start="1"><li><mark class="highlight-default"><strong>Dividing Memory into Pages</strong></mark><mark class="highlight-default">:</mark><ul id="7bcd2ff6-5d7c-4218-bcdf-de929bc6663f" class="block-color-default bulleted-list"><li style="list-style-type:disc"><strong>Pages</strong>: fixed-size chunks of memory. Inside a page, we use an <strong>offset</strong> to find specific data. The <strong>offset</strong> is like a distance from the start of the page. For example, if you want the 100th byte in <strong>page 2</strong>, the offset is 100. This offset stays the same for both virtual and physical addresses. To find the real memory location (physical address), we take the <strong>physical page frame&#x27;s starting address</strong> (like page frame 6) and add the <strong>offset</strong>. This gives us the exact spot in memory where the data is stored.</li></ul><ul id="c79a21ac-77ab-4d87-bb7f-2e671832f74f" class="block-color-default bulleted-list"><li style="list-style-type:disc"><strong>Page Table</strong>: Each process has a <strong>page table</strong> that keeps track of the mapping between virtual pages and their corresponding physical pages in RAM or disk. Each process has its <strong>own page table</strong> because every process uses its own virtual address space. When you switch between processes, you also switch to a new page table.<ul id="b4ec8c62-e22e-4523-a4ee-d83ca1d376ea" class="bulleted-list"><li style="list-style-type:circle">The <strong>page directory base register</strong> in the CPU stores the <strong>start address</strong> of the page table for the current process, helping the CPU quickly locate the correct page table for address translation.</li></ul><ul id="17682a35-59f1-80ff-8cd9-f1214ccc3b2a" class="toggle"><li><details open=""><summary>Mapping Virtual Addresses to Physical Addresses with Paging</summary><figure id="17682a35-59f1-807b-b34f-fe0eed857cbe" class="image"><a href="image%207.png"><img style="width:288px" src="image%207.png"/></a></figure></details></li></ul><ul id="851a903f-a474-401b-8f0b-6f0e5a1e6022" class="toggle"><li><details open=""><summary><strong>Memory Lookup Efficiency</strong>:</summary><p id="dcb01b27-4d1f-4934-bc34-6434cd9c5743" class=""><strong>The problem:</strong> Every time the CPU wants to access memory, it would need to:<div class="indented"><ol type="1" id="e9ba5ee7-b599-4700-96c0-4950ca4ccd82" class="numbered-list" start="1"><li>Look up the page table (in main memory) to find which page frame to use.</li></ol><ol type="1" id="36c57c0f-0342-49aa-be85-f4dabc690e4a" class="numbered-list" start="2"><li>Then access the actual memory location in the physical page frame.</li></ol></div></p><p id="ffb2c38c-55f0-4857-bdce-a349ae8eda4b" class="">This would be <strong>slow</strong> because it requires accessing memory <strong>twice</strong>—once for the page table lookup and once for the actual data.</p><p id="5c68c1cf-ffd6-4f07-8237-caa89fbd39b8" class=""><strong>Solution</strong>: <strong>Caches</strong> called the <strong>TLB (Translation Lookaside Buffer) </strong>are used. </p><p id="1df82a35-59f1-801b-a5ad-e494b90eb68c" class="">The <strong>TLB</strong> is a fast cache that stores recently used page table entries, allowing the CPU to quickly translate virtual addresses to physical addresses without looking at the page table every time.<div class="indented"><ul id="29c0d515-8063-4e8e-bd18-5fc9c09a0ed7" class="bulleted-list"><li style="list-style-type:disc"><strong>Example</strong>: If the CPU recently accessed page 2, the TLB will remember that <strong>page 2 maps to page frame 6</strong>. Next time the CPU needs something from page 2, it can skip the page table lookup and directly use the TLB’s cached translation.</li></ul></div></p><p id="db1cb7dd-4191-40cd-923e-d28a13bb571c" class=""><strong>TLB</strong> entries are specific to each process (because each process has its own page table). When you switch to a new process, the old TLB entries become <strong>invalid</strong>. This is why <strong>process switching</strong> can take extra time—because the TLB cache has to be cleared and reloaded with new entries from the new process’s page table.</p></details></li></ul></li></ul></li></ol><ol type="1" id="17582a35-59f1-806f-9385-fc454df74426" class="numbered-list" start="2"><li><strong>Using RAM and Disk</strong>:<ul id="fd9ef94d-8841-42e1-a55a-cae137c2560e" class="bulleted-list"><li style="list-style-type:disc"><strong>RAM</strong>: Stores the currently active pages that the process is using.</li></ul><ul id="3af3bffa-4831-44c8-815e-2884a8ca1eb4" class="bulleted-list"><li style="list-style-type:disc"><strong>Disk (Swap Space)</strong>: This stores pages that are not currently needed in RAM in a special area of the hard drive called <strong>swap space</strong> or <strong>paging file</strong>.</li></ul><ul id="c28c4d9a-474c-4e0c-9324-0bcbb1ace8c0" class="bulleted-list"><li style="list-style-type:disc">The OS moves data back and forth between RAM and disk depending on which pages are needed at the moment.</li></ul></li></ol></details></li></ul><hr id="17782a35-59f1-80e6-abed-c53b87b3b95d"/><h3 id="17582a35-59f1-80c2-bfd8-e20ee0050278" class=""><strong>Demand Paging </strong><em><strong>(also called vitual memory management)</strong></em>:</h3><ul id="17782a35-59f1-80c0-a15c-cb3053a98802" class="toggle"><li><details open=""><summary>Demand Paging</summary><p id="17782a35-59f1-80ff-ba08-d1174f5886b3" class="">This method links the virtual memory addresses with the larger hard disk storage in such a way that pages are only read into the main memory when needed and moved in the opposite direction, for example, when no longer in use or when the main memory is too full.</p></details></li></ul><ul id="17582a35-59f1-809c-9bf2-c6363b5c0c92" class="bulleted-list"><li style="list-style-type:disc">Pages are loaded into RAM <strong>only when they are needed</strong>. When a process tries to access a page that is not in memory (a <strong>page fault</strong>), the OS loads it from the disk into RAM.</li></ul><ul id="17582a35-59f1-8042-8de1-f36f17dd067d" class="bulleted-list"><li style="list-style-type:disc">This <strong>on-demand loading</strong> ensures that only the most necessary parts of a program are kept in memory, freeing up RAM for other processes.</li></ul><ul id="17782a35-59f1-8005-83c8-f776e80bced9" class="toggle"><li><details open=""><summary>What happens if MMU cannot find a page frame</summary><p id="17782a35-59f1-809c-bd51-da6e56963dff" class="">If the MMU cannot find a matching page frame for an address in the page table, it generates an exception  (i.e., it sends an interrupt signal to the CPU’s control unit), prompting the operating system to act. The OS determines whether the address is invalid <em>(memory protection violation)</em> or if the needed page is simply not loaded into memory. If it&#x27;s the latter, the OS loads the page from the hard disk into a free page frame, updates the page table, and resumes the program.</p></details></li></ul><ul id="17782a35-59f1-80c6-997f-d2909d2d6003" class="toggle"><li><details open=""><summary>What happens if memory is full</summary><p id="17782a35-59f1-80d7-83ee-c1f9ec87bc8c" class="">If no free page frames are available in main memory, the OS may evict rarely used pages from memory back to the hard disk (a process called swapping) to free up space. This mechanism extends the virtually available memory capacity, as long as frequent swapping is avoided to maintain performance. The disk partition used for this is commonly called &quot;swap.&quot;</p></details></li></ul><hr id="17782a35-59f1-807c-96e6-efb6d0970f71"/><h3 id="17582a35-59f1-80c1-add9-d9c3bb8af454" class=""><strong>Page Replacement</strong>:</h3><p id="17582a35-59f1-80a9-821d-f1fbaae04f27" class="">When RAM is full and a new page needs to be loaded, the OS uses <strong>page replacement strategy</strong> to decide which page to move back to the disk. </p><p id="17582a35-59f1-80f0-89fa-f03c94020061" class="">The typical replacement strategies are: </p><ul id="17582a35-59f1-80a3-b524-c2a1f678a224" class="bulleted-list"><li style="list-style-type:disc"><strong>First In / First Out (FIFO)</strong>. The page that has been in the main memory for the longest amount of time is replaced.</li></ul><ul id="17582a35-59f1-80f8-85be-ce6d5a3e60bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Least Frequently Used (LFU)</strong>. The page that is least frequently used is replaced.</li></ul><ul id="17582a35-59f1-8044-9299-de18cf283f2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Least Recently Used (LRU)</strong>. The page that has <strong>not been accessed for the longest amount</strong> of time is replaced.</li></ul><ul id="17582a35-59f1-805e-9438-e9d65644afcd" class="block-color-default bulleted-list"><li style="list-style-type:disc"><strong>Not Recently Used (NRU)</strong>. This method uses two flags to decide which pages to remove from memory:<ul id="f33a136f-a119-4dcb-849c-02bae4b3db04" class="bulleted-list"><li style="list-style-type:circle"><code>ACCESSED</code>: Shows if a page has been read or written recently.</li></ul><ul id="b1a69d4c-39a5-4b40-bc73-cc0aa63f687b" class="bulleted-list"><li style="list-style-type:circle"><code>DIRTY</code>: Shows if a page has been changed since it was loaded.</li></ul><p id="629ed518-49ef-4612-837e-ae25e3396cb7" class="">The operating system regularly resets the <code>ACCESSED</code> flag for all pages every few time slices. When it needs to remove a page, it follows these steps:</p><ol type="1" id="ca3ab225-6119-4b16-bb4c-a141b8ec440e" class="numbered-list" start="1"><li>First, it looks for pages that haven&#x27;t been accessed or changed (<code>ACCESSED=0</code>, <code>DIRTY=0</code>).</li></ol><ol type="1" id="28f6f7f7-b4b1-4f2d-bcc1-a06547e9f233" class="numbered-list" start="2"><li>If none found, it chooses pages that haven&#x27;t been accessed but were changed (<code>ACCESSED=0</code>, <code>DIRTY=1</code>). These pages need to be saved to disk before removal.</li></ol><ol type="1" id="f393c231-7679-4d4f-8430-c795b8183f44" class="numbered-list" start="3"><li>If still none found, it picks pages that were accessed but not changed (<code>ACCESSED=1</code>, <code>DIRTY=0</code>).</li></ol><ol type="1" id="fd9443f8-7d92-4645-9c8c-49cb6e96bb08" class="numbered-list" start="4"><li>As a last resort, it selects pages that were both accessed and changed (<code>ACCESSED=1</code>, <code>DIRTY=1</code>).</li></ol></li></ul><hr id="17582a35-59f1-802d-b6e8-ed13704a020c"/><h2 id="17582a35-59f1-80dc-904b-f938f74f3013" class="">1.5. File Systems</h2><p id="17582a35-59f1-80e0-b27f-f0c4dbd0c9fa" class="">Hard disk data is accessed in <strong>blocks</strong> (typically 512 bytes or 4 KB), which are larger chunks compared to main memory (RAM). The operating system (OS) manages data on the hard disk in a <strong>block-oriented</strong> way to improve access efficiency.</p><p id="17582a35-59f1-807b-ad1d-ce3d3c468ce9" class="">The <mark class="highlight-yellow">OS uses </mark><mark class="highlight-yellow"><strong>Logical Block Addresses (LBA)</strong></mark><mark class="highlight-yellow"> to map data blocks on the disk</mark>, creating a linear addressing system for managing files. Instead of directly working with block addresses, the <strong>OS abstracts data management into files</strong>. A <strong>file</strong> is a group of data blocks managed under a single name and treated as a unit.</p><p id="17582a35-59f1-8022-b72f-fe4eaef63e15" class=""><strong>File Systems</strong> further organise files into directories (folders), allow hierarchical management, and assign attributes to files like size, ownership, permissions, and timestamps.</p><h3 id="17582a35-59f1-8052-800c-d9133d4b76af" class=""><strong>Inode-Based File Systems</strong>:</h3><p id="17582a35-59f1-803c-96a3-f18868c9c1ff" class="">An <strong>inode</strong> (index node) is a data structure contains metadata about the file or directory, such as its size, permissions, timestamps, and pointers to the actual data blocks on the disk. <mark class="highlight-yellow"><strong>Inodes do not store the file data itself but rather point to the blocks that contain the data</strong></mark>. In this system, files can be stored in non-contiguous blocks, which helps manage disk space flexibly. </p><h3 id="17582a35-59f1-80ac-a6ec-da703c47b35e" class="">Why this happens:</h3><ul id="17582a35-59f1-80dc-a3dc-d1d4003e9c95" class="bulleted-list"><li style="list-style-type:disc"><strong>Unified Directory Tree</strong>: Unix uses a single, hierarchical directory tree, which means different devices or partitions are integrated into this tree at specific points (called <strong>mount points</strong>). Unlike some systems where each device gets its own root directory (e.g., &quot;C:&quot; in Windows), <strong>Unix-like systems place all devices under a common root </strong><code><strong>/</strong></code>.</li></ul><ul id="17582a35-59f1-8011-9a76-e295adf4ad36" class="bulleted-list"><li style="list-style-type:disc"><strong>Support for Different File Systems</strong>: Unix <strong>allows multiple file systems to be mounted at different locations</strong>. This allows, for instance, a file system formatted with <strong>FAT32</strong> on a USB memory drive to be mounted at <code>/mnt/ssd</code>, while the main file system uses <strong>ext4</strong> on the hard drive. Each file system continues to function independently but is accessible under the same global directory tree.</li></ul><h3 id="17582a35-59f1-80b6-930e-d11d780caea2" class=""><strong>Directory Structure</strong>:</h3><p id="17582a35-59f1-80c6-8699-c38bc6005385" class="">Directories are special types of files that list file names and their corresponding <strong>inode numbers</strong>. This structure allows for the creation of <strong>hierarchical file systems</strong> where directories can contain subdirectories and files, allowing complex organization. <mark class="highlight-yellow">The navigation through the directory tree is then done via the inodes of the directories. For backward navigation, there is always an entry (usually named “..”) that refers to the inode of the parent directory. The root directory is a notable example.</mark> As there is no level higher than the root directory, it always refers to itself when navigating backward. <mark class="highlight-yellow">The root directory in an inode-based system addressed by a simple slash ( </mark><mark class="highlight-yellow"><code>/</code></mark><mark class="highlight-yellow"> ). The backward navigation enabled in an inode-based directory structure via an entry that refers to the inode of the root directory.</mark></p><p id="17582a35-59f1-800b-a573-d45e1cefb767" class=""><strong>Formatting and File System Types</strong>: When a disk is prepared for use, it must be <strong>formatted</strong> to set up the file system, determining how files are organised and stored. Different disks (hard drives, CDs, etc.) may use different file systems. For example, Unix-like systems commonly use <strong>inode-based</strong> file systems, while others like <strong>FAT32</strong> are used for removable media like USB drives.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

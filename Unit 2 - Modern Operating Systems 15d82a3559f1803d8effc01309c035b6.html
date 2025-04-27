@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 2 - Modern Operating Systems</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="15d82a35-59f1-803d-8eff-c01309c035b6" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">2️⃣</span></div><h1 class="page-title">Unit 2 - Modern Operating Systems</h1><p class="page-description"></p></header><div class="page-body"><h2 id="17582a35-59f1-80d6-9e2b-fa93a276fce8" class="">2.1.  Microsoft Windows</h2><p id="17782a35-59f1-8051-b3e5-f2444e20c95a" class="">Developed by Microsoft Corporation</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">History</summary><div class="indented"><ul id="6c7d1e79-e87c-4e9e-9e92-10e722eb78e4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>MS-DOS: </strong></mark><mark class="highlight-default"> The official OS of the IBM PC, released in 1981. It was </mark>designed as a simple, single-user operating system with 16-bit address space. Initially, it had no multitasking functionality, which simplified the management of the floppy and hard disks. The only user interface offered at that time was a text-based command line interpreter</li></ul><ul id="17782a35-59f1-8001-a473-e6079289f4b4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>MS-DOS based Windows</strong></mark><mark class="highlight-purple">:</mark> The first versions of Windows were <mark class="highlight-purple">essentially GUI extensions of </mark><mark class="highlight-purple"><strong>MS-DOS </strong></mark><strong>(Microsoft Disk Operating System). T</strong>hey were mere graphical window managers that still required MS-DOS for interfacing with the hardware. </li></ul><ul id="4acf2164-82b3-4f51-92c1-b865be92804f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>NT-based Windows</strong></mark><mark class="highlight-purple">: Microsoft developed a new kernel,</mark> known as New Technology (NT), which introduced <mark class="highlight-purple"><strong>new CPU capability</strong></mark>, <mark class="highlight-purple"><strong>better memory protection</strong></mark> and the <mark class="highlight-purple"><strong>NTFS file system</strong></mark>. NT also provided partial compatibility with the older DOS environment.</li></ul><ul id="a7f52039-c570-4ebb-92ed-05aa060e66b4" class="bulleted-list"><li style="list-style-type:disc"><strong>Windows Modern UI</strong>: Modern versions of Windows, starting from <strong>Windows 8</strong>, introduced the <strong>Modern UI</strong>, designed to support <strong>more type of devices</strong>, <strong>touch screen support</strong>, and <strong>tile based UI</strong>.</li></ul><ul id="17782a35-59f1-803a-880a-e1256e39cd15" class="toggle"><li><details open=""><summary>Development Years of Microsoft OS</summary><table id="26f3c2fe-3bef-497f-86bc-2d540dd2142e" class="simple-table"><tbody><tr id="d24c8579-1ccf-46c1-b8f0-5ee2757c7312"><td id="relw" class="" style="width:105.79861450195312px"><strong>Year</strong></td><td id="vPzq" class="" style="width:91.79861450195312px"><strong>MS-DOS</strong></td><td id="hwAd" class="" style="width:169.7882080078125px"><strong>MS-DOS based Windows</strong></td><td id="jXt`" class="" style="width:149.77430725097656px"><strong>NT-based Windows</strong></td><td id="mkQi" class="" style="width:128.77430725097656px"><strong>Windows<br/>Modern UI<br/></strong></td></tr><tr id="644c55a9-20c4-4825-9708-6837b17e31b1"><td id="relw" class="" style="width:105.79861450195312px">1981</td><td id="vPzq" class="" style="width:91.79861450195312px">1.0</td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="24653088-e4d4-4740-a188-d6e7161b67cf"><td id="relw" class="" style="width:105.79861450195312px">1983</td><td id="vPzq" class="" style="width:91.79861450195312px">2.0</td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="0e7d7f77-f333-4fb8-998b-44dadc44f7a0"><td id="relw" class="" style="width:105.79861450195312px">1984</td><td id="vPzq" class="" style="width:91.79861450195312px">3.0</td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="aed52b9b-ce21-45aa-9f87-4b0812a9090b"><td id="relw" class="" style="width:105.79861450195312px">1990</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px">Windows 3.0</td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="ac17a2f1-f08b-4f1c-a200-dae667a09fd1"><td id="relw" class="" style="width:105.79861450195312px">1991</td><td id="vPzq" class="" style="width:91.79861450195312px">5.0</td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="fcc9b769-6adf-4e28-9442-84346c261269"><td id="relw" class="" style="width:105.79861450195312px">1992</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px">Windows 3.1</td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="620a6e55-d0b9-44be-92cd-e4d704d7e789"><td id="relw" class="" style="width:105.79861450195312px">1993</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px">Windows NT 3.1</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="0aed683c-9863-45b3-9689-fca526cc6f07"><td id="relw" class="" style="width:105.79861450195312px">1995</td><td id="vPzq" class="" style="width:91.79861450195312px">7.0</td><td id="hwAd" class="" style="width:169.7882080078125px">Windows 95</td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="847fb473-cc59-4f4a-918b-3ca32343d535"><td id="relw" class="" style="width:105.79861450195312px">1996</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px">Windows NT 4.0</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="0cc97eff-470d-4f6c-9303-0da9fbcbce54"><td id="relw" class="" style="width:105.79861450195312px">1998</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px">Windows 98</td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="c478af39-e928-4aa3-a148-0e808036c5eb"><td id="relw" class="" style="width:105.79861450195312px">2000</td><td id="vPzq" class="" style="width:91.79861450195312px">8.0</td><td id="hwAd" class="" style="width:169.7882080078125px">Windows ME</td><td id="jXt`" class="" style="width:149.77430725097656px">Windows 2000</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="39a12882-6b8f-4213-8c5f-259621295498"><td id="relw" class="" style="width:105.79861450195312px">2001</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px">Windows XP</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="950085ce-79dd-44ba-a120-7ac1352a2e0d"><td id="relw" class="" style="width:105.79861450195312px">2006</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px">Windows Vista</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="e4a2256c-edcb-443d-8c4e-2fb25d62b27c"><td id="relw" class="" style="width:105.79861450195312px">2009</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px">Windows 7</td><td id="mkQi" class="" style="width:128.77430725097656px"></td></tr><tr id="9ac1365e-f774-4638-867c-301d827f6a2d"><td id="relw" class="" style="width:105.79861450195312px">2012</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px">Windows 8</td></tr><tr id="a0f45eec-6cbf-4e74-9bb0-5ebcfdb8c4e2"><td id="relw" class="" style="width:105.79861450195312px">2013</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px">Windows 8.1</td></tr><tr id="68389021-a7f9-4f0a-a288-11833366b2fc"><td id="relw" class="" style="width:105.79861450195312px">2015</td><td id="vPzq" class="" style="width:91.79861450195312px"></td><td id="hwAd" class="" style="width:169.7882080078125px"></td><td id="jXt`" class="" style="width:149.77430725097656px"></td><td id="mkQi" class="" style="width:128.77430725097656px">Windows 10</td></tr></tbody></table></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Structure &amp; Interfaces</summary><div class="indented"><p id="17782a35-59f1-804c-bca8-f1ca9f413992" class="">In kernel mode, the central layers of the operating system handle two main functions:</p><ol type="1" id="17782a35-59f1-8095-8205-c507483a7e09" class="numbered-list" start="1"><li><strong>Hardware Management</strong>: This includes interruption handling and hardware-related CPU management.</li></ol><ol type="1" id="17782a35-59f1-8087-8262-d6441b177760" class="numbered-list" start="2"><li><strong>System Services</strong>: These manage processes, threads, virtual memory, and input/output operations, supported by device drivers.</li></ol><p id="17782a35-59f1-8026-b63a-f491b618c7c3" class="">At the lowest software level, the <strong>Hardware Abstraction Layer (HAL)</strong> provides interfaces to hardware components like the interrupt controller, MMU, and device controllers. At higher levels, the <strong>Win32 API</strong>, introduced with Windows NT, offers a standardized programming interface for accessing system libraries and abstracting system calls in the Windows kernel.</p><p id="17782a35-59f1-8029-9e6c-f945403eb141" class="">The <strong>Win32 API</strong> ensures compatibility across Windows versions. Applications written using it can run on Windows NT, 95/98/ME, and subsequent versions like 2000, Vista, 7, 8/8.1, and 10, making it a widely supported interface for Windows development.</p><p id="f98bdc21-989f-4c77-990e-acc0045818e1" class=""><mark class="highlight-yellow"><strong>Win32 API </strong></mark><mark class="highlight-yellow">is a programming interface that provides </mark><mark class="highlight-yellow"><strong>standardized access to system libraries and abstracts system calls in the Windows kernel</strong></mark>. It was introduced with Windows NT and is used for programming Windows applications. Functions like <code>CreateFile</code>, <code>ReadFile</code>, and <code>WriteFile</code> are part of this API.</p><figure id="55fc36f6-44d3-42dc-a615-91c036131c91" class="image" style="text-align:center"><a href="image%208.png"><img style="width:432px" src="image%208.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">File System</summary><div class="indented"><p id="17782a35-59f1-8022-85ca-f3bce7e05404" class="">Windows NT introduced the <strong>New Technology File System (NTFS)</strong>, which remains the default file system for modern Windows versions<mark class="highlight-default">, supporting large file sizes and features like </mark><mark class="highlight-default"><strong>journaling</strong></mark><mark class="highlight-default">.</mark> NTFS replaced the older <strong>File Allocation Table (FAT)</strong> system, which was widely used for floppy disks, hard drives, and, more recently, devices like memory sticks.</p><ul id="17782a35-59f1-80ec-929c-e3cd3eb4be22" class="bulleted-list"><li style="list-style-type:disc">in FAT all allocation information between all files and all blocks of a disk or drive are stored in a single, large table. <strong>FAT32 (File Allocation Table)</strong> is still used in portable devices but has limitations, such as a 4GB maximum file size.</li></ul><h3 id="17782a35-59f1-80f0-b6e5-f1ad6dab0b88" class="">Key differences between NTFS and FAT32:</h3><ul id="17782a35-59f1-8023-a1db-fcd64fe724eb" class="bulleted-list"><li style="list-style-type:disc"><strong>File Size Limits</strong>: NTFS supports files up to 16 Tebibytes, while FAT32 is limited to 4 Gibibytes per file, making it unsuitable for large files like uncompressed DVD images.</li></ul><ul id="17782a35-59f1-80b2-986f-d5e0846f8257" class="bulleted-list"><li style="list-style-type:disc"><strong>Volume Size</strong>: NTFS can handle volumes up to 256 Tebibytes, compared to FAT32&#x27;s 2 Tebibyte limit.</li></ul><ul id="17782a35-59f1-8019-ad88-c30bac42d7fa" class="bulleted-list"><li style="list-style-type:disc"><strong>File Count</strong>: NTFS allows more files than FAT32.</li></ul><p id="17782a35-59f1-80e7-8765-d32d8ea5e248" class="">NTFS also offers advanced features:</p><ul id="17782a35-59f1-80d4-885d-e1c3fbfd5253" class="bulleted-list"><li style="list-style-type:disc"><strong>Journaling</strong>: It logs metadata changes in a journal to ensure data consistency, even after power outages or system crashes, avoiding lengthy file system checks. This allows for the consistent state of data structures to be instantly restored at any time.</li></ul><ul id="17782a35-59f1-80c5-aa85-c84d014f9822" class="bulleted-list"><li style="list-style-type:disc"><strong>Modern Use</strong>: NTFS is optimized for hard disks, while FAT32 remains popular for cross-platform compatibility on portable devices.</li></ul><p id="17782a35-59f1-80b1-84d1-d9141fcdaa5f" class="">This makes NTFS the superior choice for larger volumes and critical systems requiring reliability and scalability.</p></div></details><hr id="17782a35-59f1-801e-a7f7-ded6f7ae5ad6"/><h2 id="17582a35-59f1-80ef-945a-c703db554c16" class="">2.2. Case Study: Unix and Linux</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>Unix History</strong>:</summary><div class="indented"><p id="e3e7fdd9-b244-4cec-a83c-b914d3c8d83d" class=""><strong>Unix</strong> was originally developed in the 1970s at AT&amp;T&#x27;s Bell Labs and became highly influential due to its portability and multitasking capabilities using C programming language. <mark class="highlight-default"><strong>Unix was open-source operating system until 1980 and was commonly used at research institutes and universities</strong></mark><mark class="highlight-default">.</mark></p><p id="17782a35-59f1-8023-bb05-e39b7f380e4a" class="">Common early and modern derivatives (forks and hardware manufacturers) of Unix include</p><ul id="db1ea4cc-c499-41e6-975f-802fae7f7d8e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Berkeley Software Distribution (BSD)</mark></li></ul><ul id="7fcff667-b166-41f8-8fda-6282c0e22bd9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Unix System V</mark></li></ul><ul id="4f074312-da7e-4815-96d7-40c56223e60a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">SunOS/Solaris (today Oracle)</mark></li></ul><ul id="124320cb-ee31-45b7-bebe-c2b047dbf3e3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">FreeBSD, OpenBSD, and NetBSD (open-source) </mark></li></ul><ul id="b67bd9c6-2f59-473b-b603-1ea23aebbd1c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Mac OS X/macOS</mark></li></ul><ul id="e7cca3bb-632b-4954-b407-0f1b1d2faadb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Xenix (licensed by Microsoft)</mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Linux History:</summary><div class="indented"><p id="17782a35-59f1-806f-b2e8-fdf51ed56e34" class="">In 1987, Tanenbaum created MINIX, an open-source teaching operating system designed for academic use. Building on MINIX, Linus Torvalds developed the <strong>Linux kernel</strong> in 1991, releasing it under the <strong>GNU General Public License (GPL)</strong>. This license promoted open-source collaboration while protecting the code from misuse in proprietary projects. <mark class="highlight-default">When combined with GNU software, Linux forms a complete operating system often referred to as </mark><mark class="highlight-default"><strong>GNU/Linux.</strong></mark><mark class="highlight-default"> It is an open-source version of Unix and quickly gained widespread adoption. </mark></p><p id="17782a35-59f1-800d-bd9b-e0713d8440c4" class="">Since its release, Linux development has been driven by the online open-source community, with maintainers overseeing specific sections of the code. Linus Torvalds continues to have the final say on kernel changes. Over time, an extensive ecosystem of tools, libraries, and runtime environments has grown around Linux, leading to the creation of various <strong>Linux distributions</strong>. These distributions often share the same kernel version but may differ in configuration and packaging. Linux now supports a wide range of uses, from personal computing to enterprise systems.</p><ul id="cd80c25c-5eda-433e-a9e4-35b1a834e6ba" class="toggle"><li><details open=""><summary><strong>GNU General Public License</strong></summary><p id="20d2dc58-3f08-415d-b984-8b0ac2760b17" class="">This license (also called GNU GPL) allows anybody to use, modify, and distribute open-source software provided that the rights outlined in the license are always reserved during redistribution and re-use.</p></details></li></ul><figure id="4837abee-7714-4bdc-b4e6-8471c5b18620" class="image" style="text-align:center"><a href="image%209.png"><img style="width:384px" src="image%209.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Structure and Interfaces</summary><div class="indented"><p id="17782a35-59f1-8053-87b1-f236a0599e31" class="">Unix-like operating systems share a similar structure and interface design, based on standardized software layers with interchangeable components. <mark class="highlight-default">This design </mark><mark class="highlight-default"><strong>allows for easy replacement or modification of one layer without affecting others</strong></mark><mark class="highlight-default">. A clear example is the </mark><mark class="highlight-default"><strong>graphical user interface (GUI)</strong></mark><mark class="highlight-default"> and </mark><mark class="highlight-default"><strong>desktop environment</strong></mark><mark class="highlight-default">, where users can choose between different options like </mark><mark class="highlight-default"><strong>GNOME</strong></mark><mark class="highlight-default"> or </mark><mark class="highlight-default"><strong>KDE</strong></mark><mark class="highlight-default"> i</mark>n Linux-based systems. This flexibility highlights the modularity of Unix-like systems.</p><p id="d5054d93-d348-4fec-af22-be23f401090b" class="block-color-default"><strong>POSIX (Portable Operating System Interface) is a set of standardised operating system interfaces and APIs </strong>that ensure compatibility between different UNIX-like systems. It defines a common set of standards, ensuring that software written for one POSIX-compliant system can run on another without requiring major modifications. It was developed by IEEE and the Open Group (ISO/IEC 9945). POSIX defines:</p><ul id="17782a35-59f1-8029-8614-ea5c2a7b32cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Programming Interfaces</strong>: Standardized functions for system calls, described in C, enabling portability across compliant systems.</li></ul><ul id="17782a35-59f1-8060-adb8-f12df653dc07" class="bulleted-list"><li style="list-style-type:disc"><strong>Tools and Shells</strong>: Command-line tools and interpreters (e.g., shell scripts) that work seamlessly across POSIX-compliant systems. They provide an interface for users to interact with the system, often through command-line interfaces (CLI).</li></ul><p id="17782a35-59f1-8033-b4f9-d91b399ea7a3" class="">This standard allows POSIX-compatible programs and scripts to run on any compliant Unix-like OS without modification. While Windows is not Unix-like and lacks full POSIX compliance, tools like the <strong>Windows Subsystem for Linux (WSL)</strong> and hypervisors enable interoperability and portability between Windows and Unix-based systems.</p><ul id="307428a4-184d-46f7-ab85-388706d7b045" class="bulleted-list"><li style="list-style-type:disc"><strong>Multitasking</strong>: Unix introduced true multitasking, allowing multiple processes to run simultaneously.</li></ul><ul id="77d2f2b3-6791-47c0-ad30-3bdce2d0056e" class="bulleted-list"><li style="list-style-type:disc"><strong>Multiuser Support</strong>: Both Unix and Linux are designed to handle multiple users simultaneously, providing security and resource isolation between users.</li></ul><ul id="62ac4b05-7534-4e27-a63a-7451bbffb1b6" class="bulleted-list"><li style="list-style-type:disc"><strong>Kernel</strong>: The core part of Unix/Linux responsible for managing resources and system calls. </li></ul></div></details><figure id="8afd9abc-c07b-45a0-9cb2-81352b5a0264" class="image" style="text-align:center"><a href="image%2010.png"><img style="width:288px" src="image%2010.png"/></a></figure><h3 id="227dfaa8-0129-4793-b7b3-4e60a976c060" class=""><strong>File Systems</strong>: </h3><p id="db2cfd59-01f9-408d-b945-1a167d18ab74" class="">Unix and Linux primarily use <strong>inode-based file systems</strong> (like ext4 for Linux), which efficiently manage files and directories.</p><p id="44544651-9339-4d05-a65c-8a2fe802ed24" class=""><mark class="highlight-purple"><strong>&quot;everything is a file&quot;</strong></mark><mark class="highlight-purple"> is a fundamental design philosophy. It means that almost all system resources, whether they are actual files, hardware devices, or even processes, are treated as files within the system.</mark></p><ul id="880841e8-fc1d-44c2-b0de-f87b906813f2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">In Unix/Linux systems, the special file </mark><mark class="highlight-purple"><code>/dev</code></mark><mark class="highlight-purple"> stands for “devices” and </mark><mark class="highlight-purple"><code>/lp</code></mark><mark class="highlight-purple"> for “line printer.” Writing or copying data to this special file would then cause exactly this data to be printed. </mark></li></ul><p id="1e182a35-59f1-8059-ba32-c2911f203c2b" class="">In Unix-like operating systems, <strong>mounting</strong> allows different file systems to be attached to the global directory tree under specific subdirectories. Here’s how it works:</p><ul id="1e182a35-59f1-80ee-9e53-ced502505c70" class="bulleted-list"><li style="list-style-type:disc">Each storage device (such as a hard disk or USB drive) is treated as a <strong>block device</strong>, meaning it can be accessed similarly to a file.</li></ul><ul id="1e182a35-59f1-8053-bc35-f5a481847136" class="bulleted-list"><li style="list-style-type:disc">Before you can access files or directories on a device, the system must <strong>mount</strong> its file system into the global directory structure.<ul id="1e182a35-59f1-8022-89c5-fdc815172f74" class="bulleted-list"><li style="list-style-type:circle">For example, a USB drive could be mounted at <code>/mnt/ssd</code>, making its contents accessible as part of the system&#x27;s overall directory tree.</li></ul></li></ul><p id="306d8429-8f9f-47b5-9b56-6fee0a69fd1d" class=""><mark class="highlight-purple">APFS stands for Apple File System, designed for macOS and iOS.</mark></p><h2 id="17582a35-59f1-80a4-8acc-f93508ffde30" class="">2.3. Mobile Operating Systems</h2><p id="17582a35-59f1-8042-80ef-d26394a1a2f0" class="">Mobile OSs are designed for devices like smartphones and tablets, where resources (battery, memory, and processing power) are limited. These operating systems must support <strong>mobility</strong>, meaning they handle frequent changes in network connectivity (Wi-Fi, cellular data) and location-based services.</p><p id="17582a35-59f1-8014-a8d8-c1e0d0d8eedd" class=""><strong>Android</strong> is a popular mobile OS built on a <strong>Linux kernel</strong>. <mark class="highlight-purple">It uses the </mark><mark class="highlight-purple"><strong>Android Runtime (ART)</strong></mark><mark class="highlight-purple">, which allows Android apps to </mark><mark class="highlight-purple"><strong>run in their own virtual machines with strict access control over private data, system functions, and hardware resources, isolated from the system and other apps</strong></mark><mark class="highlight-purple">. This provides security and stability.</mark> Android apps are written in <strong>Java</strong>. </p><p id="17582a35-59f1-8045-8e4e-fa4e0c0dcb4c" class=""><mark class="highlight-yellow">The Android Application Framework provides access to the application layer for Android apps. The hardware resources of the mobile device can only be accessed via system libraries provided by underlying layers of Android OS. These libraries encapsulate the actual system calls in the kernel and make these functions available to the actual applications via the Android Application Framework. For instance, if an application needs to use the device&#x27;s sensors, it will use the system libraries to make a call to the kernel which will in turn communicate with the hardware resource i.e., the sensor. All this routing is made possible via the Android Application Framework, making the Framework crucial for accessing and managing hardware resources in a device. </mark></p><p id="17582a35-59f1-80df-a37c-cd2305e68cdc" class=""><strong>Android’s security model</strong> is built on a <strong>granular permissions system</strong> that governs how apps interact with <strong>sensitive data</strong> and <strong>system functions</strong>. <mark class="highlight-purple">Android&#x27;s security concept includes </mark><mark class="highlight-purple"><strong>running apps in separate virtual machines</strong></mark><mark class="highlight-purple"> with </mark><mark class="highlight-purple"><strong>strict access control over private data, system functions, and hardware resources</strong></mark><mark class="highlight-purple">. </mark></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

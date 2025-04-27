@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 4 - Internet and TCP/IP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17582a35-59f1-8001-859c-fb7f0fa72ec0" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">4️⃣</span></div><h1 class="page-title">Unit 4 - Internet and TCP/IP</h1><p class="page-description"></p></header><div class="page-body"><p id="17882a35-59f1-80fe-ad73-d36938e0d7d4" class="">
+</p><p id="17a82a35-59f1-8044-85d5-f846868dbc32" class="">The Internet is a vast collection of interconnected networks using the Internet Protocol (IP) family. Its development was organic rather than centrally planned, and its evolution is guided by independent standardization bodies in a decentralized manner.</p><figure id="f6f3df8c-96d5-41dd-8e26-6f66ba5509b7" class="image"><a href="image%2028.png"><img style="width:288px" src="image%2028.png"/></a></figure><p id="17a82a35-59f1-806e-92fb-ce7d344009e3" class="">The organizational structure of the internet includes several key institutions. The tasks and responsibilities of key internet governance institutions are:</p><ul id="17a82a35-59f1-80c2-89a1-e66bc03a4658" class="bulleted-list"><li style="list-style-type:disc">The <strong>Internet Society (ISOC)</strong> maintains and develops internet infrastructure.<ul id="17a82a35-59f1-80df-ac74-ec0921d2aac3" class="bulleted-list"><li style="list-style-type:circle">The <strong>Internet Architecture Board (IAB)</strong> oversees the standardization activities of the <strong>IETF</strong> and the research activities of the IRTF. It also supports the ISOC in an advisory capacity.<ul id="17a82a35-59f1-80f6-9684-fa079b0e9584" class="bulleted-list"><li style="list-style-type:square">The <strong>Internet Research Task Force (IRTF)</strong> promotes research for the future development of Internet protocols, applications, architecture, and technoloy.</li></ul><ul id="17a82a35-59f1-8074-8409-e3114648c16e" class="bulleted-list"><li style="list-style-type:square"><strong>Internet Engineering Task Force (IETF) </strong>focuses on technological development and standardization of the internet.</li></ul></li></ul></li></ul><ul id="17a82a35-59f1-80e3-b4e0-dfd1201726e7" class="bulleted-list"><li style="list-style-type:disc">The <strong>Internet Corporation for Assigned Names and Numbers (ICANN)</strong> manages the allocation of unique names and addresses used on the internet.<ul id="17a82a35-59f1-80df-875e-ff31a59726d7" class="bulleted-list"><li style="list-style-type:circle">The <strong>Internet Assigned Numbers Authority (IANA)</strong>, a division of ICANN, handles the global allocation of IP addresses. <ul id="17a82a35-59f1-8095-9a53-e73800a12948" class="bulleted-list"><li style="list-style-type:square"><strong>Regional Internet Registry (RIR)</strong> allocates internet addresses regionally, with five RIRs serving different global regions: <div id="17a82a35-59f1-8000-844b-d310db9bbb37" class="column-list"><div id="17a82a35-59f1-8092-9a7a-d4627164e89b" style="width:100%" class="column"><ul id="17a82a35-59f1-80cb-9526-f87ecdb17f77" class="bulleted-list"><li style="list-style-type:disc">AFRINIC (Africa),</li></ul><ul id="17a82a35-59f1-8083-b068-f18a8eb0d701" class="bulleted-list"><li style="list-style-type:disc">ARIN (USA and Canada)</li></ul><ul id="17a82a35-59f1-805f-84c8-c8b4180420c5" class="bulleted-list"><li style="list-style-type:disc">RIPE NCC (Europe, the Middle East, and Central Asia)</li></ul></div><div id="17a82a35-59f1-80d6-8640-fb20ca186eca" style="width:99.99999999999999%" class="column"><ul id="17a82a35-59f1-800e-abce-e315fbbdb0a0" class="bulleted-list"><li style="list-style-type:disc">APNIC (Asia-Pacific)</li></ul><ul id="17a82a35-59f1-8080-a00b-efd1b020eff2" class="bulleted-list"><li style="list-style-type:disc">LACNIC (Latin America and the Caribbean)</li></ul></div></div></li></ul></li></ul></li></ul><h2 id="17582a35-59f1-8011-860c-dc29e87cdeed" class="">4.1. The Emergence of the Internet</h2><ul id="17a82a35-59f1-808c-9c59-e5491cb81b80" class="toggle"><li><details open=""><summary>Early Development</summary><p id="17582a35-59f1-80c2-bb31-c2d7f20f7d9a" class="">The development of the Internet began in the late 196</p><p id="1da82a35-59f1-80fe-9ed1-fa074dbbe211" class="">0s during the Cold War. The <strong>United States Department of Defense</strong> wanted to create a <strong>nationwide, redundant meshed network</strong> that could resist attacks by not relying on the hierarchical topologies used with telephone networks, which were vulnerable to failure at critical nodes., </p><p id="17a82a35-59f1-8060-b452-db09aa9b7a42" class="">The U.S. Department of Defense asked RAND Corporation&#x27;s expertise and concluded that a meshed network using packet-switching technology, unlike the circuit-switching used in telephone networks, was necessary. However, AT&amp;T declined to build the network. </p><ul id="17a82a35-59f1-8061-9ee4-e304ab8c25fa" class="toggle"><li><details open=""><summary>Vulnerability of a Hierarchical Topology (a) versus a Meshed Topology (b)</summary><figure id="17a82a35-59f1-80b9-81f4-c66c6c343f9a" class="image" style="text-align:center"><a href="image%2029.png"><img style="width:240px" src="image%2029.png"/></a></figure></details></li></ul></details></li></ul><ul id="17a82a35-59f1-8021-84b7-f94548c389ab" class="toggle"><li><details open=""><summary>ARPANET</summary><p id="17a82a35-59f1-8054-b285-e74f3d481830" class="">Consequently, the Advanced Research Projects Agency (ARPA) funded research into packet-switching networks, resulting in the <strong>ARPANET</strong> in 1969. This first packet-switching wide-area network connected four institutions via 56 kbit/s lines and featured two types of nodes: hosts <em>(the </em>main computing devices at each participating site<em>)</em> and Interface Message Processors (IMP), which acted as routers, responsible for managing communication between hosts. Communication within ARPANET followed the OSI model, using protocols at different levels, including:</p><ul id="17a82a35-59f1-804e-bf1b-fa40aee7e5a2" class="bulleted-list"><li style="list-style-type:disc"><strong>IMP-to-IMP</strong>: For transferring packets between IMPs.</li></ul><ul id="17a82a35-59f1-8076-86ba-eb2882cef11d" class="bulleted-list"><li style="list-style-type:disc"><strong>Host-to-IMP</strong>: For injecting messages into the ARPANET core.</li></ul><ul id="17a82a35-59f1-80fe-8456-e1cc5f9eca0c" class="bulleted-list"><li style="list-style-type:disc"><strong>Host-to-Host</strong>: For end-to-end communication between different computing facilities connected to the ARPANET.</li></ul><p id="7bc43377-4c41-4410-b81f-3a90390823f3" class="">The IMPs were interconnected with each other, and hosts were connected to these IMPs via dedicated lines. This setup allowed data to be transmitted across the network with <strong>packet-switching technology</strong>, where data was broken down into smaller packets before being sent through the network, allowing for more efficient communication compared to earlier circuit-switched networks.</p><ul id="17a82a35-59f1-8078-b1f5-dcbb9710bfeb" class="toggle"><li><details open=""><summary>The Protocol Stack of the Early ARPANET</summary><figure id="17a82a35-59f1-8034-9c1e-c2839d211d38" class="image"><a href="image%2030.png"><img style="width:488.9410095214844px" src="image%2030.png"/></a></figure></details></li></ul></details></li></ul><ul id="17a82a35-59f1-80dd-b465-f2fa08d7c728" class="toggle"><li><details open=""><summary><strong>NSFNET and the Expansion of the Internet</strong></summary><p id="17a82a35-59f1-8035-afc8-cc078abdd12e" class="">By 1970, the ARPANET expanded rapidly, but its protocol stack proved inflexible as more universities and local networks joined. In 1973, the TCP/IP protocol stack was introduced, enabling network-to-network and host-to-host communication. </p><p id="17a82a35-59f1-80ee-b1cc-ea84af35077a" class="">In late 1970s, the National Science Foundation (NSF) further advanced networking by creating the NSFNET, which allowed broader access for educational and research institutions. </p><p id="17582a35-59f1-80cc-bca5-d34d2b8b1f6c" class=""><strong>ANSNET</strong> was established for open, commercial internet use and later merged with <strong>NSFNET</strong>, leading to the further expansion of the commercial internet in the 1990s. It was then sold to AOL</p></details></li></ul><ul id="17a82a35-59f1-80b1-88b3-e5e0d3669d74" class="toggle"><li><details open=""><summary>Global Development.</summary><p id="17a82a35-59f1-8074-95d2-fdc40798689b" class="">Internationally, similar networks emerged, and their interconnection through long-distance links like submarine cables and satellites formed the global internet. </p><p id="17a82a35-59f1-8092-bcae-d75a27e71875" class="">Today, the internet&#x27;s infrastructure is highly diverse, spanning DSL technology (Digital Subscriber Line), broadband, mobile networks, fiber optics, and satellites. Despite this heterogeneity, the Internet Protocol and related protocols like TCP remain the foundation of its operation.</p><p id="193f9449-130f-4a23-8e4f-055bc365e054" class=""><mark class="highlight-yellow"><strong>DSL</strong></mark><mark class="highlight-yellow"> stands for </mark><mark class="highlight-yellow"><strong>Digital Subscriber Line </strong></mark><mark class="highlight-yellow">technology, which provides </mark><mark class="highlight-yellow"><strong>internet access through conventional telephone lines</strong></mark><mark class="highlight-yellow">. Households and small businesses commonly use it. </mark></p></details></li></ul><hr id="17a82a35-59f1-8050-af81-d8035dbbd45d"/><h2 id="17582a35-59f1-8025-82b9-e953643148fd" class="">4.2. The TCP/IP Protocol Stack</h2><p id="17b82a35-59f1-806e-9ae4-ea048b11a453" class="">The &quot;TCP/IP protocol stack&quot; or &quot;internet protocol family&quot; refers to a set of network protocols developed throughout the internet&#x27;s evolution. Key protocols include:</p><ul id="17b82a35-59f1-8076-87af-ee886325bbcc" class="bulleted-list"><li style="list-style-type:disc"><strong>Internet Protocol (IP):</strong> a packet-switching protocol used for the exchange of data. It belongs to the layer 3 OSI model.</li></ul><ul id="17b82a35-59f1-80cb-a3e6-d15ba657a714" class="bulleted-list"><li style="list-style-type:disc"><strong>Internet Control Message Protocol (ICMP):</strong> used by network devices (e.g., routers)<br/>to exchange error messages and diagnostic information.<br/></li></ul><ul id="17b82a35-59f1-8069-801b-d7ffb8f02608" class="bulleted-list"><li style="list-style-type:disc"><strong>Transmission Control Protocol (TCP):</strong> A connection-oriented protocol belonging to layer 4 of OSI. It ensures reliable data stream delivery through numbered packets and automatic repeat request (ARQ) mechanism.</li></ul><ul id="17b82a35-59f1-806c-9358-da3ccaa30c26" class="bulleted-list"><li style="list-style-type:disc"><strong>User Datagram Protocol (UDP):</strong> A connectionless layer 4 protocol that transports individual packets without guaranteeing reliable delivery.</li></ul><p id="17b82a35-59f1-80a8-a0d3-c29d32826ac4" class="">The TCP/IP stack encompasses additional protocols that build on these or provide higher-level services using TCP/UDP.</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">TCP/IP Reference Model</summary><div class="indented"><p id="17b82a35-59f1-8051-ae50-cbcd8cadee0c" class="">The <strong>TCP/IP reference model</strong> is a suite of communication protocols developed to interconnect different networks. It supports communication across multiple networks and enables the global connectivity that defines the modern internet. It consists of four layers: </p><p id="17e82a35-59f1-8081-81c5-c560b9f75fc1" class="block-color-red"><strong>L</strong>azy <strong>I</strong>guanas <strong>T</strong>ake <strong>A</strong>pples. </p><ul id="17b82a35-59f1-8053-b813-c61e975cf8f2" class="toggle"><li><details open=""><summary>1. Link Layer: </summary><ul id="17b82a35-59f1-80c6-a910-cf631f3c224c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Deals with the physical transmission of data over network hardware (e.g., </mark><mark class="highlight-purple"><strong>ARP</strong></mark><mark class="highlight-purple">).</mark></li></ul><p id="17b82a35-59f1-80bd-ba6f-d768d592b447" class="">The <strong>link layer</strong> connects hardware (e.g., Ethernet, Wi-Fi) with the connectionless internet layer above it, handling the actual transmission of data over physical media.  </p><p id="17b82a35-59f1-806f-b54b-fe57e8301e09" class="">Furthermore, it maps the hardware addressing and the physical aspects of the connected devices through 2 protocols:</p><ul id="17b82a35-59f1-80a5-9aa4-e2670ca8b282" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Address Resolution Protocol (ARP):</strong></mark><mark class="highlight-purple">  </mark><mark class="highlight-default"><strong>maps logical IP addresses to the MAC</strong></mark><mark class="highlight-default">  addresses of devices on a network. It allows computers and network devices within a link domain to </mark><mark class="highlight-default"><strong>inquire about the MAC address</strong></mark><mark class="highlight-default"> </mark><mark class="highlight-default"><strong>for a specific IP address via a broadcast</strong></mark><mark class="highlight-default">. While all computers within the domain listen to the request, </mark><mark class="highlight-default"><strong>Only the device with the requested IP will respond</strong></mark><mark class="highlight-default">, and this information is temporarily </mark><mark class="highlight-default"><strong>stored in the ARP cache </strong></mark><mark class="highlight-default">of the inquiring computer. This protocol is used in IPv4.</mark></li></ul><ul id="17b82a35-59f1-809d-92a5-de36439a38d5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Neighbor Discovery Protocol (NDP):</strong></mark> Replaces ARP in IPv6 networks for similar address resolution functions.</li></ul></details></li></ul><ul id="17c82a35-59f1-8083-8bf7-c52e2015e4ef" class="toggle"><li><details open=""><summary>2. Internet Layer</summary><p id="17c82a35-59f1-80bb-8131-f9c47bc5fd3b" class=""><mark class="highlight-purple"><strong>Internet Layer</strong></mark><mark class="highlight-purple">: Handles packet routing across networks (e.g., </mark><mark class="highlight-purple"><strong>IP</strong></mark><mark class="highlight-purple">).</mark></p><p id="17c82a35-59f1-802b-8b92-cd1cbda3b229" class=""><strong>Main protocol:</strong> IP (Internet Protocol) and ICMP (Internet Control Message Protocol)</p><p id="17c82a35-59f1-80f2-a6ef-c8e17fa588ae" class="">Routers connect the different subnetworks on this layer and forward data packets from one link domain to another through routing algorithms. The routing algorithms work with the <strong>IP addresses</strong> that are global and independent of the respective hardware structures of the local networks encountered on the way from the sender to the receiver. Only in the final network domain, the router must be able to deliver incoming packets to the final receiver through a hardware address (this is what the ARP is meant to do). </p><hr id="18382a35-59f1-8032-8670-cb5f1efcf8fb"/><p id="17c82a35-59f1-80fd-9aaf-cf73860e43a3" class="">The computers within a local network cannot have arbitrarily different IP addresses. This is because the routing of packets is done according to a pre-defined scheme that correlates to the structure of IP addresses themselves. </p><p id="17c82a35-59f1-802a-a269-c371cf5b841e" class="">Both IPv4 and IPv6 are packet-switching protocols used for routing. Therefore, both would belong to layer 3 of OSI model.  </p><ul id="17c82a35-59f1-8006-a286-e80b4c5377e0" class="toggle"><li><details open=""><summary>IPv4</summary><p id="17c82a35-59f1-806d-96a3-eb31a64f1885" class=""><mark class="highlight-purple"><strong>IPv4 (Internet Protocol Version 4)</strong></mark><mark class="highlight-purple"> uses a </mark><mark class="highlight-purple"><strong>32-bit address</strong></mark><mark class="highlight-purple"> format (4 bytes), typically represented as four decimal numbers separated by dots (e.g., </mark><mark class="highlight-purple"><code>192.168.0.1</code></mark><mark class="highlight-purple">). IPv4 supports about </mark><mark class="highlight-purple"><strong>4.3 billion unique addresses</strong></mark><mark class="highlight-purple">. However, with the rapid growth of the internet, this address space is nearly exhausted. </mark></p><p id="17c82a35-59f1-80fd-a031-c413befd1925" class="">The IP address comprises of two parts: </p><ol type="1" id="17c82a35-59f1-809a-9ed5-f7bb8ac23955" class="numbered-list" start="1"><li><strong>network address: </strong>identifies the entire local network (subnet). This is the first element of the address. </li></ol><ol type="1" id="17c82a35-59f1-800b-a59a-cf998b357ee2" class="numbered-list" start="2"><li><strong>node address: </strong>Identifies a specific device within the local subnet</li></ol><ul id="17c82a35-59f1-807b-8243-d74dd44c5ae2" class="toggle"><li><details open=""><summary><strong>Subnet Masks:</strong></summary><p id="17c82a35-59f1-806c-8627-fc314b713138" class="">A subnet mask, often written as a slash followed by the number of bits allocated to the network (e.g., 123.77.88.99/8), determines the division between the network and node portions of the IP address. This number describes how many bit positions make up the network address of the subnet.</p><ul id="17c82a35-59f1-802d-9195-e4d0e2be9b30" class="bulleted-list"><li style="list-style-type:disc">In <strong>123.77.88.99/8</strong>, the first <strong>8 bits</strong><em> (or the first byte, &quot;123&quot;) </em>represent the subnet, while the remaining <strong>24 bits</strong> <em>(the other three bytes)</em> represent the node.</li></ul></details></li></ul><ul id="17c82a35-59f1-8011-b665-e4389305b910" class="toggle"><li><details open=""><summary><strong>Addressing Limits:</strong></summary><p id="17c82a35-59f1-80e9-9d11-edba9578c888" class="">IPv4 addresses are 32 bits long, divided into four 8-bit bytes. Each byte can have <strong>256 values</strong> (0–255), leading to <strong>4.3 billion unique IPv4 addresses</strong>. This is restrictive considering the global population and the number of internet-connected devices.</p></details></li></ul><ul id="17c82a35-59f1-80d1-80c8-c90753ebc83c" class="toggle"><li><details open=""><summary><strong>Network Address Translation (NAT):</strong></summary><p id="17c82a35-59f1-8044-99cb-e95d8152c435" class="">To manage the limited IPv4 space, <strong>NAT</strong> allows multiple devices in a local network to share a single global IP address. With this technology, only locally valid (also called private) IP addresses are assigned by the providers’ local networks. Such private IP addresses are not globally unique, and a computer within such a local network cannot act as a global server. However, it can act as a client. Routers redirect incoming packets to the correct local devices using mapping tables.</p></details></li></ul><ul id="17c82a35-59f1-8007-9403-ef337ea8d019" class="toggle"><li><details open=""><summary>IPv4 header</summary><p id="17c82a35-59f1-8002-bde1-db9da0801c2d" class=""><mark class="highlight-purple">The </mark><mark class="highlight-purple"><strong>IPv4 header</strong></mark><mark class="highlight-purple"> contains several important fields:</mark></p><ul id="17c82a35-59f1-8074-a480-ddb6de745c58" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Version</strong></mark><mark class="highlight-purple">: Indicates the IP protocol version in use.</mark></li></ul><ul id="17c82a35-59f1-801e-bbeb-d58dabc07651" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>IP Header Length (IHL)</strong></mark><mark class="highlight-purple">: Specifies the header&#x27;s length in 32-bit words.</mark></li></ul><ul id="17c82a35-59f1-8077-b971-e71bba6a9f8a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Type of Service (TOS)</strong></mark><mark class="highlight-purple">: Sets packet transport priorities.</mark></li></ul><ul id="17c82a35-59f1-8015-8c34-f1d20433fb61" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Total Packet Length</strong></mark><mark class="highlight-purple">: Defines the entire packet&#x27;s length (header plus payload), up to 2^16 bytes.</mark></li></ul><ul id="17c82a35-59f1-801d-97a3-f0d0672c5579" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Identification</strong></mark><mark class="highlight-purple">: Assigns a unique number (0–65,535) to each packet.</mark></li></ul><ul id="17c82a35-59f1-8014-ac24-e7339d571ebd" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Flags</strong></mark><mark class="highlight-purple">: Three bits for fine-tuned packet forwarding control.</mark></li></ul><ul id="17c82a35-59f1-8053-a374-fbbe35a1b8d7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Fragment Offset</strong></mark><mark class="highlight-purple">: Indicates the position of fragmented payload data parts in split packets if it was necessary to split a packet into further smaller packets.</mark></li></ul><ul id="17c82a35-59f1-805e-83f8-e33db6e63d0c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Time to Live (TTL)</strong></mark><mark class="highlight-purple">: A counter decremented at each hop to prevent endless packet circulation.</mark></li></ul><ul id="17c82a35-59f1-8030-b5f1-c3bef0569244" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Protocol</strong></mark><mark class="highlight-purple">: Identifies the payload&#x27;s higher-layer protocol </mark><em><mark class="highlight-purple">(6 for TCP, 7 for UDP).</mark></em></li></ul><ul id="17c82a35-59f1-8088-aa58-f2cf7e088ca3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Header Checksum</strong></mark><mark class="highlight-purple">: Verifies header integrity. Corrupted headers result in packet discard.</mark></li></ul><p id="17d82a35-59f1-8066-b321-f53132174319" class="">IP header + payload data form the IP packet.<div class="indented"><figure id="17c82a35-59f1-8032-9d0d-eab30e90a66a" class="image" style="text-align:center"><a href="image%2031.png"><img style="width:432px" src="image%2031.png"/></a></figure></div></p></details></li></ul></details></li></ul><ul id="17c82a35-59f1-80b7-8711-d780468bd508" class="toggle"><li><details open=""><summary>IPv6</summary><p id="33c8e5d3-2c66-44c0-9425-bfc764c893cd" class=""><strong>IPv6 (Internet Protocol Version 6)</strong> uses a <strong>128-bit address</strong> format (16 bytes), significantly increasing the available address space. It’s written in hexadecimal and separated by colons (e.g., <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>). </p></details></li></ul><ul id="17c82a35-59f1-8060-89bc-d390de94d59f" class="toggle"><li><details open=""><summary>Communication through IP</summary><p id="17c82a35-59f1-8096-ad62-cdf00e830e49" class="">An IP packet consists of a <strong>header</strong> and a <strong>payload</strong> data (the body - data being transmitted). </p><p id="17c82a35-59f1-8086-bd20-cf7831fcee2b" class=""><mark class="highlight-purple"><strong>Local vs. External Communication:</strong></mark></p><ul id="17c82a35-59f1-802a-ac28-f7b6cdb62922" class="bulleted-list"><li style="list-style-type:disc">If the <strong>destination address</strong> is within the <strong>local network</strong>, the sender uses the <strong>Address Resolution Protocol (ARP)</strong> to retrieve the receiver&#x27;s <strong>MAC address</strong> and delivers the packet directly.</li></ul><ul id="17c82a35-59f1-805d-b5c7-f2a1c83fafde" class="bulleted-list"><li style="list-style-type:disc">If the destination is <strong>outside the local network</strong>, the sender forwards the packet to the <strong>local router</strong>, whose MAC address is also obtained via an ARP request.</li></ul><p id="17c82a35-59f1-80ad-baeb-e65193da63c7" class=""><mark class="highlight-purple"><strong>Router&#x27;s Role in Packet Delivery:</strong></mark></p><p id="17c82a35-59f1-80ec-ae4d-e8d272de96c0" class="">Routers determine the best path for the packet to reach its destination via <strong>Routing Protocols</strong>: Routers share configuration information (network addresses and subnet masks) to decide on forwarding routes. The packet hops through multiple routers until it reaches the destination subnet. Here, the <strong>local router</strong> uses ARP to get the receiver&#x27;s MAC address and delivers the packet.</p></details></li></ul></details></li></ul><ul id="17b82a35-59f1-8017-9b76-e87f49cac755" class="toggle"><li><details open=""><summary>3. Transport Layer</summary><p id="17582a35-59f1-8006-b735-f8555c3f8977" class=""><mark class="highlight-purple"><strong>Transport Layer</strong></mark><mark class="highlight-purple">: Manages end-to-end communication (e.g., </mark><mark class="highlight-purple"><strong>TCP</strong></mark><mark class="highlight-purple">, UDP).</mark></p><p id="17b82a35-59f1-8046-ae71-fe19f06dd571" class="">The <strong>transport layer</strong> handles the reliable or connectionless delivery of data between applications, primarily through <strong>TCP</strong> and <strong>UDP</strong> protocols.</p><ul id="17b82a35-59f1-80c9-b779-f4ee8740b704" class="bulleted-list"><li style="list-style-type:disc">Whtether via UDP or TCP, a client must be privy to IP address, port number, and a list of standard ports in order to contact services on the internet.</li></ul><ul id="17c82a35-59f1-809d-a3bb-e02bb7e1aace" class="bulleted-list"><li style="list-style-type:disc">TCP is preferred for reliable, bidirectional data transfer, while UDP is suitable for faster, less critical applications where occasional packet loss is acceptable.</li></ul><ul id="17b82a35-59f1-8082-aef7-e25a2cac4b5e" class="toggle"><li><details open=""><summary>Transmission Control Protocol (TCP)</summary><p id="17b82a35-59f1-801b-a81e-c15a0cd532c9" class=""><mark class="highlight-purple"><strong>Reliable &amp; Connection-Oriented:</strong></mark><mark class="highlight-purple"> </mark>Establishes a session using a three-way handshake<em> (SYN, SYN-ACK, ACK)</em> before data transmission. The establishment of this session is expressed in the binding of the logical  connection to ports and the use of ARQ mechanism</p><p id="18382a35-59f1-8069-9962-c4d8c63f6f4d" class=""><mark class="highlight-purple"><strong>Port use: </strong></mark>Uses ports to bind services and facilitate communication between clients and servers.</p><p id="17b82a35-59f1-8026-be96-ca077333f282" class=""><mark class="highlight-purple"><strong>Error Handling:</strong></mark> Ensures reliability through sequence numbers, acknowledgments, and a checksum covering both the header and payload.</p><p id="17b82a35-59f1-8002-a46d-e50d9c132a39" class=""><mark class="highlight-purple"><strong>Data Transmission:</strong></mark><mark class="highlight-purple"> </mark>Divides data exceeding 1,500 bytes into smaller packets and then sequence them. These sequence numbers and the corresponding ACKs are part of TCP header. TCP is directly based on IP protocol</p><p id="17b82a35-59f1-8047-bdca-c57504477b59" class=""><mark class="highlight-purple"><strong>Client-Server Model:</strong></mark><mark class="highlight-purple"> </mark>Tasks are distributed between servers offering services and clients requesting them.</p><ul id="17c82a35-59f1-8090-bc26-fe63414905d2" class="toggle"><li><details open=""><summary>Client-Server model and The Three-Way Handshake</summary><p id="17c82a35-59f1-80d0-bbb3-de21b6b2f2e3" class="">TCP enables <strong>session management</strong> and reliable communication via the <strong>transport layer</strong> of the TCP/IP model, compensating for the absence of a session layer (of the OSI model). The process involves a <strong>Session Establishment </strong>where communication partners (client and server) initiate a session using the server’s <strong>IP address</strong> and <strong>TCP port</strong>.</p><ol type="1" id="17c82a35-59f1-801e-9e34-ef3f1aaf5c3d" class="numbered-list" start="1"><li><strong>Server: </strong>The <strong>server</strong> prepares to accept connections by bindng its service to a specific port (bind). <mark class="highlight-default"> This associates the server with a port number for receiving incoming requests. The server then </mark><mark class="highlight-default"><strong>enters a listening state</strong></mark><mark class="highlight-default">, awaiting connection requests from clients</mark><mark class="highlight-purple"> </mark>(listen).</li></ol><ol type="1" id="17c82a35-59f1-8049-a3aa-cdd6041d19cc" class="numbered-list" start="2"><li><strong>Client: </strong>The <strong>client</strong>, which must know both the port and the IP address of the server, can use the service by connecting the server (connect). To do so, it sends a TCP packet in which the SYN (synchronize) flag is set to the server.</li></ol><ol type="1" id="17c82a35-59f1-8097-bb1d-de76c2f7ef33" class="numbered-list" start="3"><li><strong>Server: </strong>The server receives the SYN request, then responds (accept) with a <strong>SYN-ACK</strong> (synchronize + acknowledgment) flag set packet, acknowledging the connection request.</li></ol><ol type="1" id="17c82a35-59f1-802e-a76e-e50a0ff2f82f" class="numbered-list" start="4"><li><strong>Client: </strong>The client confirms the connection by sending an <strong>ACK</strong> (acknowledgment) packet, thus establishing the connection. Both can then send and receive in both directions on this connection until one of them closes it again with a FIN packet</li></ol><figure id="17c82a35-59f1-80ac-bb2c-c0132ac528d5" class="image" style="text-align:center"><a href="image%2032.png"><img style="width:240px" src="image%2032.png"/></a></figure></details></li></ul><ul id="17c82a35-59f1-8064-b1a1-fabf7dc76483" class="toggle"><li><details open=""><summary><strong>TCP header</strong></summary><p id="17c82a35-59f1-8051-8f25-fe6dfa3766e3" class="">The <strong>TCP header</strong> is a structured part of a TCP packet, containing fields for managing reliable communication. Key elements include:</p><ol type="1" id="17c82a35-59f1-8081-93a9-e8a1f06caf40" class="numbered-list" start="1"><li><strong>Source and Destination Ports</strong> (16 bits each):<strong> </strong>These specify the sending and receiving applications by their port numbers, enabling data to reach the correct service.</li></ol><ol type="1" id="17c82a35-59f1-80f4-bc15-ff37f154ba23" class="numbered-list" start="2"><li><strong>Sequence Numbers: </strong>Used to order data packets and ensure they are reassembled correctly on the receiving end.</li></ol><ol type="1" id="17c82a35-59f1-80eb-bdd9-cc365410e374" class="numbered-list" start="3"><li><strong>Acknowledgement Numbers: </strong>Confirm the successful receipt of data by indicating the next expected sequence number.</li></ol><ol type="1" id="17c82a35-59f1-8033-ab54-daeeda1d4b82" class="numbered-list" start="4"><li><strong>Flags: I</strong>ndicators that can be set (=1) or not set (=0) in the header that control the connection state and procedures:<ul id="17c82a35-59f1-80bb-a645-e02c506aed37" class="bulleted-list"><li style="list-style-type:disc"><strong>SYN (Synchronize):</strong> Used during connection establishment.</li></ul><ul id="17c82a35-59f1-802a-8763-c046acd16404" class="bulleted-list"><li style="list-style-type:disc"><strong>ACK (Acknowledgement):</strong> Confirms receipt of packets.</li></ul><ul id="17c82a35-59f1-80a0-83c5-cd29df9c86af" class="bulleted-list"><li style="list-style-type:disc"><strong>FIN (Finish):</strong> Indicates the end of the connection.</li></ul></li></ol><ol type="1" id="17c82a35-59f1-8097-96a5-dfd9b0f43d2e" class="numbered-list" start="5"><li><strong>Checksum: </strong>A field that validates the integrity of the TCP header and the payload data<em> (unlike IP&#x27;s checksum, which only checks the header). </em>This helps detecting transmission errors and triggers retransmission of the ARQ mechanism if needed.</li></ol><figure id="17c82a35-59f1-8073-a9a2-ee23bf3a46cb" class="image" style="text-align:center"><a href="image%2033.png"><img style="width:488.9930725097656px" src="image%2033.png"/></a></figure></details></li></ul></details></li></ul><ul id="17c82a35-59f1-8004-b926-d11b7a8bf577" class="toggle"><li><details open=""><summary>User Datagram Protocol (UDP)</summary><p id="17b82a35-59f1-8039-9a6e-d5c81b60b27f" class=""><mark class="highlight-purple"><strong>Connectionless &amp; Unreliable:</strong></mark> Delivers single datagrams (packets) without connection setup, making it faster but less reliable than TCP, similiar to IP protocol. </p><p id="17b82a35-59f1-8035-ac33-f9ab3494f96c" class=""><mark class="highlight-purple"><strong>Port Awareness:</strong></mark> Like TCP, it uses ports for addressing services, though without reliability mechanisms like handshakes.</p></details></li></ul><ul id="17c82a35-59f1-805a-8a9b-c575aca53b33" class="toggle"><li><details open=""><summary>Ports</summary><p id="17b82a35-59f1-8082-93f4-e96bed011810" class=""><strong>Well-Known Ports:</strong>  List of port numbers for TCP and UDP standardized by IANA, examples include:<div class="indented"><ul id="17b82a35-59f1-80c8-9222-e91ab7a6b86a" class="bulleted-list"><li style="list-style-type:disc">Port 80: HTTP (web servers)</li></ul><ul id="17b82a35-59f1-80ea-8529-db5e77221798" class="bulleted-list"><li style="list-style-type:disc">Port 443: HTTPS (secure web servers)</li></ul><ul id="17b82a35-59f1-80df-bc80-de39ec693118" class="bulleted-list"><li style="list-style-type:disc">Port 25: SMTP (email)</li></ul><ul id="17c82a35-59f1-8005-8d2f-f2887839f024" class="bulleted-list"><li style="list-style-type:disc">Port 465: SMTP (encrypted email connections)</li></ul></div></p></details></li></ul></details></li></ul><ul id="17c82a35-59f1-80a9-a88d-e0a9e8e9af5f" class="toggle"><li><details open=""><summary>4. Application Layer</summary><p id="17582a35-59f1-8058-bc52-db9884f9435b" class="">Provides end-user services directly to applications, such as <strong>HTTP</strong>, <strong>SMTP</strong>, and <strong>FTP</strong>. Incorporates the functionality of OSI&#x27;s <strong>application</strong>, <strong>presentation</strong>, and <strong>session layers</strong>. </p></details></li></ul><hr id="17b82a35-59f1-80f3-9b61-e41422330b98"/><ul id="17b82a35-59f1-8028-8deb-d08192a46841" class="toggle"><li><details open=""><summary>TCP/IP Reference model with Typical Protocols</summary><figure id="1b52fe35-9325-44f4-a8c7-aaae9704b934" class="image" style="text-align:center"><a href="image%2034.png"><img style="width:240px" src="image%2034.png"/></a></figure></details></li></ul><ul id="17b82a35-59f1-8070-9eab-f6297c0a6cc0" class="toggle"><li><details open=""><summary>OSI and TCP/IP differences</summary><p id="17b82a35-59f1-8088-aa02-d0361584b696" class="">Unlike the OSI model, TCP/IP consolidates certain layers (e.g., omits a separate physical layer and merges some protocol responsibilities). While simpler, it still accounts for all network communication aspects within its layers.</p><figure id="bf621492-aae9-4032-9292-b2a09e0dc50a" class="image" style="text-align:center"><a href="image%2035.png"><img style="width:288px" src="image%2035.png"/></a></figure></details></li></ul></div></details><hr id="17c82a35-59f1-809e-a84f-c054f3bd2e39"/><h2 id="17582a35-59f1-80f4-9d66-dc80d0d88317" class="">4.3. Selected Protocols and Services</h2><p id="17c82a35-59f1-809d-a6af-db597fa782d6" class="">DHCP and DNS belong to services that primarily do their work in background while HTTP and SMTP are highly application oriented. All four protocols (which are directly based on TCP or UDP) fall onto the application layer.</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>The Dynamic Host Configuration Protocol (DHCP)</strong></summary><div class="indented"><p id="17c82a35-59f1-808c-970c-c012b295c31f" class=""><mark class="highlight-purple"><strong>Address Types:</strong></mark><strong> </strong>Each computer on the internet has a <strong>MAC address</strong> <em>(hardware address tied to its network interface card)</em> and an <strong>IP address</strong> <em>(logical address for internet communication).</em> The <strong>ARP protocol</strong> can be used to map IP addresses to MAC addresses within a local network.</p><p id="17c82a35-59f1-80fb-b27e-f9a013be6afb" class=""><mark class="highlight-purple"><strong>Assigning IP Addresses:</strong></mark></p><ul id="17c82a35-59f1-80ef-ac38-f1c02fb40ecb" class="bulleted-list"><li style="list-style-type:disc"><strong>Manual Assignment:</strong> Administrators can manually assign IP addresses that matches the local subnet to computers in the local network, but this is impractical for large networks.</li></ul><ul id="17c82a35-59f1-80ea-8734-d5feade43131" class="bulleted-list"><li style="list-style-type:disc"><strong>DHCP:</strong> Automates IP address assignment in local networks. </li></ul><p id="17c82a35-59f1-80fe-9746-f667fd06127a" class=""><mark class="highlight-purple"><strong>DHCP Process</strong></mark><strong> </strong><mark class="highlight-purple">to assign IP address to the computers</mark><mark class="highlight-purple"><strong>:</strong></mark></p><ul id="17c82a35-59f1-80fb-a0a3-d9de7d9aaaa2" class="bulleted-list"><li style="list-style-type:disc">A computer <em>(DHCP client)</em> broadcasts a <strong>DHCPDISCOVER</strong> request within the local network domain to establish the connection, after accessing a corresponding DHCP server.</li></ul><ul id="17c82a35-59f1-8055-a356-e1d5dc4cbb9a" class="bulleted-list"><li style="list-style-type:disc">DHCP server responds with a <strong>DHCPOFFER</strong>, suggesting valid and available IP addresses.</li></ul><ul id="17c82a35-59f1-80ee-9bbe-e969f04ba25c" class="bulleted-list"><li style="list-style-type:disc">The client selects one address and uses it (e.g., for an ARP request). The DHCP server tracks assigned addresses to avoid duplication.</li></ul><p id="17c82a35-59f1-8050-aa8d-c1c63fde71ff" class=""><mark class="highlight-purple"><strong>DHCP Assignment Methods:</strong></mark></p><ul id="17c82a35-59f1-806f-a8ab-c6cc46023f23" class="bulleted-list"><li style="list-style-type:disc"><strong>Static Assignment:</strong> The server uses a predefined table to assign a fixed IP address to a specific MAC address.</li></ul><ul id="17c82a35-59f1-80a5-9740-ecbe032f9922" class="bulleted-list"><li style="list-style-type:disc"><strong>Dynamic Assignment:</strong> The server assigns an IP address from a pool of available addresses, which may change each time a client connects.</li></ul><ul id="17c82a35-59f1-8004-8aef-f726bbd7b7b6" class="bulleted-list"><li style="list-style-type:disc"><strong>Automatic Assignment:</strong> Similar to dynamic, but the server remembers the first assigned IP address for a client (with the same MAC address) and reassigns it if possible.</li></ul><p id="17c82a35-59f1-800d-a795-fa9a56735414" class=""><mark class="highlight-purple"><strong>Additional Configuration by DHCP: </strong></mark>DHCP can also configure network parameters for name resolutions like the subnet mask, local router IP address, and DNS server IP address.</p><p id="17c82a35-59f1-80b5-9bc4-c71c6f81b567" class=""><mark class="highlight-purple"><strong>Transport Protocol:</strong></mark><strong> </strong>DHCP uses the <strong>User Datagram Protocol (UDP)</strong> for communication.</p><p id="17c82a35-59f1-809b-b190-e2c27353671a" class=""><mark class="highlight-purple"><strong>Security Concerns:</strong></mark><strong> </strong>Any computer in a local network can act as a DHCP server, which poses risks if connecting to untrusted networks.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">The Domain Name System (DNS)</summary><div class="indented"><p id="17d82a35-59f1-80e0-97ad-d35689244f52" class="">The <strong>Domain Name System (DNS)</strong> serves as a worldwide directory that translates human-readable domain names into machine-readable IP addresses. This enables clients to connect to internet servers using well-known ports without knowing their IPs.  DNS can use both <strong>UDP</strong> (typically for queries) and <strong>TCP</strong> (for more reliable or larger transmissions),  and its configuration can be automated via <strong>DHCP</strong>.</p><p id="17d82a35-59f1-805c-8d75-e673777344d6" class="">Domain names are structured hierarchically as Fully Qualified Domain Names (FQDN), such as <code>www.lectures.iu.de</code>, where each part represents a component in the naming hierarchy, following the scheme:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17d82a35-59f1-8047-aafc-efc072c05e61" class="code"><code class="language-SQL">hostname.subdomain(s).second-level domain.top-level domain. (TLD)</code></pre><ul id="17582a35-59f1-8087-b0ef-e19d7a551c31" class="block-color-default bulleted-list"><li style="list-style-type:disc">The DNS system is structured with multiple levels:<ul id="5b7e3451-df16-4a02-b2bf-61238f9f456e" class="bulleted-list"><li style="list-style-type:circle"><strong>Top-Level Domain (TLD)</strong>: The highest part of the hierarchy, such as <code>.com</code>, <code>.org</code>, or two letters country codes specified in ISO 3166, like <code>.de</code> for Germany. These are largely managed by ICANN</li></ul><ul id="df7368be-bff8-4462-8351-eccf853171b7" class="bulleted-list"><li style="list-style-type:circle"><strong>Second-level Domain Name:</strong> Identifies the domain to which the host <em>(organizations, companies, and private individuals) </em>belongs. These are the registered domains (e.g., <code>example</code> in <code>www.example.com</code>).</li></ul><ul id="17d82a35-59f1-80fd-b097-e6e17f921362" class="bulleted-list"><li style="list-style-type:circle"><strong>Subdomain name:</strong> Second-level domains can be hierarchically supplemented by further sub-domains</li></ul><ul id="72fc8d6b-b0b0-4b45-84e0-1100e39b4906" class="bulleted-list"><li style="list-style-type:circle"><strong>Hostname</strong>: A specific name assigned to a host by the operators of the respective second-level domains.(e.g., <code>www</code> in <code>www.example.com</code>). Lowest level of the scheme</li></ul></li></ul><ul id="17582a35-59f1-8085-a9ee-c8dd4f472175" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple">Each level is separated by dots (</mark><mark class="highlight-purple"><code>.</code></mark><mark class="highlight-purple">), forming a </mark><mark class="highlight-purple"><strong>Fully Qualified Domain Name (FQDN) </strong></mark><mark class="highlight-purple">represents an absolute and unique address in the Domain Name System (DNS) of the internet. (The final dot to the right of the top-level domain (TLD) often can be omitted)</mark></li></ul><ul id="17d82a35-59f1-80e2-b50c-fe6d1d99df07" class="toggle"><li><details open=""><summary>Distribuited Directory Service</summary><p id="17d82a35-59f1-8063-9f47-ded60de7f2e8" class="">In providing a distributed directory service (and naming service), several DNS servers work together along the hierarchy of the naming scheme to ultimately resolve an issued FQDN to an IP address.</p><p id="17d82a35-59f1-807d-818f-dc43667ed42c" class="">When a computer wants to access a web server, it first checks its local DNS cache for the corresponding IP address to see if the IP address of this server is already known. If unresolved, the query is sent to a local DNS server, which may resolve the name or forward the query to another server up the hierarchy (e.g., starting with TLD, the sub-domain, and finally, the host names). For this to work, however, each computer must know at least one DNS server, which acts as an entry point for name resolution via IP address. Once resolved, the actual web server can be contacted by sending a packet to that address, and the IP address is cached locally for future use.</p><ul id="17582a35-59f1-80dd-b939-ff76f70d8746" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>ICANN</strong></mark><mark class="highlight-purple">: The </mark><mark class="highlight-purple"><strong>Internet Corporation for Assigned Names and Numbers (ICANN)</strong></mark><mark class="highlight-purple"> manages the overall structure and allocation of domain names globally.</mark></li></ul></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">The Hypertext Transfer Protocol (HTTP)</summary><div class="indented"><p id="17d82a35-59f1-80ed-8bff-c4cc14915ff8" class="">HTTP is a communication protocol used by web browsers (clients) to communicate with web servers and retrieve content, such as HTML pages. To do so, the browser sends an <strong>HTTP request</strong>, and the server responds with the desired content or a status code indicating the result of the request.</p><p id="17d82a35-59f1-80ff-84c4-c4115cdaba73" class="">The address of the web server, and the specific HTML page or file that should be delivered by the server, is transmitted as a URL by the client.</p><ul id="17d82a35-59f1-80e2-aebf-c6eb5982ef43" class="toggle"><li><details open=""><summary>URL (Uniform Resource Locator)</summary><p id="17d82a35-59f1-80c3-8a0f-e3ce427c6b48" class="">URL describes <mark class="highlight-purple">the location and access parameters of an internet resource. It typically consists of: </mark></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17d82a35-59f1-800d-9965-c9138affad3d" class="code"><code class="language-SQL">Protocol://User:Password:@Hos0t:Port/Path?Query#Fragment</code></pre><ol type="1" id="17582a35-59f1-8086-938f-d7b93dda42f6" class="numbered-list" start="1"><li><mark class="highlight-purple"><strong>Protocol Name:</strong></mark><mark class="highlight-purple"> Specifies the protocol used to access the resource (e.g., http, https).</mark></li></ol><ol type="1" id="17d82a35-59f1-80e9-adc2-fd938d0868d3" class="numbered-list" start="2"><li><strong>User:</strong> Username specified when access to the resource must be authenticated <em>(optional).</em></li></ol><ol type="1" id="17d82a35-59f1-8055-bb38-e412789741ba" class="numbered-list" start="3"><li><strong>Password: </strong>Password used with the specified username when access to the resource must be authenticated (optional).</li></ol><ol type="1" id="17d82a35-59f1-805e-ab80-f6d45e7992e6" class="numbered-list" start="4"><li><strong>Host:</strong> The name or address of the computer running the web server as a service,<br/>specified either as a hostname or FQDN or directly as an IPv4 or IPv6 address (the latter in square brackets)<br/></li></ol><ol type="1" id="17d82a35-59f1-8076-8e2b-e63430c964b1" class="numbered-list" start="5"><li><strong>Port:</strong> Specifies the server’s port (e.g., port 80 for HTTP). When not set to the well-known port, this entry represents the chosen port on which the server listens</li></ol><ol type="1" id="17d82a35-59f1-80ef-ba50-ec7946c79c1e" class="numbered-list" start="6"><li><strong>Path:</strong> the directory path where the server looks up the resource locally. A filename may be placed at the end of this entry.</li></ol><ol type="1" id="17d82a35-59f1-802c-8eeb-c2c36eed1a37" class="numbered-list" start="7"><li><strong>Query:</strong> The parameters that can be passed to the server in the form of key-value pairs. A key equals one value (e.g., q=iu), and an ampersand (“&amp;”) can be used to<br/>separate multiple parameter pairs<br/></li></ol><ol type="1" id="17d82a35-59f1-800f-9f22-eafb19b09eef" class="numbered-list" start="8"><li><strong>Fragment:</strong> This can be used to reference only a part of the requested resource, such as a specific section of an HTML page.</li></ol></details></li></ul><ul id="17d82a35-59f1-8021-892c-dd2d78ac0d60" class="toggle"><li><details open=""><summary>HTTP methods</summary><ul id="17d82a35-59f1-80a5-b3b0-e23d9674a222" class="bulleted-list"><li style="list-style-type:disc"><strong>GET:</strong> Requests data from the server (read-only). </li></ul><ul id="17d82a35-59f1-80aa-acd7-d97c811fd4c7" class="bulleted-list"><li style="list-style-type:disc"><strong>POST:</strong> Used to modify data present on the server. It submits data to the server from form fields (e.g., form submissions).</li></ul><ul id="17d82a35-59f1-8083-93e3-e4d22eea0b46" class="bulleted-list"><li style="list-style-type:disc"><strong>PUT:</strong> Uploads data to a specific location specified by a target URL on the server. However, in contrast to the POST method, no further processing of the data takes place on the server side.</li></ul><p id="17d82a35-59f1-80cd-b205-e062acdd7439" class="">For example, the website of an internet store, which offers the customer a virtual<br/>shopping cart to hold any desired items. This information is sent to the server using POST, and the server then changes and updates the contents of the shopping cart within the respective session, which is managed by the server. The web server will then respond with a three-digit status code in an HTTP header. Often, requested payload will follow. <br/></p><p id="17d82a35-59f1-80ec-a4cc-cee8c4bb7104" class="">The code given depends on the whether the server was able to issue the request successfully. </p><ul id="17d82a35-59f1-807f-8ae5-e6d4063fb6ee" class="toggle"><li><details open=""><summary><strong>Status Codes:</strong></summary><ul id="17d82a35-59f1-80ac-aa29-dc21548c96d0" class="bulleted-list"><li style="list-style-type:disc"><strong>200 OK:</strong> Request was successful.</li></ul><ul id="17d82a35-59f1-8015-9054-d05cd162b22a" class="bulleted-list"><li style="list-style-type:disc"><strong>403 Forbidden:</strong> Access denied due to missing/failing authorization.</li></ul><ul id="17d82a35-59f1-80e4-827a-f82b191c4071" class="bulleted-list"><li style="list-style-type:disc"><strong>404 Not Found:</strong> Resource not found.</li></ul><ul id="17d82a35-59f1-80ae-926f-d476b28f569c" class="bulleted-list"><li style="list-style-type:disc"><strong>500 Internal Server Error:</strong> Server encountered an unexpected issue.</li></ul></details></li></ul></details></li></ul><p id="17d82a35-59f1-80b9-a4aa-ee05e04ce559" class=""><strong>Transport Protocol: </strong>HTTP relies on <strong>TCP</strong> for reliable data transmission.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Simple Mail Transfer Protocol (SMTP), POP3, IMAP</summary><div class="indented"><p id="17d82a35-59f1-8031-b424-dc423a60fd6f" class="">SMTP is used to send and forward emails while receiving emails involves <strong>POP3</strong> (Post Office Protocol Version 3) or <strong>IMAP</strong> (Internet Message Access Protocol). All three protocols are common components of every email client program.</p><p id="17d82a35-59f1-80ff-93f0-d80aa43f41b2" class=""><strong>Email Transmission Path: </strong>Components involved:</p><ul id="17d82a35-59f1-80d6-bc7f-f108e9216e2c" class="bulleted-list"><li style="list-style-type:disc"><strong>MUA (Mail User Agent):</strong> Email client or program sending the message<em> (Outlook, Gmail).</em></li></ul><ul id="17d82a35-59f1-805b-b522-e02f7f37b5aa" class="bulleted-list"><li style="list-style-type:disc"><strong>MSA (Mail Submission Agent):</strong> The sender&#x27;s SMTP server.</li></ul><ul id="17d82a35-59f1-80d0-a311-e305225dfc18" class="bulleted-list"><li style="list-style-type:disc"><strong>MTA (Mail Transfer Agent):</strong> Intermediate servers forwarding the email from MSA to POP3 or IMAP server (i.e., the MDA).</li></ul><ul id="17d82a35-59f1-8054-885b-d0eaf0220c37" class="bulleted-list"><li style="list-style-type:disc"><strong>MDA (Mail Delivery Agent):</strong> The recipient’s server.</li></ul><figure id="17d82a35-59f1-8072-b174-d78b05aa94d9" class="image" style="text-align:center"><a href="image%2036.png"><img style="width:480.0000305175781px" src="image%2036.png"/></a></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Secure Communication on the Internet</summary><div class="indented"><p id="17d82a35-59f1-801d-9634-f7e8fb99b6e8" class="">Security is generally understood as the protection of:</p><ul id="17d82a35-59f1-8015-ac93-f7f6d924167f" class="bulleted-list"><li style="list-style-type:disc"><strong>Confidentiality:</strong> Ensures only authorized individuals can access sensitive data.</li></ul><ul id="17d82a35-59f1-8059-b16f-d720fc4acf9b" class="bulleted-list"><li style="list-style-type:disc"><strong>Integrity:</strong> Guarantees that data remains are not manipulated by unauthorized parties.</li></ul><ul id="17d82a35-59f1-80a0-ba5f-da77e1f77c7f" class="bulleted-list"><li style="list-style-type:disc"><strong>Availability:</strong> Ensures data is accessible to authorized users when needed and that they reach the legitimate recipient.<ul id="17d82a35-59f1-8028-ba36-d96097c2d939" class="toggle"><li><details open=""><summary><strong>Security vs. Reliability:</strong></summary><p id="17d82a35-59f1-8041-9e5b-d289a5377ee6" class="">Security focuses on protecting data from unauthorized access and manipulation through specific techniques (such as data encryption). </p><p id="17d82a35-59f1-8076-954e-de4d219c3b79" class="">Reliability, like in TCP, ensures accurate delivery of data (e.g., retransmitting lost packets) but does not protect against eavesdropping or malicious modifications <em>(including through manipulation iof checksum) </em>by third-party during transport.</p></details></li></ul></li></ul><ul id="17d82a35-59f1-80de-b5ec-c408a9b58574" class="toggle"><li><details open=""><summary><strong>Techniques for Enhancing Security:</strong></summary><p id="17d82a35-59f1-8028-8fd3-c0bdb0cb85eb" class="">Sensitive data should be encrypted during communication, either by the <strong>application</strong> (or human user) encrypting and decrypting data or the <strong>transport protocols</strong> handling encryption transparently. </p><ol type="1" id="17d82a35-59f1-80e1-8691-d036c72fd51e" class="numbered-list" start="1"><li><strong>Transport Layer Security (TLS): </strong><p id="17d82a35-59f1-803a-9422-faf419846a72" class="">TLS adds encryption to protocols like SMTP and HTTP, forming SMTPS and HTTPS, and securing communication on ports like 465 (SMTPS) and 443 (HTTPS). The result is a secure RCP connection. TLS operates at the <strong>application layer</strong> or as an extension of the transport layer in the TCP/IP model or the presentation layer in the OSI model.</p><p id="17d82a35-59f1-807e-a3b2-d5b37b0ac58f" class=""><strong>TLS </strong>is<strong> a </strong>protocol, once called the Secure Socket Layer (SSL), based on TCP and encrypts the user data before it is transmitted over the internet.</p></li></ol><ol type="1" id="17d82a35-59f1-8070-878a-cd0cc5f7063e" class="numbered-list" start="2"><li><strong>IPSec Standard: </strong><p id="17d82a35-59f1-80e8-abf3-d47102ce4891" class="">Secures communication at the <strong>internet layer</strong> by encrypting IP packets. IPSec works on a connection-oriented basis because it requires an initial exchange of keys to establish secure logical connections. Used for <strong>VPNs</strong> to create secure tunnels for transmitting data by encapsulating encrypted IP packets as payloads in regular IP packets.</p></li></ol><ol type="1" id="17d82a35-59f1-803b-a6c7-f445e86fb75f" class="numbered-list" start="3"><li><strong>End-to-End Encryption:</strong><p id="17d82a35-59f1-80f4-80c4-ceba3d492184" class="">Ensures only the sender and recipient of a multi-stage communication path can access plaintext data while intermediate servers cannot decrypt or modify the data.</p><p id="17d82a35-59f1-8098-ac9b-cb8c22d9b91f" class="">Tools like S/MIME and PGP provide encryption that protects data throughout the entire communication process. These tools also offer authentication through digital signatures and certificates for robust security, making it harder for attackers to impersonate legitimate senders.</p></li></ol><p id="17d82a35-59f1-803d-b808-c4ca3027fae2" class="">Both TLS and IPSec only ensure the integrity and confidentiality of the transmitted user data during the routing of TCP/IP packets through the network. It cannot, however, provide true end-to-end encryption and/or authentication. For example, this means that emails will continue to be processed unencrypted on the respective mail servers, as these must be able to at least read the mail headers in plain text. Furthermore, despite TLS, faking sender names and email addresses is still very easy for hackers and spammers.</p><p id="17d82a35-59f1-800d-8e1f-ff5281883ee7" class="">
+</p></details></li></ul></div></details><p id="17d82a35-59f1-80d1-ac6d-f268fb7f4cf0" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

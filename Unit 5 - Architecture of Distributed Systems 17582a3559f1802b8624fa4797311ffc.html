@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 5 - Architecture of Distributed Systems</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17582a35-59f1-802b-8624-fa4797311ffc" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">5️⃣</span></div><h1 class="page-title">Unit 5 - Architecture of Distributed Systems</h1><p class="page-description"></p></header><div class="page-body"><h2 id="17582a35-59f1-804b-a128-c6870d75736d" class="">5.1. Client-Server-Systems and Distributed Applications</h2><ul id="17e82a35-59f1-8037-a286-cd3c5bf6f262" class="toggle"><li><details open=""><summary><strong>Early Monolithic Programs to Modular Systems</strong>:</summary><p id="17e82a35-59f1-80a7-8862-e111fd3e521b" class=""><strong>Monolithic Programs:</strong> In the past, software was simple and combined all functionality into a single component. This approach worked when program requirements rarely changed and complexity was low.</p><p id="17e82a35-59f1-806d-81f6-d97d4dc9de2b" class=""><strong>Modular and Multi-Layered Architecture</strong>:  As software grew in complexity and a greater avaliability of resources, modular and multi-layered designs emerged, dividing software into distinct layers with specific responsibilities. Layers interact top-down via defined interfaces, reducing the complexity within the layers, avoiding dependency cycles <em>(a function call across layers may only ever be made from top to bottom) </em>and allowing for interchangeability of individual layers without having to change the structure of the overall system. Furthermore, the encapsulation in layers improves <strong>maintainability</strong>, <strong>scalability</strong>, and <strong>expandability</strong>.  Today, this multi-layered approach is standard and a basic requirement for distributed applications.</p></details></li></ul><ul id="17e82a35-59f1-806a-806f-fa419067d60c" class="toggle"><li><details open=""><summary>Two-tier  Architecture vs Three-Tier Architecture:</summary><ol type="1" id="17e82a35-59f1-802d-9b85-f03539bec35c" class="numbered-list" start="1"><li><mark class="highlight-purple"><strong>Two-Tier </strong></mark>(or Client-Server) <mark class="highlight-purple"><strong>Architecture</strong></mark><mark class="highlight-purple">:</mark><p id="17e82a35-59f1-8046-bc43-d7844ecb9a91" class="">Comprises two layers where the server offers functions, while the client request services:</p><ul id="17e82a35-59f1-8063-b96c-d25d9cb3b9d4" class="bulleted-list"><li style="list-style-type:disc"><strong>Client (Upper Layer)</strong>: Service user, that invokes the functions of the lower layer.</li></ul><ul id="17e82a35-59f1-805c-a4c6-e000c5801bfd" class="bulleted-list"><li style="list-style-type:disc"><strong>Server (Lower Layer)</strong>: Service provider.</li></ul><p id="17e82a35-59f1-801d-b690-d3be78123da5" class="">These layers may reside on the same or separate computers. When on the same computer, the two layers could be embodied by two software modules.</p></li></ol><ol type="1" id="17e82a35-59f1-80f4-9ede-c13a4a242dc9" class="numbered-list" start="2"><li><mark class="highlight-purple"><strong>Three-Tier Architecture</strong></mark><mark class="highlight-purple">:</mark><p id="17e82a35-59f1-806e-88fb-eb82a63a7294" class="">Adds a third layer to the two-layer architecture and divides responsibilities:</p><ul id="17e82a35-59f1-8034-b1b6-d06d1ffe1e2f" class="bulleted-list"><li style="list-style-type:disc"><strong>Presentation Tier</strong>: User interface. Responsible for visual presentation and input handling.</li></ul><ul id="17e82a35-59f1-8030-bdc4-e405b41d19c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Logic Tier</strong>: Handles data processing mechanisms of the application <em>(also called application or business logic tier)</em>.</li></ul><ul id="17e82a35-59f1-802b-ac8d-d9f724f09dea" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Tier</strong>: Manages and stores data (e.g., manages data records in databases).</li></ul><p id="a8e65a63-fc69-4766-ad9e-8fa084a51eb0" class=""><mark class="highlight-default">These layers can be distributed across multiple machines, allowing better load balancing and scalability</mark><mark class="highlight-purple"> </mark><em><mark class="highlight-purple">(</mark></em><em>multiple clients can interact with servers distributed across various locations.)</em><em><mark class="highlight-purple">. </mark></em></p></li></ol></details></li></ul><ul id="17e82a35-59f1-8065-bba1-fc3efd9351e8" class="toggle"><li><details open=""><summary><strong>Thin vs. Fat Client Approaches</strong></summary><ol type="1" id="17e82a35-59f1-80af-9a19-f10fbeca8b1d" class="numbered-list" start="1"><li><mark class="highlight-purple"><strong>Thin Client</strong></mark><mark class="highlight-purple">:</mark></li></ol><p id="17e82a35-59f1-8010-b955-d9d72e0f17ee" class="">Only the <strong>presentation tier</strong> runs on one or many client computers, while Logic and data processing occur on the server. This makes it suitable for scalability, as servers handle most of the workload.</p><ol type="1" id="17e82a35-59f1-808b-bd02-c820e8d65275" class="numbered-list" start="2"><li><mark class="highlight-purple"><strong>Fat Client</strong></mark><mark class="highlight-purple">:</mark></li></ol><p id="17e82a35-59f1-8002-a3cf-c3aea29083b7" class="">The client computers also process the data <em>(Logic tier components), </em>and the server only provides persistent storage for these processed data. This results in less dependence on servers but increased use of client resources.</p><figure id="17e82a35-59f1-8040-94a4-d9909fb8d43a" class="image" style="text-align:center"><a href="image%2037.png"><img style="width:240px" src="image%2037.png"/></a></figure><p id="17e82a35-59f1-805c-8836-ecbb5d322956" class=""><mark class="highlight-purple"><strong>Further Approaches:</strong></mark></p><p id="17e82a35-59f1-80f4-99ed-e30d67d23a9f" class="">Because the different tiers are logically separated from each other, further approaches<br/>using different distribution strategies can be realized, such as a distributed architecture according to the three-tier model, where the accesses of several clients are mapped individually (e.g., by load balancing) to different application servers. These, in turn, access a common, distributed database.<br/></p><ul id="17e82a35-59f1-8046-9429-c3869a8de27b" class="bulleted-list"><li style="list-style-type:disc"><strong>Load balancing</strong>= Distribution of large amounts of data, large computing loads,<br/>and/or many processing requests to several parallel systems.<br/></li></ul><ul id="18182a35-59f1-80d4-a33e-c7e8b2a65a6b" class="toggle"><li><details open=""><summary>Example of a Distributed System on a Client-Server Basis</summary><figure id="17e82a35-59f1-8033-89e9-ee9edcdcf9c1" class="image" style="text-align:center"><a href="image%2038.png"><img style="width:336px" src="image%2038.png"/></a></figure></details></li></ul></details></li></ul><ul id="17e82a35-59f1-80ce-be4f-f23d27256f91" class="toggle"><li><details open=""><summary>Horizontal vs Vertical Distribution</summary><p id="17e82a35-59f1-80ca-924e-d04e181e76ed" class="">In the distributed Applications, two distributions can be generally distinguished:</p><p id="17e82a35-59f1-801b-b611-f4ed28ac0d8a" class=""><mark class="highlight-purple"><strong>Horizontal Distribution</strong></mark><mark class="highlight-purple">:</mark></p><ul id="17e82a35-59f1-8004-a4c0-ccbc2101704f" class="bulleted-list"><li style="list-style-type:disc">Redundant servers handle client requests, enabling load sharing, because each server can answer the request itself.</li></ul><ul id="17e82a35-59f1-8027-99ce-d8478193c045" class="bulleted-list"><li style="list-style-type:disc">Scaling involves adding more servers <em>(of the same nature) </em>to handle increased client requests <em>(of the same nature)</em>.</li></ul><ul id="17e82a35-59f1-801d-9365-e35e4fb9d129" class="bulleted-list"><li style="list-style-type:disc">Horizontal scaling ensures that no single server is overwhelmed, and <strong>load balancing</strong> across multiple servers further improves efficiency and fault tolerance. </li></ul><p id="17e82a35-59f1-8026-9f59-f6f343cfa0d8" class=""><mark class="highlight-purple"><strong>Vertical Distribution</strong></mark><mark class="highlight-purple">:</mark></p><ul id="17e82a35-59f1-8002-9e77-eaf9c157b250" class="bulleted-list"><li style="list-style-type:disc">Different, specialized servers handle different tasks/functions/data. Therefore, a client with a certain request can only address a certain server (e.g., one server handles the application layer, and another handles the database layer). </li></ul><ul id="17e82a35-59f1-80e9-8c91-f57801effa96" class="bulleted-list"><li style="list-style-type:disc">Scaling: the more client requests (of the same nature), the more powerful the respective server should be  <em>(increasing the computing power, memory, or storage of each server)</em><figure id="17e82a35-59f1-8030-9d24-ff907f85a8d6" class="image" style="text-align:center"><a href="image%2039.png"><img style="width:336px" src="image%2039.png"/></a></figure></li></ul><p id="17e82a35-59f1-8082-a0ad-c59faeacbcba" class="">Combining both scaling approaches ensures that systems can meet growing demand without compromising performance.</p></details></li></ul><ul id="17582a35-59f1-8020-836b-d23b5e217f98" class="toggle"><li><details open=""><summary><strong>Distributed Applications</strong>:</summary><p id="6d5864ff-cc62-40d4-884d-e865b1d377b2" class="">Software systems where components are distributed across different computers, meaning they constantly exchange data with each other via networks. This distribution allows for greater <strong>scalability</strong>, <strong>fault tolerance</strong>, and performance optimization.</p></details></li></ul><hr id="17e82a35-59f1-8030-a189-e4c6677fc078"/><h2 id="17582a35-59f1-8046-9cd8-cab8067cabb1" class="">5.2. Communication, Synchronization, and Transactions</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Communication in Distributed Systems</summary><div class="indented"><p id="17e82a35-59f1-80cc-86bd-fded8e829e53" class="">Communication in distributed systems typically follows the <strong>client-server model</strong>, where a client requests specific resources or services from a server.<em> </em>Distributed systems use internet protocols like HTTP but often require additional protocols for complex interactions (e.g., server-to-server or peer-to-peer communication). This complexity goes beyond simple client-server models, such as retrieving web pages.</p><ul id="17e82a35-59f1-80a1-8102-f87336f0b731" class="toggle"><li><details open=""><summary><strong>Remote Procedure Calls (RPCs):</strong></summary><p id="17e82a35-59f1-80a3-be96-db298c5d6853" class=""><strong>Remote Procedure Calls (RPCs)</strong> are a protocol that enables a process on one computer to execute a function or service as if it were local, even though the service is located on a remote server. The client sends a request (similar to a function call) and receives a response in the form of a result or return value.</p><p id="17e82a35-59f1-8070-b7eb-c0332b98c9b6" class="">RPCs were introduced early in network development to make remote function calls more transparent. They bridge the gap between local and remote function execution, ensuring seamless interaction for the client.</p><hr id="17e82a35-59f1-8003-8a40-e755e31dfa74"/><p id="17e82a35-59f1-80fb-b9b0-cb013928f935" class=""><strong>Functions vs. Procedures:</strong> </p><p id="1e282a35-59f1-80e8-89c4-ef729a33fc32" class="">A function is generally stateless, meaning it doesn&#x27;t rely on or modify any internal state. </p><p id="17e82a35-59f1-8027-afac-ce2e5dfc150e" class="">In contrast, a procedure typically operates on mutable data within its internal state. In the RPC model, the server provides the procedure, and the client invokes it over the network. To simplify this process for the client, an <strong>abstraction layer</strong> ensures the remote procedure feels like a local procedure call. On the client side, this layer includes <strong>client stub procedures</strong>, which act as local replicas of the actual service procedures on the server. While these stubs don’t execute the service themselves, they simulate the remote procedures locally, forward the requests to the server and return the result to the client. This design makes communication in distributed systems seamless, with HTTP often used as the transport protocol, enabling efficient remote access to services and resources.</p><ul id="17e82a35-59f1-8032-a576-ea1d9fd98a52" class="toggle"><li><details open=""><summary> Schematic of an RPC with Client-Side Perspective</summary><figure id="17e82a35-59f1-8031-b42c-cd547e2e9b16" class="image"><a href="image%2040.png"><img style="width:384px" src="image%2040.png"/></a></figure></details></li></ul><ul id="17e82a35-59f1-8086-adf6-e29229f56159" class="toggle"><li><details open=""><summary><strong>Communication Modes:</strong></summary><p id="17e82a35-59f1-80ad-9241-e78123b58505" class="">In remote procedure calls (RPC), there are two primary modes of communication for handling client-server interactions: <strong>active waiting (polling)</strong> and <strong>passive waiting (interrupt-driven)</strong>. These modes determine how the client waits for the server’s response and how system resources, like the CPU, are used.</p><ul id="17e82a35-59f1-8095-9e2f-f40b8ef9012d" class="bulleted-list"><li style="list-style-type:disc"><strong>active waiting with polling: </strong><mark class="highlight-purple">The </mark><mark class="highlight-purple"><strong>client continuously checks (polls) for the server’s response</strong></mark><mark class="highlight-purple">. This keeps the CPU busy, as the client remains active and engaged in the RPC process.</mark></li></ul><ul id="17e82a35-59f1-804d-a036-dace822b27cb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>Passive Waiting (Interrupt-Driven)</strong></mark><mark class="highlight-purple">: The </mark><mark class="highlight-purple"><strong>client passes control of the RPC to the operating system and goes to sleep until the server responds</strong></mark><mark class="highlight-purple">. The CPU is freed for other tasks during this waiting period. While the response may take longer due to the overhead of waking the client back up, this method is often preferred for network-based RPCs, as it avoids constant CPU usage.</mark></li></ul><p id="17e82a35-59f1-80a0-98a7-c80785cde5f2" class="">If the results of the RPC are not needed immediately<em> (e.g., because the client sends the RPC in the program code early and with foresight)</em>, the client itself could continue calculating until it reaches a point where that RPC result is needed. To realize such an overlapping of further computation and communication in the background, many  systems offer non-blocking RPC variants in addition to the standard blocking ones:</p><ul id="17e82a35-59f1-8006-bf5f-d9023bfd41cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Blocking Communication:</strong> The client waits within the RPC for the server’s response, either actively (polling) or passively (interruption), and cannot perform other tasks in the meantime.</li></ul><ul id="17e82a35-59f1-80b2-b41b-e15bbab15d0e" class="bulleted-list"><li style="list-style-type:disc"><strong>Non-blocking Communication:</strong> The client continues processing other tasks while waiting for the server’s response, enabling concurrency or parallelism between server and client operations. A reference to the call running in the background is then returned in the form of a handle. With this handle, the client can check to see if the server result is available in the meantime <em>(active polling).</em></li></ul><ul id="17e82a35-59f1-8021-a5be-c8b50b9f5695" class="toggle"><li><details open=""><summary>Blocking (a) vs Non-Blocking (b) RPCs</summary><figure id="17e82a35-59f1-80cb-aec3-e3bcff5686b7" class="image" style="text-align:center"><a href="image%2041.png"><img style="width:288px" src="image%2041.png"/></a></figure></details></li></ul></details></li></ul></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Synchronization Methods</summary><div class="indented"><p id="17e82a35-59f1-80db-be5e-deeeacadd136" class="">In computing systems, whether local or distributed, parallel and/or asynchronous processes must still be able to coordinate and thus synchronize with each other at some point. This synchronization is usually achieved through system calls provided by the local operating system for processes running together on the same computer. </p><ul id="17e82a35-59f1-8048-b6b7-d62c4b86d18b" class="toggle"><li><details open=""><summary><strong>Local Synchronization Methods:</strong></summary><p id="17e82a35-59f1-8096-b17a-e4f685db9807" class=""><mark class="highlight-purple"><strong>Mutex (Mutual Exclusion):</strong></mark> In a system with multiple processes, only one process at a time is allowed to perform a specific operation or use an exclusive resource. This is managed using a <strong>token-based system</strong>, where a process must hold the token <em>(called a </em><em><strong>mutex</strong></em><em>) </em>to gain access to the resource. Other processes must wait until the token is released.</p><ul id="17e82a35-59f1-8030-b26e-d907b9e817d5" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Ensures that critical resources or operations are not accessed simultaneously, preventing conflicts or inconsistencies.</li></ul><p id="17e82a35-59f1-8070-aae3-dd9a21f504d9" class=""><mark class="highlight-purple"><strong>Semaphores (Atomic Counters variables):</strong></mark>  variables used for synchronization, allowing up to <strong>n processes</strong> to share a resource simultaneously. If the number of simultaneous users exceeds n, additional processes must wait until the resource becomes available. There are 2 types of Semaphore:</p><ul id="17e82a35-59f1-80c6-900d-f0fd3740a9ce" class="bulleted-list"><li style="list-style-type:disc"><strong>Binary Semaphore (n=1):</strong> Works like a mutex, allowing only one process at a time.</li></ul><ul id="17e82a35-59f1-8054-ad66-ce96d88825ca" class="bulleted-list"><li style="list-style-type:disc"><strong>General Semaphore:</strong> Allows multiple processes (up to n) to access the resource.</li></ul><p id="17e82a35-59f1-806e-bb45-c8feb616ec38" class=""><mark class="highlight-purple"><strong>Barrier:</strong></mark><strong>  </strong>A synchronization mechanism that ensures all <strong>n</strong> processes reach a specific point before any of them can continue. When a process arrives at the barrier, it must wait until exactly <strong>n</strong> processes have arrived. Only then are all processes allowed to proceed, ensuring they are synchronized at a specific stage and enabling coordinated actions across the system.</p></details></li></ul><ul id="17e82a35-59f1-804f-a367-de76d98d76b8" class="toggle"><li><details open=""><summary><strong>Distributed Synchronization:</strong></summary><p id="17e82a35-59f1-8071-a015-df01f1e6727d" class="">Unlike local systems, distributed systems cannot rely on direct system calls for synchronization, as each computer has its own operating system. Instead, communication happens via <strong>network messages, </strong>according to a synchronization protocol. The mechanism is:</p><ol type="1" id="17e82a35-59f1-80b2-a7e8-dd6f0d763221" class="numbered-list" start="1"><li><strong>Token Passing for Mutex:</strong> A special <strong>token </strong>is passed between processes (or computers). A process must hold the token to gain access to the critical section. To acquire the token, a process sends a request — either to all other processes or, depending on the method used, to a specific process that currently holds the token (or is known to have held it previously).</li></ol><ol type="1" id="17e82a35-59f1-80d6-a2eb-c0004094486c" class="numbered-list" start="2"><li><strong>Distributed Barriers:</strong> Processes form a logical ring, with each having a predecessor and a successor. A token circulates twice around the ring to ensure all processes have synchronized. Once this is understood, every process can leave the barrier function. In distributed systems, synchronisation ensures that multiple processes coordinate effectively.<div id="1e282a35-59f1-8090-bd67-de7b2ac987f1" class="column-list"><div id="1e282a35-59f1-808c-bf44-f8a4ed33ece7" style="width:200.00000000000009%" class="column"><figure id="17e82a35-59f1-804d-8328-c5e8f7ff23df" class="image" style="text-align:center"><a href="image%2042.png"><img style="width:288px" src="image%2042.png"/></a></figure></div><div id="1e282a35-59f1-80fc-a46b-f9eda472d0bf" style="width:100.00000000000003%" class="column"><p id="1e282a35-59f1-8048-a6ee-f327db3d154a" class="">
+</p><p id="17e82a35-59f1-8034-8ece-f16c99548574" class="">Distributed Barrier with Token Passing<div class="indented"><p id="1e282a35-59f1-80dd-84c9-cd33feb04ac7" class="">
+</p></div></p></div></div></li></ol><p id="17e82a35-59f1-8088-92c4-c1832c6577e1" class=""><strong>Challenges:</strong> Synchronization in distributed systems can fail if a process or computer crashes or a message containing the token is lost. Because there is usually no central observer as in the local operating system, such a failure can hardly be detected globally.</p><p id="17e82a35-59f1-8075-9eae-d8eb003b1905" class="">The situation where processes indefinitely wait for a token or message that will never arrive, often due to failure, is called a <strong>deadlock</strong>. Deadlocks are typically addressed using timeouts, where processes stop waiting if no response is received within a specific time.</p></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>Transactions</strong></summary><div class="indented"><p id="17e82a35-59f1-8078-b343-f1e855698681" class="">In distributed client-server systems, <strong>persistent data storage</strong> is critical for maintaining consistent and reliable access to shared data. The challenges arise when multiple servers interact with the same dataset, potentially leading to inconsistencies due to differences in data views or processing orders if proper protocols are not in place. The solution is to use Transactions to ensure data consistency and reliability during access and modification.</p><hr id="17e82a35-59f1-801f-a1e7-edb3e3404ba4"/><p id="17e82a35-59f1-809d-a18a-d8aa29fe798a" class="">A transaction is a sequence of operations that ensures reliable and traceable modifications of persistent data on a storage system, particularly when the system could be affected by failures. The goal is to eliminate uncertainty about the state of data during and after operations.</p><ul id="17582a35-59f1-8021-89cf-c5b2e4433a6d" class="toggle"><li><details open=""><summary><mark class="highlight-purple"> They follow the </mark><mark class="highlight-purple"><strong>ACID properties</strong></mark><mark class="highlight-purple">:</mark></summary><ul id="17e82a35-59f1-805d-9b46-ca3123b3e74a" class="bulleted-list"><li style="list-style-type:disc"><strong>Atomicity: </strong>A transaction is either fully completed or not executed at all <em>(If a payment fails, the flight reservation is also canceled (rollback)).</em></li></ul><ul id="17e82a35-59f1-8007-b9f3-c1a1c8212377" class="bulleted-list"><li style="list-style-type:disc"><strong>Consistency:  </strong>The database remains in a valid state before and after a transaction. No intermediate or invalid states are visible externally.</li></ul><ul id="17e82a35-59f1-803d-adfa-e60a0d085ac2" class="bulleted-list"><li style="list-style-type:disc"><strong>Isolation: </strong>Simultaneous transactions do not interfere with each other through their overlapping. This means that write accesses in particular must be serialized. </li></ul><ul id="17e82a35-59f1-8086-b7a7-f38d01be72e3" class="bulleted-list"><li style="list-style-type:disc"><strong>Durability: </strong>Once a transaction is committed, its effects are permanent, even if the system fails afterward.</li></ul></details></li></ul><ul id="17e82a35-59f1-800f-9809-e6d6d42184e1" class="toggle"><li><details open=""><summary>Transaction code</summary><p id="17e82a35-59f1-801b-8bf9-ceba67043cfe" class="">A transaction meets these criteria by encapsulating a set of (data changing) operations in<br/>such a way that they are either ordered and executed entirely or not at all. The set of operations that form a transaction begins with a <br/><code><strong>begin</strong></code><strong> function</strong> and include a series of operations (read/write). </p><ul id="17e82a35-59f1-8080-98e8-c7e77a5b27c2" class="bulleted-list"><li style="list-style-type:disc">If successful, they end with a <code><strong>commit</strong></code><strong> function</strong>, making the changes permanent. </li></ul><ul id="17e82a35-59f1-805f-be0f-da41b1bf8dc5" class="bulleted-list"><li style="list-style-type:disc">If there’s a failure, a <strong>rollback</strong> reverts the system to its initial state before the transaction began. <mark class="highlight-purple">This is necessary when a transaction cannot be completed successfully due to errors or interruptions. </mark></li></ul></details></li></ul><ul id="17e82a35-59f1-80f1-a9ad-cd1060c5a0b2" class="toggle"><li><details open=""><summary>Distributed Transactions</summary><p id="17e82a35-59f1-80f6-a833-ec8725b18d10" class="">In distributed systems, transactions span multiple servers or databases. Failures in any component (server, connection to the client or other servers, or transaction errors) can cause inconsistencies.</p><p id="17e82a35-59f1-80c5-9e8a-c6e7c6ca6b77" class="">Solving the issue of processing distributed transactions across multiple servers require global coordination. A <strong>coordinator</strong> ensures that either all interdependent (sub-) transactions are successful or that a global rollback is performed.</p><p id="17e82a35-59f1-807d-9800-cb21fab95f96" class=""><strong>Example Workflow:</strong></p><ul id="17e82a35-59f1-802c-b2f9-d1213a944cb3" class="bulleted-list"><li style="list-style-type:disc">A client sends a transaction to a coordinator, because the global coordination can be done by the client or by an intermediate server</li></ul><ul id="17e82a35-59f1-80fc-b343-eaa51f7578fa" class="bulleted-list"><li style="list-style-type:disc">The coordinator splits the transaction into sub-transactions for different databases, following a protocol that ensures all sub-transactions are either completed or globally rolled back.</li></ul><p id="17e82a35-59f1-80ad-989e-c449fdddc157" class=""><mark class="highlight-purple">Challenges like </mark><mark class="highlight-purple"><strong>deadlocks and process failures can occur, requiring careful management</strong></mark><mark class="highlight-purple">.</mark></p></details></li></ul></div></details><hr id="17e82a35-59f1-803a-95f6-f2636edd87d6"/><h2 id="17582a35-59f1-8003-acb6-e61c1385b0ba" class="">5.3. Service Orientation and Cloud Applications</h2><p id="18082a35-59f1-8012-bf7a-cbab32e34815" class="">In addition to the classic client-server model, <strong>extended architectural approaches</strong> like <strong>Service-Oriented Architectures (SOAs)</strong> and <strong>Microservices</strong> offer more flexibility, modularity, and interoperability in distributed systems. These architectures focus on how services interact and are orchestrated to meet both technical and business needs.</p><ul id="18082a35-59f1-800c-81b8-f316eeb43cc1" class="toggle"><li><details open=""><summary>Service-oriented Architecture (SOA)</summary><p id="18082a35-59f1-8016-9e1b-e7f566730e57" class="">SOA is an architecture where systems are composed of independent, loosely coupled services that can be orchestrated very flexibly and communicate using messages. Key features are:</p><p id="18082a35-59f1-80b2-9e44-e74ec09ee727" class=""><mark class="highlight-purple"><strong>Service Offering:</strong></mark><mark class="highlight-purple"> </mark>Servers provide and advertise their services through <strong>global directories</strong>. Global directories include a description of each API function, such as those described using OpenAPI, and details of available services and how to use them.</p><p id="18082a35-59f1-80af-9082-e7295c944a0e" class=""><mark class="highlight-purple"><strong>Interoperability</strong></mark><strong>:</strong> Services are platform-independent, enabling seamless integration across different systems.</p><p id="18082a35-59f1-8029-9395-e9280e58d00a" class=""><mark class="highlight-purple"><strong>Orchestration:</strong></mark><mark class="highlight-purple"> </mark>Higher-level services are created by combining subordinate services for flexible and reusable solutions.</p><ul id="1e282a35-59f1-80d9-b75e-dea74dabf868" class="toggle"><li><details open=""><summary>Schematic of a Service-Oriented Architecture (SOA)</summary><p id="1e282a35-59f1-805e-b188-f4033068db1c" class=""> A service directory could have as components:</p><div id="1e282a35-59f1-809e-b017-f60736b93cf7" class="column-list"><div id="1e282a35-59f1-807a-8940-f8790af79157" style="width:68.75%" class="column"><ul id="18082a35-59f1-80ec-9678-f4a5945346e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Service User:</strong> The client requesting a service.</li></ul><ul id="18082a35-59f1-805b-b41c-d2b546825959" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Provider:</strong> The server offering the service.</li></ul><ul id="1e282a35-59f1-801d-9792-c7bdf846a501" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Broker:</strong> An intermediary maintaining a directory of services.</li></ul></div><div id="1e282a35-59f1-807e-bded-ca47135faba2" style="width:31.250000000000007%" class="column"><figure id="18082a35-59f1-8064-8a26-ebacaaf7d835" class="image"><a href="image%2043.png"><img style="width:288px" src="image%2043.png"/></a></figure></div></div></details></li></ul><p id="18082a35-59f1-805c-9914-e8acba3e1ac9" class=""><mark class="highlight-purple"><strong>Business Alignment:</strong></mark> SOA bridges IT architectures with an organization’s business processes, ensuring IT services align with business needs.</p></details></li></ul><ul id="18082a35-59f1-80ca-a675-df3a29bc870f" class="toggle"><li><details open=""><summary>Microservice Architecture</summary><p id="18082a35-59f1-80a8-a694-cd4a0228c8cb" class="">Microservices build upon SOA but focus on smaller, more fine-grained services. They are an extension of the SOA concept. Key features are:</p><p id="18082a35-59f1-80bc-be38-ecaa48d877ef" class=""><mark class="highlight-purple"><strong>Lightweight Services:</strong></mark><mark class="highlight-purple"> </mark>Each service performs a single, well-defined function, making the system easier to develop, test, and maintain.</p><p id="18082a35-59f1-800f-a00d-cd8a82ef2bda" class=""><mark class="highlight-purple"><strong>Fine-Grained Modularity</strong></mark><strong>:</strong> Each service has a clear interface, simplifying interactions.</p><p id="18082a35-59f1-8036-a623-f445e92bff28" class=""><mark class="highlight-purple"><strong>Fault Tolerance and Parallelism:</strong></mark><mark class="highlight-purple"> </mark>Redundant service instances improve reliability and allow parallel processing.</p><p id="18082a35-59f1-802f-a3e3-ce5cf7e33109" class=""><mark class="highlight-purple"><strong>Lightweight Protocols:</strong></mark><mark class="highlight-purple"> </mark>Communication between services uses simple and efficient protocols, reducing complexity.</p></details></li></ul><ul id="18082a35-59f1-80d9-bb3a-e46f6439ff0a" class="toggle"><li><details open=""><summary>Web Services</summary><p id="18082a35-59f1-80bd-a5ba-e540598f7bef" class="">Web services provide a middleware layer that enables users to have uniform access to remote and distributed services, often based on the <strong>Service-Oriented Architecture (SOA)</strong>. These services must also offer a high degree of portability with flexible standards. Key features are:</p><p id="18082a35-59f1-8034-8eb3-f9ae89ffd4fa" class=""><mark class="highlight-purple"><strong>Middleware</strong></mark><mark class="highlight-purple">:</mark> Software layers that provide communication, coordination, and service brokering beyond what the operating system offers. In the OSI model, middleware typically operates around the <strong>fifth layer </strong>(Session) and the <strong>seventh layer </strong>(Application).</p><p id="18082a35-59f1-80f3-b492-fdd7c433b5cc" class=""><mark class="highlight-purple"><strong>Protocols and Standards</strong></mark><mark class="highlight-purple">:</mark> The communication for accessing these services is usually done via well-known web service protocols and standards such as:</p><ul id="18082a35-59f1-8038-9581-dc7a34b566d7" class="bulleted-list"><li style="list-style-type:disc"><strong>Simple Object Access Protocol (SOAP)</strong>: An HTTP-based protocol for sending RPCs.</li></ul><ul id="18082a35-59f1-80f4-937a-e8a5b188c865" class="bulleted-list"><li style="list-style-type:disc"><strong>Extendable Markup Language (XML)</strong>: Encodes SOAP messages for interoperability.</li></ul><ul id="18082a35-59f1-8084-a064-d37d9fbe5b29" class="bulleted-list"><li style="list-style-type:disc"><strong>Remote Procedure Calls (RPCs)</strong>: Facilitate function-like service calls over networks.</li></ul><p id="18082a35-59f1-80b3-9fce-c4cef467b2c2" class=""><mark class="highlight-purple"><strong>Stateless Processing</strong></mark><mark class="highlight-purple">: </mark>Services do not maintain internal states and therefore always returns the same result for the same call with the same parameters. A service user or client can therefore contact any server as long as it offers the same web service. To find out which server provides which service, clients can contact directory services. </p><p id="18082a35-59f1-803f-b7f8-fb84a9116e47" class="">Because, for a web service to operate in a stateless manner, all required information must always be supplied by the client in the form of parameters, the <strong>Representational State Transfer (REST) </strong>paradigm has been established, and Web services following this paradigm are called <strong>RESTful</strong>.</p><p id="18082a35-59f1-8019-9578-d3c74cbfed1d" class=""><mark class="highlight-purple"><strong>WSDL</strong></mark><mark class="highlight-purple">:</mark> A standard for describing web services in a portable way, specifying inputs, outputs, and parameters.</p></details></li></ul><ul id="18082a35-59f1-806f-a440-f18fb5e9f8e8" class="toggle"><li><details open=""><summary>Cloud Computing</summary><p id="18082a35-59f1-80c8-872d-c33843a74a41" class="">Cloud computing refers to the processing and storage of data on remote servers (the &quot;cloud&quot;), making computing resources available on-demand over the internet. </p><ul id="18082a35-59f1-80dd-9767-cb2aac323664" class="toggle"><li><details open=""><summary>Cloud Architectures</summary><p id="18082a35-59f1-80af-b64e-e032d0b23558" class=""><mark class="highlight-purple"><strong>Software as a Service (SaaS)</strong></mark><mark class="highlight-purple">:   </mark><strong>For end users: </strong>Provides fully developed applications that address the human user and web application as the end customer. Data processing and collaboration occur in the cloud. Examples include Marketplaces <em>(eBay, Amazon),</em> Online software suits <em>(Microsoft Office 365), </em>and website builders <em>(Jimdo).</em></p><p id="18082a35-59f1-802b-8cc4-f841403176e4" class=""><mark class="highlight-purple"><strong>Platform as a Service (PaaS)</strong></mark><mark class="highlight-purple">: </mark><strong>For Cloud Application Developers</strong>: Supports the software product cycle for web application, offering tools and platforms to build, deploy, and manage applications. Examples include Google App Engine, Microsoft Azure, and data service platforms, which provide weather forecasts or stock exchange data for further processing</p><p id="18082a35-59f1-80a2-a601-ce1112c0e03a" class=""><mark class="highlight-purple"><strong>Infrastructure as a Service (IaaS)</strong></mark><mark class="highlight-purple">: </mark><strong>For IT Administrators</strong>: Provides direct access (and use of) to abstract cloud infrastructure resources like virtual servers, storage, and networking. IaaS uses virtualization to abstract hardware, enabling <strong>elastic scaling</strong> (dynamic allocation of resources), and protecting the physical hardware from the customer. Examples include Amazon Elastic Compute Cloud (EC2) and DigitalOcean.</p><ul id="18082a35-59f1-80d4-ad06-c8ee4c1bb988" class="toggle"><li><details open=""><summary>Layer Models of Cloud Computing Architectures</summary><figure id="18082a35-59f1-8043-9652-edf8965bcb60" class="image" style="text-align:center"><a href="image%2044.png"><img style="width:384px" src="image%2044.png"/></a></figure></details></li></ul></details></li></ul><ul id="18082a35-59f1-8033-a708-df06f6f275f5" class="toggle"><li><details open=""><summary>Cloud infrastructure</summary><p id="18082a35-59f1-80fb-895e-fbedc292dbf8" class="">Where the services offered are eventually implemented is irrelevant in cloud computing. These services are often located in dedicated large-scale data centers used by cloud service providers.  The data centers are usually structured according to the principle of <strong>server farms.</strong></p><ul id="18082a35-59f1-80b5-85dc-e5cc1bd9f4e8" class="bulleted-list"><li style="list-style-type:disc"><strong>Virtualization</strong>: Optimizes hardware usage by running multiple virtual instances on each physical server. This helps the system react very flexibly to scale horizontally (adding/removing virtual servers dynamically) for handling varying loads.</li></ul><ul id="18082a35-59f1-80cf-8faa-f1e56351d96d" class="bulleted-list"><li style="list-style-type:disc"><strong>Transparency</strong>: Users don’t know or need to know the exact location of the data centers.</li></ul></details></li></ul></details></li></ul><hr id="18082a35-59f1-801e-93fa-f9490b2cce6c"/><h2 id="17582a35-59f1-80bc-9224-f07e5250b8b2" class="">5.4. Computer Clusters</h2><ul id="18082a35-59f1-803b-ba33-f4f26523181b" class="toggle"><li><details open=""><summary>Cloud Computing and Server farms</summary><p id="18082a35-59f1-802b-bc03-e2dca64c07bc" class="">Cloud computing relies on <strong>server farms</strong>, aggregations of many similarly configured virtual servers hosted in large-scale data centers, that work close to one another.  This allows for a very flexible (i.e., elastic) load balancing between the server instances. These servers provide services to a wide variety of clients. Communication is <strong>outward-facing</strong>, primarily directed toward clients using the services. Data centers are interconnected but prioritize communication with external clients over internal interactions.</p></details></li></ul><ul id="18082a35-59f1-806d-b5a2-d273348db549" class="toggle"><li><details open=""><summary><strong>HPC Systems</strong>:</summary><p id="18082a35-59f1-804d-b2f7-cb02d91a9607" class="">These are specialized data centers designed for scientific research and supercomputing. </p><p id="18082a35-59f1-809c-84c5-cfb5dcf971fb" class="">HPC typically comprises many high-performance servers, which differ from cloud computing:</p><ul id="18082a35-59f1-804b-909e-d9dd25473ea1" class="bulleted-list"><li style="list-style-type:disc"><strong>Inward-Focused Communication</strong>: Servers work together to solve a single, complex computing task.</li></ul><ul id="18082a35-59f1-804c-bc53-e9528d61a998" class="bulleted-list"><li style="list-style-type:disc"><strong>Task Division</strong>: Large tasks are split into smaller subtasks, which are processed in <strong>parallel</strong> by multiple servers. Each computer is assigned only its share</li></ul><ul id="18082a35-59f1-80ca-8072-ff0508cdf53c" class="bulleted-list"><li style="list-style-type:disc"><strong>Intermediate Results Exchange</strong>: Servers frequently communicate intermediate results to ensure the subtasks align because the subtasks are typically similar and are rarely independent of each other.</li></ul><p id="18082a35-59f1-8031-a510-d7c2688b5dc0" class="">Communication between servers follows mostly homogeneous communication patterns between the computers, and uses <strong>high-performance networks</strong> for fast data exchange, especially between neighboring servers.</p><p id="18082a35-59f1-8076-9d88-c816a1cc5cb3" class="">The hardware infrastructure and network topology of HCP is referred to as a <strong>computer cluster</strong> or a <strong>distributed parallel computer, </strong>and it’s designed for highly efficient, synchronized processing.</p></details></li></ul><ul id="18082a35-59f1-8039-a513-f9a31343e0ea" class="toggle"><li><details open=""><summary>Parallel Processing</summary><p id="18082a35-59f1-8058-9bc9-c9a6b7b3a30f" class="">Tasks are divided into subtasks and assigned to multiple computers. Each computer processes its subtask, exchanging results with others for subsequent steps.</p><ul id="18082a35-59f1-8026-9aea-dba0507a0d53" class="toggle"><li><details open=""><summary><strong>Example: Weather Forecasting</strong>: </summary><p id="1e282a35-59f1-80ba-a605-dde5f75bb1e8" class="">The atmosphere is divided into <strong>volume elements</strong>, with each computer responsible for simulating one element.  Each computer calculates the state of the flow within its assigned volume element for a very short time step into the future. Afterward, they exchange results over the network with neighboring computers, which simulate adjacent volume elements. These updated values are then used to calculate the next time step. By repeating this process, the overall airflow and weather forecast can be gradually computed and predicted.</p></details></li></ul><p id="18082a35-59f1-807f-816a-cafd251a8089" class=""><strong>Key Trade-offs </strong>are that increasing the number of computers enhances accuracy but adds communication overhead <em>(the calculation of a single simulation in scientific computing centers can take up several days)</em>. So, the more computers in use means, the more will be the communication effort, which could negatively impact the time needed to obtain a result: the high-performance networks can no longer compensate for this increased activity.</p><p id="18082a35-59f1-8056-89e9-f3097175be11" class="">This trade-off between runtime, accuracy, and the use of computational resources is called <strong>parallel scaling, </strong>which has two variants:</p><ul id="18082a35-59f1-80e6-8842-db4964589d41" class="bulleted-list"><li style="list-style-type:disc"><strong>Weak Scaling</strong>: Adds more computers to improve result accuracy with constant <em>runtime</em>.</li></ul><ul id="18082a35-59f1-80f4-8c87-f960fe346da6" class="bulleted-list"><li style="list-style-type:disc"><strong>Strong Scaling</strong>: Adds more computers to reduce the time it takes to achieve a result, with a focus on maintaining result accuracy. Here, we speak of temporal acceleration<em> (the </em><em><strong>speedup</strong></em><em>, the metric describes by which factor the processing is accelerated in the parallel case compared to the sequential case).</em><ul id="18082a35-59f1-80d0-bf70-edb8c70be76c" class="bulleted-list"><li style="list-style-type:circle"><strong>Speedup (Sₙ)</strong>: Measures how much faster n computers in a network are compared to one. This speedup is simply calculated from the time T(1), which is a single computer, related to the time T(n), which are n computers, needed for the same result. This is noted as:</li></ul><figure id="18082a35-59f1-8041-9b12-e3563a80d223" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>T</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>T</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S(n)= T(1)/ T(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span></div></figure><ul id="18082a35-59f1-8049-80ae-fd329c837a67" class="bulleted-list"><li style="list-style-type:circle">Ideal speedup is if the result were avaliable n-times faster when using n computer, but communication overhead usually reduces this in practice.</li></ul></li></ul></details></li></ul><ul id="18082a35-59f1-802b-a90d-c351ef556a3a" class="toggle"><li><details open=""><summary>Parallel Programming</summary><p id="18082a35-59f1-800c-83b6-dd4198d1dfbd" class="">The <strong>client-server model</strong> commonly used for distributed applications isn&#x27;t well-suited for clusters because tasks in a cluster are similar and need to work in parallel, unlike the diverse roles of clients and servers. </p><ol type="1" id="18182a35-59f1-8006-a0cf-f42a583d49ae" class="numbered-list" start="1"><li>The <strong>Message-Passing Interface (MPI)</strong> is designed specifically for communication between the computers of a cluster. It facilitates the exchange of messages between processes running in parallel on different computers.</li></ol><ol type="1" id="18182a35-59f1-80f9-b7b2-d769daffe6f6" class="numbered-list" start="2"><li>MPI standard also covers<strong> session management,</strong> aspects of data representation, and the storage of data via input/output functions in such systems. </li></ol><ol type="1" id="18182a35-59f1-80b2-9b1e-c6407694d6bb" class="numbered-list" start="3"><li>In contrast to the client-server model, in which client and server are typically processing completely different programs, MPI follows a <strong>single-program-multiple-data paradigm (SPMD) </strong>where a single program at a time is written and deployed across all computers in the cluster. Each process in the cluster runs the same program but operates on different portions of the data. The processes that run this single program in parallel can pass messages to each other directly over the connecting network (e.g., for exchanging any intermediate results). It is this message passing to which the standard owes its name.  This eliminates the need to rely on IP addresses or port numbers. Instead, MPI assigns each process a <strong>unique rank</strong><em><strong> (</strong></em><em>number in ascending order starting from zero and running up to the number that reflects the exact number of processes of the respective session)</em> to identify and address it.</li></ol><ol type="1" id="18182a35-59f1-8041-8ea9-d17b7dfcb230" class="numbered-list" start="4"><li>The <strong>MPI</strong> standard provides a comprehensive set of over 400 functions designed to support communication and synchronization in distributed systems, particularly for parallel computing. Examples include blocking and non-blocking communication functions, the realization of collective communication patterns <em>(broadcasting), </em>and synchronization functions <em>(e.g., the barrier function). </em></li></ol><ol type="1" id="18182a35-59f1-800f-b83c-c89233ea29f8" class="numbered-list" start="5"><li>Only transactions are foreign to MPI. MPI is an open standard according to which several<br/>communication libraries have been developed as middleware for various parallel computing platforms. Well-known, open-source representatives of such libraries include Open MPI, MPICH, MVAPICH, and ParaStation MPI<br/></li></ol><ul id="18182a35-59f1-806e-884e-c193f0ec6329" class="toggle"><li><details open=""><summary>Pseudo Code with MPI functions</summary><figure id="18182a35-59f1-802c-8573-d4a4092bf691" class="image" style="text-align:center"><a href="image%2045.png"><img style="width:476.9965515136719px" src="image%2045.png"/></a></figure></details></li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

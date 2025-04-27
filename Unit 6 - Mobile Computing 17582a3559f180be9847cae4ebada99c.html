@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unit 6 - Mobile Computing</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17582a35-59f1-80be-9847-cae4ebada99c" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">6️⃣</span></div><h1 class="page-title">Unit 6 - Mobile Computing</h1><p class="page-description"></p></header><div class="page-body"><p id="18182a35-59f1-80a4-b990-f994798ae0a0" class="">Mobile devices operate in various environments, encountering different communication delays, data rates, and costs influenced by location and network conditions. These devices rely on radio networks, which are widely available through modern mobile networks and local Wi-Fi-based computer networks. The seamless integration of mobile devices with the internet is known as <strong>mobile computing</strong>.</p><p id="18182a35-59f1-800e-8583-f2314e23ac91" class="">However, mobile computing faces significant challenges due to the unreliable nature of radio network connections <em>(that alone lead to increased and often highly flctating proneness to errors) </em>and the diversity of network types. Movement between network cells (each managed by different ba se stations) often leads to changes in address ranges and internet addresses, causing communication interruptions or performance degradation.</p><h2 id="17582a35-59f1-8063-84bf-d349819f6c30" class="">6.1. Basics, Techniques, and Special Features</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Basics</summary><div class="indented"><p id="18182a35-59f1-8051-885c-d9198962eb1b" class=""><mark class="highlight-purple"><strong>Wireless Networks</strong></mark><mark class="highlight-purple">:</mark> Mobile devices rely on wireless networks (e.g., Wi-Fi, cellular) that vary in signal strength and data rates based on factors like distance from the base station or the number of users connected.</p><p id="17582a35-59f1-80a8-9615-cfaf34d6a8f2" class=""><mark class="highlight-purple"><strong>Communication Issues</strong></mark><mark class="highlight-purple">:  </mark>when a mobile computer is moved through different cells of a radio network with several base stations, the uninterrupted transfer of responsibility between the different transmitters and stations could present a problem. There are 2 types of interrupted connectivity issues:</p><ul id="b52ed688-e8b0-4e83-a5a1-190c90a5ff2c" class="bulleted-list"><li style="list-style-type:disc"><strong>Unplanned Interruptions</strong>: Caused by transmission interference on the radio link or technical issues.</li></ul><ul id="b77ac386-32d3-4a54-a23f-e878fdd2d339" class="bulleted-list"><li style="list-style-type:disc"><strong>Planned Disconnection</strong>: User-initiated, such as temporarily disconnecting to save energy or costs, or the device may have approached radio network’s boundaries.</li></ul><p id="17582a35-59f1-8074-abfc-e85726e4cc9a" class=""><mark class="highlight-purple"><strong>Special Handling in Mobile Systems</strong></mark><mark class="highlight-purple">: </mark>Mobility requires constant reconfiguration as devices move between different networks with different IP ranges, causing dynamic network changes that must be handled by protocols designed for mobile computing. </p><ol type="1" id="18182a35-59f1-808c-87e7-e97f8bdd0785" class="numbered-list" start="1"><li><strong>Transport Protocols</strong>: Protocols like <strong>TCP</strong> can ensure reliable data transmission during short interruptions by maintaining transparency and retransmitting lost packets, as long as missing packets on the server side do not cause a timeout.</li></ol><ol type="1" id="18182a35-59f1-80a3-be2d-f3ea7eee18d7" class="numbered-list" start="2"><li><strong>Proxies</strong>: A proxy serves as an intermediary between a mobile device and a server, with special services and protocols, ensuring smooth communication even when the mobile device disconnects. It takes over communication during longer interruptions, performing its role transparently so applications remain unaware of its presence.</li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">The <strong>Proxy Approach</strong> </summary><div class="indented"><p id="18182a35-59f1-806d-bbaf-cbeb36d2da02" class="">The <strong>proxy approach</strong> is essential for ensuring connection transparency, caching data, and supporting seamless mobile computing transitions, especially during <strong>planned and unplanned disconnections</strong>.</p><p id="18182a35-59f1-80ac-a0c0-eff75140c8bd" class="">The proxy facilitates communication on both sides:</p><ul id="18182a35-59f1-807f-b78d-d473e5d54eba" class="bulleted-list"><li style="list-style-type:disc"><strong>For the server</strong>: It acts as the <strong>client</strong>, continuing to request or receive data from the server.</li></ul><ul id="18182a35-59f1-806a-a28b-e03a9f4b4f88" class="bulleted-list"><li style="list-style-type:disc"><strong>For the mobile device</strong>: It acts as the <strong>server</strong>, storing data until the device reconnects.</li></ul><ul id="18182a35-59f1-803e-903a-f83d2e781d39" class="toggle"><li><details open=""><summary>Types of Proxies</summary><p id="18182a35-59f1-80e0-9532-f6a9866049d5" class="">There are various proxy types, which are placed at various points on the communication path between client and server:</p><p id="18182a35-59f1-80f1-b3c2-c30e898e652a" class=""><mark class="highlight-purple"><strong>1. Proxy Near the Base Station: </strong></mark><div class="indented"><p id="18282a35-59f1-8061-b89a-eb60d4017b69" class="">Functions as a client for the server during mobile device disconnections. It maintains the server connection, tolerating long interruptions on the client side. When a mobile device disconnects, the proxy continues to receive and cache data (e.g., downloads) from the server. This data is delivered to the device when it reconnects.</p><ul id="18182a35-59f1-8097-b469-f1cc74706d2c" class="toggle"><li><details open=""><summary> A Proxy Close to the Base Station of the Radio Link</summary><figure id="18182a35-59f1-8071-9a11-e083a5c53219" class="image" style="text-align:center"><a href="image%2046.png"><img style="width:481.9965515136719px" src="image%2046.png"/></a></figure></details></li></ul></div></p><p id="18182a35-59f1-8098-9ebd-f38fe3aab9ec" class=""><mark class="highlight-purple"><strong>2. Proxy on the Mobile Device</strong></mark><div class="indented"><p id="18182a35-59f1-80ca-ba27-eadfe60beadb" class="">During disconnections, the proxy emulates a server connection, forming a self-contained &quot;island&quot; with the mobile device. It caches outgoing data (e.g., uploads) from the mobile device. Once the connection is restored, the proxy automatically transfers the data to the server. The mobile device remains unaware of the delayed transfer (Transparent Process).</p><ul id="18182a35-59f1-8071-be6e-f800ec4f3660" class="toggle"><li><details open=""><summary> A Proxy Close to (or Directly on) the Client</summary><figure id="18182a35-59f1-802f-a5c3-dc3507af6b79" class="image" style="text-align:center"><a href="image%2047.png"><img style="width:483.9930725097656px" src="image%2047.png"/></a></figure></details></li></ul></div></p><p id="18182a35-59f1-806b-ace1-f8aee92173cc" class=""><mark class="highlight-purple"><strong>3. Combined Proxies</strong></mark><div class="indented"><p id="18182a35-59f1-800f-b9c4-f65179bcbc02" class="">Uses two proxies simultaneously: one near the base station and one on the mobile device. This approach ensures uninterrupted communication and transparency for both the server and the mobile device. A common Use Case is for Content Delivery Networks (CDNs), such as Amazon Cloudflare and Netify, for efficient and seamless data delivery.</p><ul id="18182a35-59f1-80f4-a2c9-f8a3d3c0687f" class="toggle"><li><details open=""><summary>A Proxy Close to the Client and Another Close to the Base Station</summary><figure id="18182a35-59f1-8076-aea2-f077f608f92b" class="image" style="text-align:center"><a href="image%2048.png"><img style="width:488.92364501953125px" src="image%2048.png"/></a></figure></details></li></ul></div></p></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Use of Contextual Information</summary><div class="indented"><p id="18182a35-59f1-801d-acb3-c6041086714e" class="">Mobile devices use contextual information such as location, environmental conditions, and device status to deliver personalized, context-aware services. This capability enriches applications, improves user interaction, and adapts functionality to suit dynamic environments. </p><ul id="18182a35-59f1-80e5-9bf3-f3f69442372e" class="toggle"><li><details open=""><summary><mark class="highlight-default"><strong>Location Awareness: </strong></mark></summary><p id="18182a35-59f1-804d-a842-fba147c13322" class="">Mobile devices change location both in terms of network access and the user’s physical position. Devices can use this information as an input parameter for certain applications, such as a weather app that can display the local forecast or a navigation app that can suggest nearby places of interest.</p><p id="18182a35-59f1-8021-8d59-f829f5808771" class="">The location can be determined either explicitly or implicitly: </p><ul id="18182a35-59f1-80bb-9fff-c2245fc165e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Explicit Methods</strong>: Use of GPS receivers, a worldwide, satellite-supported system for the positioning of electronic devices, to determine precise geographic coordinates.</li></ul><ul id="18182a35-59f1-808e-a34d-c26da7b99fdc" class="bulleted-list"><li style="list-style-type:disc"><strong>Implicit Methods</strong>: Based on properties of the radio network, such as Wi-Fi positioning systems (WPS), which estimate location using Wi-Fi cell data through  MAC address of the transmitter or SSID of the wireless network.  Wi-Fi-based positioning is often much less accurate than GPS-based positioning, as it can only provide an approximate location.</li></ul></details></li></ul><ul id="18182a35-59f1-80f3-913b-c4e5578bb240" class="toggle"><li><details open=""><summary><strong>Enriching Applications with Context</strong></summary><p id="18182a35-59f1-80ae-a042-ff3465c5cdf6" class="">Even when location isn’t essential (e.g., for general websites), contextual data can enhance user experience by providing insights about the user environment:</p><ul id="18182a35-59f1-8020-9ecd-d38c8cb0a764" class="bulleted-list"><li style="list-style-type:disc"><strong>Location: </strong>Local time or cultural information.</li></ul><ul id="18182a35-59f1-805a-ab83-e12ec1960884" class="bulleted-list"><li style="list-style-type:disc"><strong>Sensors Usage</strong>: Mobile devices can measure brightness, temperature, noise levels…</li></ul><ul id="18182a35-59f1-80a4-b4dc-e1262dc56062" class="bulleted-list"><li style="list-style-type:disc"><strong>Device-Specific Data</strong>: Technical parameters like battery level, usage frequency, or network strength</li></ul><p id="18182a35-59f1-80be-b289-ff190adca9e3" class="">Context-aware applications can adapt their behavior, appearance, and content presentation based on these parameters.</p></details></li></ul></div></details><hr id="18182a35-59f1-8002-b08f-e309c514a8c4"/><h2 id="17582a35-59f1-8003-b2fe-c557b6ca881f" class="">6.2. Communication Networks for Mobile Computing</h2><p id="18182a35-59f1-80b3-a388-f7d7d0f45fba" class="">Radio networks are the backbone of mobile computing, enabling mobile devices like smartphones and laptops to move seamlessly across various internet sub-networks. These networks include <strong>digital cellular networks</strong> (e.g., used for telephony) and <strong>local wireless computer networks</strong> (e.g., Wi-Fi).</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Modulation and Multiplexing for Radio Links</summary><div class="indented"><p id="18182a35-59f1-80fc-b110-d7d5098a3200" class="">Radio networks transmit digital data over free space using electromagnetic waves. These waves act as a transmission medium. The modulation<mark class="highlight-default"> </mark><mark class="highlight-default"><strong>is a process of mapping digital values (e.g., 0s and 1s) to physical quantities like voltage or electromagnetic waves for transmission.</strong></mark><mark class="highlight-default"> Modulation influences how these digital signals are represented during communication.</mark></p><p id="18182a35-59f1-80e3-9f8a-f949eebd775a" class="">Common methods for translating data in binary are:</p><ul id="18182a35-59f1-8082-98e7-f44735b71a24" class="bulleted-list"><li style="list-style-type:disc"><strong>Frequency Shift Keying (FSK)</strong>: Data is represented by variations in the crests of wave frequency (e.g., higher frequency = &quot;1,&quot; lower frequency = &quot;0&quot;).</li></ul><ul id="18182a35-59f1-803c-b2d1-f9b450226fb7" class="bulleted-list"><li style="list-style-type:disc"><strong>Amplitude Shift Keying (ASK)</strong>: Data is represented by variations of the height in crests in wave amplitude (e.g., high crest = &quot;1,&quot; low crest = &quot;0&quot;).</li></ul><ul id="18182a35-59f1-8010-b85a-fc8ff8b50ea2" class="bulleted-list"><li style="list-style-type:disc"><strong>Phase Shift Keying (PSK)</strong>: Data is represented by changes in the phase<em> (also called shift or angle</em>) of a wave (e.g., positive shift = &quot;1,&quot; negative shift = &quot;0&quot;).</li></ul><ul id="18182a35-59f1-80e1-8dc6-fa5dd8858649" class="toggle"><li><details open=""><summary>Multiplexing</summary><p id="18182a35-59f1-80b5-bbbe-d54ca9874381" class=""><strong>Multiplexing</strong> allows multiple transmitters or devices to share the same medium by<mark class="highlight-default"> dividing channel capacity into slices of time, frequency, or space, and by ensuring there is no i</mark>nterference. This problem is avoided automatically by using multiplexing techniques:</p><ol type="1" id="18182a35-59f1-808b-ad5c-f71a9abdf222" class="numbered-list" start="1"><li><strong>Frequency Division Multiple Access (FDMA):  </strong>Devices transmit simultaneously using different frequencies. This prevents interference by assigning distinct frequencies to each device.</li></ol><ol type="1" id="18182a35-59f1-807c-89ad-f89b55b4d681" class="numbered-list" start="2"><li><strong>Space Division Multiple Access (SDMA): </strong>If two transmitters are located far enough they can transmit on the same frequency without interfering with each other.  This technique divides the network area into cells, each with its own base station. Neighboring cells use different frequencies, while distant cells can reuse frequencies.</li></ol><ol type="1" id="18182a35-59f1-801c-a504-cccd7a4a1527" class="numbered-list" start="3"><li><strong>Time Division Multiple Access (TDMA):  </strong>Devices share the same frequency by transmitting in assigned time slots. Each device is always assigned a specific time slot per cell. During this period, it is allowed to communicate with the base station. This method can also be combined with FDMA for efficient communication.</li></ol><figure id="18182a35-59f1-80d4-b1db-d1fa57dec84a" class="image" style="text-align:center"><a href="image%2049.png"><img style="width:480px" src="image%2049.png"/></a></figure></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Wireless and Mobile Networks</summary><div class="indented"><p id="18182a35-59f1-80b5-88e9-ec4ee0adc114" class="">Both Wi-Fi networks and cellular mobile networks can use a combination of FDMA, SDMA, and TDMA to supply mobile computers and devices with internet access.</p><ol type="1" id="18182a35-59f1-8039-a4ba-ef14df6cc447" class="numbered-list" start="1"><li><strong>Wi-Fi Networks</strong><p id="18182a35-59f1-80b5-8025-fed911db1a72" class="">One should make sure that the station does not transmit on a frequency channel that is used by a neighbor. Modern Wi-Fi devices are capable of automatically complying with this form of space multiplexing. However, devices in the same network share frequencies through time multiplexing. </p></li></ol><ol type="1" id="18182a35-59f1-807c-8fd5-e981949b0678" class="numbered-list" start="2"><li><strong>Cellular Networks</strong><p id="18182a35-59f1-8083-94e9-c7a62f1c5683" class="">Earlier generations (e.g., 2G) focused on real-time voice transmission with low data rates (~64 kbit/s). By contrast, modern networks like <strong>4G LTE+ </strong>offer high-speed, universal packet-oriented internet connectivity, support downstream data transfer rates of several hundred megabits per second (e.g., for multimedia), and use protocols like <strong>Voice-over-LTE (VoLTE)</strong> for voice calls.</p></li></ol></div></details><hr id="18182a35-59f1-807f-bd69-cdd7a44fd95c"/><h2 id="17582a35-59f1-804c-bb3e-ecc9fdaa3faf" class="">6.3. Mobile Internet: Protocols and Applications</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><strong>Mobile Internet Protocols</strong></summary><div class="indented"><p id="18182a35-59f1-808c-867d-f794ea698115" class="">Most mobile internet protocols are based on the <strong>TCP/IP protocol family</strong>, but they are often adapted to meet the unique needs of mobile networks. key examples are:</p><ul id="18182a35-59f1-806f-91d6-d9db22380bc9" class="toggle"><li><details open=""><summary><strong>Dynamic Address Allocation (DHCP)</strong></summary><p id="18182a35-59f1-8008-9969-d805aaa37b96" class="">DHCP is widely used protocol for both internet and mobile networks and is particularly effective in local wireless environments.</p><ul id="18182a35-59f1-8067-98c9-c342179648e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Temporary IP Address Assignment:</strong> A DHCP server dynamically assigns an IP address from the local range to a new device when it enters the respective subnet. These addresses can be private and not globally valid. The assigned IP address is valid for a limited time (lease period). Once this time expires, the device must request an extension to keep using the address. If the device leaves the network without renewing the lease, the IP address is freed and made available for other devices.</li></ul><p id="18182a35-59f1-8055-b357-e01936128c24" class="">This dynamic allocation ensures flexibility and seamless transitions between networks. However, because the IP addresses are temporary and not globally valid, devices cannot act as publicly accessible servers or establish direct client-to-client connections. This limitation aligns with the reduced computing power of mobile devices, which prioritizes mobility over server functionality.</p></details></li></ul><ul id="18182a35-59f1-80ea-b32c-fa6a6ed010bf" class="toggle"><li><details open=""><summary>Mobile IP Protocol</summary><p id="18182a35-59f1-809a-91db-daafdcdb4de2" class="">A standardized, TCP/IP-based protcol, that addresses the limitations of DHCP by providing a solution for devices to maintain a fixed IP address even as they move between networks.. It provides two IPs for a device:</p><ul id="18182a35-59f1-801d-946d-f7c744f79ba4" class="bulleted-list"><li style="list-style-type:disc">A well-known and already configured <strong>permanent address</strong> assigned by the home network.</li></ul><ul id="18182a35-59f1-800d-95fa-e48386d93ea7" class="bulleted-list"><li style="list-style-type:disc">A <strong>temporary address</strong> (called a &quot;care-of address&quot;) assigned by the foreign network, which must be globally valid (not private). This address in managed and assigned by a foreign agent, similar to DHCP server.</li></ul><p id="18182a35-59f1-80d4-a749-fe4d1e953652" class=""><mark class="highlight-purple"><strong>Home Agent and Communication: </strong></mark>This protocol uses a <strong>home agent</strong> in the home network to track the device&#x27;s location and redirect communication when it is in a foreign network. When another device <em>(third-party computer) </em>wants to communicate with the mobile device, it contacts the home agent using the permanent address. If the mobile device is in a foreign network, the home agent intercepts the request, encapsulates the corresponding IP packet <em>(and the subsequent packeta) </em>into an agent-to-agent message (a process called <strong>tunneling</strong>), and sends it to the foreign agent in the temporary network. The foreign agent then unpacks the message and delivers it to the mobile device via the IP protocol. From the client’s point of view, the packet appears to have been sent by the original computer.  Reply packets from the mobile device are sent directly to the third-party computer, bypassing the home agent.</p><p id="18182a35-59f1-8076-bcaf-d061be63b02e" class="">This approach ensures that the mobile device remains accessible despite moving across networks, and it enables uninterrupted communication.</p><ul id="18182a35-59f1-8018-84a7-e19a56f54cb5" class="bulleted-list"><li style="list-style-type:disc"><strong>Tunneling: </strong>packets are encapsulated and sent between home and foreign agents.</li></ul><ul id="18182a35-59f1-80cf-bf1e-ccf7aebe275f" class="toggle"><li><details open=""><summary>Flowchart of IP Packets for the Mobile IP Protocol</summary><figure id="18182a35-59f1-8050-a4d2-c5f547fc450b" class="image"><a href="image%2050.png"><img style="width:481px" src="image%2050.png"/></a></figure></details></li></ul></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Mobile Computing and Multimedia Applications</summary><div class="indented"><ul id="18282a35-59f1-8073-af83-dcdc2f82c664" class="toggle"><li><details open=""><summary><strong>Transmission Control Protocol (TCP)</strong></summary><p id="18282a35-59f1-806c-8f8a-ed04e05fcc4f" class="">TCP ensures reliable delivery of data packets by retransmitting lost or faulty ones using confirmation messages, ensuring all data arrives correctly. It was developed and optimized for wired networks, where packet loss is rare. However, in mobile networks, TCP faces challenges due to higher error rates and frequent IP address changes.</p><ul id="18282a35-59f1-807e-b1d4-c2f6b1f9061f" class="toggle"><li><details open=""><summary><mark class="highlight-purple"><strong>Challenges in Mobile Networks</strong></mark></summary><ul id="18282a35-59f1-8018-b930-eb2d23a1822b" class="bulleted-list"><li style="list-style-type:disc"><strong>High Error Rates:</strong> TCP&#x27;s reliance on retransmitting all subsequent packets after an error (GoBack-N ARQ protocol) leads to frequent resets, significantly reducing data throughput. This is especially problematic for multimedia applications like video streaming, where interruptions disrupt the user experience.</li></ul><ul id="18282a35-59f1-80c2-bdc7-d29b2a47b2f7" class="bulleted-list"><li style="list-style-type:disc"><strong>IP Address Dependency:</strong> TCP connections depend on TCP ports and fixed IP addresses. When a mobile device switches networks and its IP address changes, the TCP connection is terminated, breaking the corresponding data streams.</li></ul></details></li></ul><ul id="18282a35-59f1-80f2-b99c-c42595d0a3d5" class="toggle"><li><details open=""><summary><strong>Improvements to TCP for Mobile Use</strong></summary><ol type="1" id="18282a35-59f1-8057-8326-f99d05464a55" class="numbered-list" start="1"><li><strong>Mobile IP Protocol:</strong> Maintains a consistent IP address for mobile devices regardless of network switching, preventing connection loss due to IP changes.</li></ol><ol type="1" id="18282a35-59f1-8070-a101-df4c35fc5d04" class="numbered-list" start="2"><li><strong>Selective Acknowledgment (SACK) protocol:</strong> An ARQ variant that retransmits only lost packets instead of all packets after an error, improving performance in error-prone mobile environments.</li></ol><ol type="1" id="18282a35-59f1-807d-9a55-e53902f7aeb5" class="numbered-list" start="3"><li><strong>User Datagram Protocol (UDP):</strong> Used for multimedia applications where occasional packet loss is acceptable. UDP avoids delays caused by retransmissions, ensuring smooth playback for video and audio streams. Dropped packets temporarily reduce quality without stalling the stream. Ideal for real-time applications like video or audio streaming, where continuity matters more than perfect quality.</li></ol></details></li></ul></details></li></ul><ul id="18282a35-59f1-80a4-b2ca-d8d4cf393ac1" class="toggle"><li><details open=""><summary><strong>Real-Time Streaming Protocol (RTSP)</strong></summary><p id="18282a35-59f1-8032-934a-f54ee1112715" class="">RTSP sets up and monitors multimedia streams and supports both TCP (for stable, wired networks) and UDP (for error-prone, mobile networks) for actual media transport. RTSP also supports functions for pausing, scrubbing back and forth, etc. </p><ul id="18282a35-59f1-807d-8732-d831d17a9517" class="toggle"><li><details open=""><summary>Commands Included</summary><ul id="18282a35-59f1-8084-860a-f52878cec2cb" class="bulleted-list"><li style="list-style-type:disc"><code><strong>OPTIONS</strong></code>: Queries available RTSP commands on the server.</li></ul><ul id="18282a35-59f1-8023-a766-ebcff7ad3d30" class="bulleted-list"><li style="list-style-type:disc"><code><strong>DESCRIBE</strong></code>: Retrieves media parameters for specific content.</li></ul><ul id="18282a35-59f1-80a2-beab-df04d765b43b" class="bulleted-list"><li style="list-style-type:disc"><code><strong>SETUP</strong></code>: Establishes a logical connection to the server.</li></ul><ul id="18282a35-59f1-8064-8738-e36301da3ef5" class="bulleted-list"><li style="list-style-type:disc"><code><strong>PLAY</strong></code>: Starts playback at a specific position.</li></ul><ul id="18282a35-59f1-8015-bded-f19c51807501" class="bulleted-list"><li style="list-style-type:disc"><code><strong>PAUSE</strong></code>: Temporarily stops the media stream.</li></ul><ul id="18282a35-59f1-80c6-acda-e807890090dd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>TEARDOWN</strong></code>: Ends the connection and releases resources.</li></ul></details></li></ul><ul id="18282a35-59f1-80a9-a86e-f442eb04e852" class="toggle"><li><details open=""><summary>Supporting Protocols</summary><p id="18282a35-59f1-804e-8e7c-fa7669f14358" class="">RTSP is supported by: </p><ul id="18282a35-59f1-802b-b172-fc4f25b82605" class="bulleted-list"><li style="list-style-type:disc"><strong>Real-Time Control Protocol (RTCP):</strong> Collaborates with RTP to negotiate an optimal transmission quality and rates. It also provides feedback on the media stream.</li></ul><ul id="18282a35-59f1-8094-ab14-fbaed34be4ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Real-Time Transport Protocol (RTP):</strong> Manages the transmission of data packets, ensuring continuous and adapted media streaming, often using UDP for its connectionless nature.</li></ul></details></li></ul><ul id="18282a35-59f1-8080-b769-f0f440f29062" class="toggle"><li><details open=""><summary>The Multimedia Real-Time Protocols RTSP, RTCP, and RTP in the TCP/IP Stack. </summary><p id="18282a35-59f1-8004-8d80-d34c171e637c" class="">How the protocols fit into the TCP/IP reference model</p><figure id="18282a35-59f1-80ba-96da-e089a8e62b10" class="image"><a href="image%2051.png"><img style="width:382px" src="image%2051.png"/></a></figure></details></li></ul></details></li></ul><ul id="18282a35-59f1-805a-b4d4-d3012281df72" class="toggle"><li><details open=""><summary>Multimedia Content Adaption</summary><p id="18282a35-59f1-8097-8ced-e52e5ae8a0db" class="">In addition to the choice of a suitable communication protocol,  efficient multimedia streaming on mobile devices requires adjusting content quality to match available bandwidth <em>(transmission rate)</em>. This can be achieved through:</p><ul id="18282a35-59f1-801c-ae44-cda51d023aa1" class="bulleted-list"><li style="list-style-type:disc"><strong>Pre-Adapting Data: </strong>Servers store multiple versions of media content at different quality levels to suit varying transmission rates.</li></ul><ul id="18282a35-59f1-8007-9a05-c7a17b2953de" class="bulleted-list"><li style="list-style-type:disc"><strong>Source Encoding:</strong> Dynamically compressing high-quality content to lower-quality formats during streaming to suit limited bandwidth. This approach reduces quality (lossy compression) but ensures uninterrupted playback.</li></ul></details></li></ul></div></details><hr id="18182a35-59f1-8054-971c-e77e17979d02"/><h2 id="17582a35-59f1-80d3-95b3-f33c9cb8854e" class="">6.4. Security and Data Protection in Mobile Systems</h2><p id="18282a35-59f1-80d2-8329-ff061ef323f0" class="">Mobile devices require data protection and security against unauthorized access, data theft, and data manipulation. Their mobility makes them more vulnerable due to exposure to unsecured environments and the risk of theft. To combat these threats, implementing strong encryption of the data on the device and rigorous access controls for using the device itself is essential, using specific techniques.</p><ul id="18282a35-59f1-80f7-9f13-f668d2bcaeb4" class="toggle"><li><details open=""><summary><strong>Full Disck Encryption (FDE)</strong></summary><p id="18282a35-59f1-8025-be55-d21873afbf2c" class="">Full Disk Encryption ensures that all data on a device is stored in an encrypted format directly on the hard disk. This process is transparent for the user, who doesn&#x27;t need to take any extra steps, but it safeguards sensitive data in case the device is stolen because access to the encrypted data is only possible with the correct decryption key. To enhance security, strong passwords or biometric methods (e.g., fingerprint scanners) can be used, making it harder for unauthorized users to access sensitive information.</p><p id="18282a35-59f1-8095-b1a8-f3ba649bb198" class="">This combination of encryption methods and secure protocols provides comprehensive protection for both stored and transmitted data.</p><p id="18282a35-59f1-805f-9f76-febfae01ee55" class=""><strong>Network Security Considerations:</strong></p><p id="18282a35-59f1-8059-832b-e27d9b8baf27" class="">Mobile devices often connect to insecure environments like public Wi-Fi, where data can be intercepted by third parties. Encryption of communicated data is crucial in these situations.<div class="indented"><ul id="18282a35-59f1-805e-8e3c-eae1cf90c3ae" class="bulleted-list"><li style="list-style-type:disc">For private wireless networks, secure encryption protocols like <strong>Wi-Fi Protected Access 2 (WPA2)</strong> help prevent unauthorized access.</li></ul><ul id="18282a35-59f1-80d4-8bb2-cb195f85d11e" class="bulleted-list"><li style="list-style-type:disc">In public networks, applications must use secure transport protocols such as <strong>Transport Layer Security (TLS)</strong> to protect transmitted data. Examples include:<ul id="18282a35-59f1-80d7-852e-e73e06ef2652" class="bulleted-list"><li style="list-style-type:circle"><strong>HTTPS</strong> for web browsers.</li></ul><ul id="18282a35-59f1-80dc-8d54-d20fc6cf11ab" class="bulleted-list"><li style="list-style-type:circle">Secure email protocols like <strong>SMTPS</strong>, <strong>POP3S</strong>, or <strong>IMAPS</strong> to ensure safe communication in email clients.</li></ul></li></ul></div></p></details></li></ul><ul id="18282a35-59f1-80e3-be40-d1f72246040e" class="toggle"><li><details open=""><summary>Mobile Virtual Private Networks (VPN)</summary><p id="18282a35-59f1-8009-b6f1-e30fde092c0c" class="">A VPN is a subnet that creates a secure, private communication channel over the internet by encrypting data packets exchanged in the VPN. This process, called <strong>tunneling</strong>, ensures that only authorized participants can access the encrypted content while keeping network traffic hidden from third parties. Key features of a VPN are:</p><ol type="1" id="18282a35-59f1-8008-8f2f-c6a45b47f0b8" class="numbered-list" start="1"><li><strong>Secure Communication: </strong>VPNs provide tap-proof and tamper-proof communication netween participants by encrypting IP packets. These packets are encapsulated within standard internet packets, allowing them to traverse the internet securely, but only the authorized participants of the VPN can read the decrypted contents of the network traffic.</li></ol><ol type="1" id="18282a35-59f1-80f8-be07-ea84b306c4ce" class="numbered-list" start="2"><li><strong>Virtual Subnet: </strong>VPNs connect distributed devices and networks over the internet, functioning as a single virtual subnet. Devices in the VPN can use private IP addresses or globally valid IP addresses, depending on the setup. Unlike physical subnets tied to specific locations, VPNs provide global connectivity while maintaining local network protections. Therefore, a VPN simultaneously offers a local network both protection and the global distribution of legitimate participants</li></ol><ol type="1" id="18282a35-59f1-8020-8d59-f656aca2db3b" class="numbered-list" start="3"><li><strong>Central Role of the VPN Gateway: </strong>The VPN gateway manages entry into the virtual subnet, routing traffic securely and facilitating encrypted communication. Common tunneling and encryption protocols include <strong>OpenVPN</strong>, Internet Key Exchange in version 2 (IKEv2), and Layer 2 Tunneling Protocol (L2TP) along with the IPSec protocol suite. </li></ol><ul id="18282a35-59f1-80b3-80ca-d2ef2bd186ff" class="toggle"><li><details open=""><summary>Types of VPNs</summary><p id="18282a35-59f1-8063-b6d8-d7112a02ce6f" class=""><strong>Site-to-Site VPN:</strong><div class="indented"><p id="18282a35-59f1-8089-a73f-f64938a1b09e" class="">Connects two or more physical networks (e.g., offices  of the same company in different locations) over the internet, creating a unified, secure locally united subnet. Encrypted tunnels ensure all communication between the networks is secure and inaccessible to third parties.</p></div></p><p id="18282a35-59f1-8090-812a-fc564bb0e80a" class=""><strong>End-to-End VPN:</strong><div class="indented"><p id="18282a35-59f1-80df-b922-ca66ba69429d" class="">Secures communication between two or more individual devices directly over the internet. Each device uses a private address within the VPN. A <strong>VPN gateway</strong> acts as a server, providing a secure entry point for encrypted communication between the devices, without requiring a physical subnet. The VPN gateway acts as the entry point for clients to connect securely.</p></div></p><p id="18282a35-59f1-802f-88e5-d1217d0476b3" class=""><strong>End-to-Site VPN:</strong><div class="indented"><p id="18282a35-59f1-8026-a632-eb8b16b31040" class="">Allows authorized remote users to securely access a physical subnet’s resources as if they were on-site.  It is ideal for remote work scenarios where employees need access to company services from home or the field. It  allows access to all company services transparently as if the client were on-site.  Remote devices connect to the network using standard VPN solutions as long as the device’s IP address does not change.</p></div></p><p id="18282a35-59f1-80a6-a9d1-ee1d9d77adaf" class=""><strong>Mobile VPN:</strong><div class="indented"><p id="18282a35-59f1-804c-9ed7-c3eef26a05b3" class="">Provides uninterrupted VPN connectivity for mobile devices that frequently change networks or IP addresses. It is designed for mobile users who experience fluctuating connectivity or frequent network switching.</p><p id="18282a35-59f1-804f-964b-e56e7133f695" class="">A <strong>communication server</strong> acts as a proxy for the mobile device within the wired network. If the device’s connection is interrupted or its IP address changes, the server maintains the VPN connection by assigning a <strong>virtual address</strong> among the rage of addresses it manages to the client. This virtual address ensures consistent communication, even as the mobile device reconnects to the network, even if the IP address has changed.This way, the communication server always knows the client’s current address.</p></div></p></details></li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
